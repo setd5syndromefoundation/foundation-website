@@ -23,10 +23,11 @@
 *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}
 @media print{
   @page{size:11in 8.5in landscape;margin:0;}
-  html{margin:0!important;padding:0!important;background:none!important;width:11in!important;height:8.5in!important;}
-  body{margin:0!important;padding:0!important;background:none!important;display:block!important;width:11in!important;min-height:unset!important;}
-  .sheet-wrapper{margin:0!important;padding:0!important;box-shadow:none!important;width:11in!important;height:8.5in!important;overflow:hidden!important;display:flex!important;}
-  .sheet-wrapper+.sheet-wrapper{page-break-before:always;break-before:page;}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  html{margin:0!important;padding:0!important;background:#1e3a45!important;width:11in!important;height:auto!important;overflow:hidden!important;}
+  body{margin:0!important;padding:0!important;background:#1e3a45!important;display:block!important;width:11in!important;height:auto!important;overflow:hidden!important;}
+  .sheet-wrapper{margin:0!important;padding:0!important;box-shadow:none!important;width:11in!important;height:8.5in!important;min-height:8.5in!important;overflow:hidden!important;display:flex!important;page-break-inside:avoid!important;break-inside:avoid!important;}
+  .sheet-wrapper+.sheet-wrapper{page-break-before:always!important;break-before:page!important;}
   .fold-line,.sheet-label,.preview-note{display:none!important;}
 }
 
