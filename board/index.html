@@ -2488,7 +2488,25 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
       <p style="font-size:0.8rem;color:var(--text-light);margin-top:10px;">You were sent an email with the link to download Airtable to edit volunteer entries. Contact Kate if you need the link resent.</p>
     </div>
     <div id="airtable-embed-wrap" style="display:none;">
-      <iframe class="airtable-embed" src="https://airtable.com/embed/appnFKm3QrThT2LSJ/shrg0L90QNIq9cryH?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background:transparent;border:1px solid var(--border);border-radius:8px;margin-bottom:32px;"></iframe>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+        <button onclick="toggleAirtableFullscreen()" id="airtable-expand-btn" style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;padding:6px 14px;border-radius:6px;font-family:inherit;font-weight:600;cursor:pointer;background:rgba(47,83,97,0.08);color:var(--teal);border:1px solid rgba(47,83,97,0.2);transition:background 0.2s;">
+          <svg id="airtable-expand-icon" width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Expand
+        </button>
+      </div>
+      <iframe id="airtable-iframe" class="airtable-embed" src="https://airtable.com/embed/appnFKm3QrThT2LSJ/shrg0L90QNIq9cryH?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background:transparent;border:1px solid var(--border);border-radius:8px;margin-bottom:32px;"></iframe>
+    </div>
+
+    <!-- Airtable fullscreen overlay -->
+    <div id="airtable-fullscreen" style="display:none;position:fixed;inset:0;z-index:9000;background:#fff;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--teal-dark);flex-shrink:0;">
+        <span style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;color:#fff;">Volunteer Roster</span>
+        <button onclick="toggleAirtableFullscreen()" style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;padding:6px 14px;border-radius:6px;font-family:inherit;font-weight:600;cursor:pointer;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M5 1H1v4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Close
+        </button>
+      </div>
+      <iframe src="https://airtable.com/embed/appnFKm3QrThT2LSJ/shrg0L90QNIq9cryH?viewControls=on" frameborder="0" width="100%" style="flex:1;border:none;"></iframe>
     </div>
     <div class="doc-folder-list">
       <div class="doc-folder" data-section="volunteer-roster" data-sub="Volunteer Agreements">
@@ -2926,6 +2944,20 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     btn.innerHTML = `<svg id="airtable-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="${isHidden ? '18 15 12 9 6 15' : '6 9 12 15 18 9'}"/></svg> ${isHidden ? 'Hide Roster' : 'Show Roster'}`;
   }
   window.toggleAirtable = toggleAirtable;
+
+  function toggleAirtableFullscreen() {
+    const fs = document.getElementById('airtable-fullscreen');
+    const btn = document.getElementById('airtable-expand-btn');
+    const isOpen = fs.style.display === 'flex';
+    fs.style.display = isOpen ? 'none' : 'flex';
+    if (btn) {
+      btn.innerHTML = isOpen
+        ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> Expand`
+        : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg> Collapse`;
+    }
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  window.toggleAirtableFullscreen = toggleAirtableFullscreen;
 
   // Initialize on page load
   document.addEventListener('DOMContentLoaded', function() {
