@@ -796,14 +796,22 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
   /* Hide "Signed in as" label and name — save header width */
   #chat-app > div:first-child > div:last-child > span:first-child { display: none !important; }
   #chat-current-name { display: none !important; }
-  /* Hide channel description under the channel name label */
-  #chat-channel-desc { display: none !important; }
-  /* Make the channel header bar tighter */
-  #chat-app .chat-main > div:first-child { padding: 8px 14px !important; }
-  /* Mobile search bar: full-width, proper background */
-  #chat-mobile-search { background: var(--white) !important; padding: 8px 14px !important; }
-  #chat-mobile-search-input { font-size: 1rem !important; padding: 10px 14px !important; border-radius: 10px !important; }
 
+  /* ── Tag header bar: hide description, hide summary badges (redundant with pills) ── */
+  #chat-channel-desc { display: none !important; }
+  #chat-summary-bar { display: none !important; }
+  /* Make tag header bar very compact */
+  #chat-app .chat-main > div:first-child { padding: 7px 14px !important; min-height: 0 !important; }
+
+  /* ── Filter pills: more compact ── */
+  .chat-filter-bar { padding: 5px 10px !important; }
+  .chat-filter-pill { padding: 4px 10px !important; font-size: 0.75rem !important; }
+
+  /* ── Mobile search bar: hidden by default, full-width when open ── */
+  #chat-mobile-search { background: var(--white) !important; padding: 8px 14px !important; }
+  #chat-mobile-search-input { font-size: 1rem !important; padding: 10px 14px !important; border-radius: 10px !important; width: 100% !important; }
+
+  /* ── Search toggle: bigger tap target ── */
   /* ── Misc ── */
   .chat-main { min-height: 0 !important; }
   .chat-keyboard-hint { display: none !important; }
@@ -812,8 +820,9 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     align-items: center !important;
     justify-content: center !important;
     min-width: 44px !important;
-    min-height: 44px !important;
-    font-size: 1.1rem !important;
+    min-height: 36px !important;
+    font-size: 1rem !important;
+    padding: 4px 8px !important;
   }
 
   /* ── Other general mobile fixes (non-chat) ── */
