@@ -638,6 +638,10 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
 @media (max-width: 640px) {
   /* ── Section preamble: hide on mobile, go straight to chat ── */
   #comm-panel-messenger .section-header { display: none !important; }
+  /* Hide the section header and zero out padding so chat fills the viewport */
+  #board-communications { padding-top: 0 !important; padding-bottom: 0 !important; }
+  #board-communications > .container { padding-left: 0 !important; padding-right: 0 !important; max-width: 100% !important; }
+  #board-communications > .container > .section-header { display: none !important; }
 
   /* ── Chat frame: fill available viewport ──
      Nav is sticky ~72px. Board sidebar is sticky 52px below nav.
