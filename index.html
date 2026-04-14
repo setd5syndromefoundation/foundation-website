@@ -48,12 +48,12 @@ body {
   --cream:      #F7F3EE;
   --text:       #1A3340;
   --text-mid:   #4a6b78;
-  --text-light: #7a9bab;
+  --text-light: #5c7d8c;
   --border:     #dde8ec;
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.05),  0 2px 8px  rgba(0,0,0,0.05);
-  --shadow-md:  0 2px 6px rgba(0,0,0,0.06),  0 6px 20px rgba(0,0,0,0.07);
-  --shadow-lg:  0 4px 12px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.09);
-  --shadow-xl:  0 8px 24px rgba(0,0,0,0.10), 0 24px 56px rgba(0,0,0,0.12);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.08),  0 2px 8px  rgba(0,0,0,0.08);
+  --shadow-md:  0 2px 6px rgba(0,0,0,0.10),  0 6px 20px rgba(0,0,0,0.11);
+  --shadow-lg:  0 4px 12px rgba(0,0,0,0.12), 0 12px 32px rgba(0,0,0,0.13);
+  --shadow-xl:  0 8px 24px rgba(0,0,0,0.14), 0 24px 56px rgba(0,0,0,0.16);
 
   /* ===== SPACING SCALE ===== */
   --sp-2xs: 4px;
@@ -161,7 +161,7 @@ strong { color: var(--text); }
 /* ===== CARDS ===== */
 .card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -171,7 +171,7 @@ strong { color: var(--text); }
 .card-icon {
   width: 52px; height: 52px;
   background: var(--gold-light);
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 20px;
 }
@@ -500,7 +500,7 @@ strong { color: var(--text); }
 /* ===== RESEARCH HIGHLIGHTS ===== */
 .research-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 32px;
   border-left: 4px solid var(--gold);
   box-shadow: var(--shadow-sm);
@@ -845,7 +845,7 @@ strong { color: var(--text); }
 /* ===== RESEARCH PAGE ===== */
 .project-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -920,14 +920,14 @@ strong { color: var(--text); }
 .advisor-card {
   text-align: center;
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 32px 24px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 @media (hover: hover) { .advisor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); } }
 .stat-tile {
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px;
   text-align: center;
   box-shadow: var(--shadow-md);
@@ -1002,7 +1002,7 @@ strong { color: var(--text); }
 .other-ways { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .other-way-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 32px 28px;
   box-shadow: var(--shadow-sm);
   border-top: 3px solid var(--gold);
@@ -1014,7 +1014,7 @@ strong { color: var(--text); }
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .value-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 32px 28px;
   box-shadow: var(--shadow-sm);
   border-bottom: 3px solid var(--teal-light);
@@ -1023,7 +1023,7 @@ strong { color: var(--text); }
 @media (hover: hover) { .value-card:hover { border-bottom-color: var(--gold); box-shadow: var(--shadow-lg); transform: translateY(-3px); } }
 .value-icon {
   width: 52px; height: 52px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--gold-light);
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 20px;
@@ -1041,7 +1041,7 @@ strong { color: var(--text); }
 }
 .board-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px 20px;
   text-align: center;
   box-shadow: var(--shadow-sm);
@@ -2562,7 +2562,7 @@ footer {
   </section>
 
   <!-- Leadership -->
-  <section class="section section--teal-light">
+  <section class="section section--cream">
     <div class="container">
       <div class="section-header">
         <span class="subhead">Leadership</span>
