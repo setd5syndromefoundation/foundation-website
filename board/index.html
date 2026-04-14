@@ -870,6 +870,24 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     padding: 4px 12px !important;
     font-size: 0.75rem !important;
   }
+  /* ── Action menu: larger tap targets, don't clip off screen ── */
+  .chat-msg-actions {
+    position: absolute !important;
+    top: auto !important;
+    bottom: calc(100% + 4px) !important;
+    right: 8px !important;
+    left: auto !important;
+    z-index: 50 !important;
+  }
+  .chat-msg-row.mine .chat-msg-actions {
+    right: auto !important;
+    left: 8px !important;
+  }
+  .chat-action-btn {
+    min-height: 36px !important;
+    padding: 6px 14px !important;
+    font-size: 0.82rem !important;
+  }
 
   /* ── Emoji picker: prevent off-screen bleed ── */
   #emoji-picker {
@@ -3792,6 +3810,38 @@ async function showChatApp() {
   // Start website review listener after read state is loaded so badge is accurate
   initWebsiteReviewListener();
 }
+
+// ── Mobile tap-to-reveal message actions ─────────────────────────────────────
+// On touch devices, hover never fires so reply/edit/delete buttons are invisible.
+// A tap on the message bubble toggles the actions-open class on the row.
+(function() {
+  var messagesEl = document.getElementById('chat-messages');
+  if (!messagesEl) return;
+  // Use touchend so it doesn't interfere with scrolling
+  messagesEl.addEventListener('touchend', function(e) {
+    var bubble = e.target.closest('.chat-msg-text');
+    if (!bubble) return;
+    var row = bubble.closest('.chat-msg-row');
+    if (!row) return;
+    // Don't trigger if the user tapped a button or link inside the bubble
+    if (e.target.closest('button, a')) return;
+    var isOpen = row.classList.contains('actions-open');
+    // Close any other open rows
+    document.querySelectorAll('.chat-msg-row.actions-open').forEach(function(r) {
+      r.classList.remove('actions-open');
+    });
+    if (!isOpen) row.classList.add('actions-open');
+    e.preventDefault();
+  }, { passive: false });
+  // Tap anywhere else closes open menus
+  document.addEventListener('touchend', function(e) {
+    if (!e.target.closest('.chat-msg-row')) {
+      document.querySelectorAll('.chat-msg-row.actions-open').forEach(function(r) {
+        r.classList.remove('actions-open');
+      });
+    }
+  });
+})();
 
 function chatSetName(name) {
   if (!name) return;
