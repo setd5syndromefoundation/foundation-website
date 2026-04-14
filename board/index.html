@@ -737,8 +737,15 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     flex-shrink: 0 !important;
   }
 
-  /* Hide "name · time" header row on own messages */
-  .chat-msg-row.mine > div > div:first-child { display: none !important; }
+  /* Own messages: hide author name + time but keep the row so action buttons show */
+  .chat-msg-row.mine .chat-msg-author { display: none !important; }
+  .chat-msg-row.mine .chat-msg-time   { display: none !important; }
+  .chat-msg-row.mine > div > div:first-child { display: flex !important; flex-wrap: wrap !important; justify-content: flex-end !important; gap: 4px !important; margin-bottom: 4px !important; }
+
+  /* Make reply / edit / delete always visible on mobile (no hover needed) */
+  .chat-reply-btn     { opacity: 1 !important; font-size: 0.78rem !important; padding: 5px 12px !important; min-height: 32px !important; }
+  .chat-edit-msg-btn  { opacity: 1 !important; font-size: 0.78rem !important; padding: 5px 12px !important; min-height: 32px !important; }
+  .chat-delete-btn    { opacity: 1 !important; font-size: 0.78rem !important; padding: 5px 12px !important; min-height: 32px !important; }
 
   /* ── Sent bubble ── */
   .chat-msg-row.mine .chat-msg-text {
@@ -3812,37 +3819,6 @@ async function showChatApp() {
   initWebsiteReviewListener();
 }
 
-// ── Mobile tap-to-reveal message actions ─────────────────────────────────────
-// On touch devices, hover never fires so reply/edit/delete buttons are invisible.
-// A tap on the message bubble toggles the actions-open class on the row.
-(function() {
-  var messagesEl = document.getElementById('chat-messages');
-  if (!messagesEl) return;
-  // Use touchend so it doesn't interfere with scrolling
-  messagesEl.addEventListener('touchend', function(e) {
-    var bubble = e.target.closest('.chat-msg-text');
-    if (!bubble) return;
-    var row = bubble.closest('.chat-msg-row');
-    if (!row) return;
-    // Don't trigger if the user tapped a button or link inside the bubble
-    if (e.target.closest('button, a')) return;
-    var isOpen = row.classList.contains('actions-open');
-    // Close any other open rows
-    document.querySelectorAll('.chat-msg-row.actions-open').forEach(function(r) {
-      r.classList.remove('actions-open');
-    });
-    if (!isOpen) row.classList.add('actions-open');
-    e.preventDefault();
-  }, { passive: false });
-  // Tap anywhere else closes open menus
-  document.addEventListener('touchend', function(e) {
-    if (!e.target.closest('.chat-msg-row')) {
-      document.querySelectorAll('.chat-msg-row.actions-open').forEach(function(r) {
-        r.classList.remove('actions-open');
-      });
-    }
-  });
-})();
 
 function chatSetName(name) {
   if (!name) return;
