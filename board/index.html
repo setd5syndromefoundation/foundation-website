@@ -686,8 +686,11 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     align-items: stretch !important;
   }
   .chat-channel-list::-webkit-scrollbar { display: none; }
-  .chat-channel-list > div:first-child { display: none !important; } /* "Channels" label */
-  .chat-channel-list > div:last-child  { display: none !important; } /* desktop search box */
+  .chat-channel-list > div:first-child { display: none !important; } /* "Topics" label */
+  /* Hide the search box inside the tab strip on mobile — use the 🔍 icon instead */
+  #chat-channel-search { display: none !important; }
+  #chat-channel-search + svg { display: none !important; }
+  .chat-channel-list > div:nth-child(2) { display: none !important; } /* search wrapper */
 
   /* Channel buttons — 44px minimum tap target */
   .chat-channel-btn {
@@ -788,6 +791,19 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     gap: 4px !important;
   }
 
+  /* ── Chat header: compact on mobile ── */
+  #chat-app > div:first-child { padding: 10px 14px !important; }
+  /* Hide "Signed in as" label and name — save header width */
+  #chat-app > div:first-child > div:last-child > span:first-child { display: none !important; }
+  #chat-current-name { display: none !important; }
+  /* Hide channel description under the channel name label */
+  #chat-channel-desc { display: none !important; }
+  /* Make the channel header bar tighter */
+  #chat-app .chat-main > div:first-child { padding: 8px 14px !important; }
+  /* Mobile search bar: full-width, proper background */
+  #chat-mobile-search { background: var(--white) !important; padding: 8px 14px !important; }
+  #chat-mobile-search-input { font-size: 1rem !important; padding: 10px 14px !important; border-radius: 10px !important; }
+
   /* ── Misc ── */
   .chat-main { min-height: 0 !important; }
   .chat-keyboard-hint { display: none !important; }
@@ -795,8 +811,9 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    font-size: 1.1rem !important;
   }
 
   /* ── Other general mobile fixes (non-chat) ── */
