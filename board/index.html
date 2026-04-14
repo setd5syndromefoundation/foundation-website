@@ -745,6 +745,8 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     margin-top: 0 !important;
     word-break: break-word !important;
   }
+  .chat-msg-row.mine .chat-msg-text a { color: var(--gold) !important; text-decoration: underline !important; }
+  .chat-msg-row.mine .chat-msg-text a:hover { color: #f0c97a !important; }
 
   /* ── Received bubble ── */
   .chat-msg-row.other .chat-msg-text {
@@ -758,6 +760,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     margin-top: 0 !important;
     word-break: break-word !important;
   }
+  .chat-msg-row.other .chat-msg-text a { color: var(--teal) !important; text-decoration: underline !important; }
   .chat-msg-row.other .chat-msg-author {
     font-size: 0.75rem !important;
     margin-bottom: 3px !important;
