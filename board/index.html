@@ -783,13 +783,25 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     line-height: 1.5 !important;
     padding: 10px 0 !important;
     min-height: 24px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   #chat-input-box {
     padding: 6px 8px 6px 16px !important;
     border-radius: 26px !important;
     align-items: center !important;
     gap: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
   }
+  #chat-compose-area {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  .chat-app-frame { overflow-x: hidden !important; }
+  #comm-panel-messenger { overflow-x: hidden !important; min-width: 0 !important; }
 
   /* ── Chat header: compact on mobile ── */
   #chat-app > div:first-child { padding: 10px 14px !important; }
