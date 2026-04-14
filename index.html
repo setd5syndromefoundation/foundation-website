@@ -2429,7 +2429,7 @@ footer {
             </div>
             <h3>Volunteer With Us</h3>
             <p>We need help with events, social media, family outreach, and more. Share your skills and time to help us grow our mission.</p>
-            <a href="#" class="btn btn-outline mt-16" style="font-size:0.85rem; padding:10px 20px;" onclick="showPage('who')">Volunteer</a>
+            <a href="#" class="btn btn-outline mt-16" style="font-size:0.85rem; padding:10px 20px;" onclick="showPage('volunteer')">Volunteer</a>
           </div>
         </div>
         <div class="card">
@@ -3089,33 +3089,27 @@ footer {
     </div>
   </section>
 
-  <section class="section section--cream">
+  <section class="section section--cream" id="volunteer-form">
     <div class="container" style="max-width:680px;">
       <div class="section-header">
         <span class="subhead">Sign Up</span>
         <h2>Express Your Interest</h2>
         <p>Fill out the form below and we'll be in touch with opportunities that match your skills and availability.</p>
       </div>
-      <div class="contact-form">
-        <div class="name-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-          <input type="text" placeholder="First Name">
-          <input type="text" placeholder="Last Name">
-        </div>
-        <input type="email" placeholder="Email Address">
-        <input type="text" placeholder="Location (City, State/Country)">
-        <select>
-          <option value="" disabled selected>Area of Interest</option>
-          <option>Family Support Network</option>
-          <option>Content &amp; Communications</option>
-          <option>Events &amp; Fundraising</option>
-          <option>Research Advocacy</option>
-          <option>Professional Skills</option>
-          <option>Ambassador Program</option>
-          <option>Other</option>
-        </select>
-        <textarea placeholder="Tell us a little about yourself and why you'd like to volunteer..."></textarea>
-        <button type="submit" class="btn btn-primary" style="width:100%;">Submit Interest Form</button>
-      </div>
+      <iframe
+        id="JotFormIFrame-261026675977065"
+        title="Volunteer Interest Form"
+        onload="window.parent.scrollTo(0,0)"
+        allowtransparency="true"
+        allow="geolocation; microphone; camera; fullscreen; payment"
+        src="https://form.jotform.com/261026675977065"
+        frameborder="0"
+        style="min-width:100%;max-width:100%;height:539px;border:none;"
+        scrolling="no"
+      >
+      </iframe>
+      <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+      <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-261026675977065']", "https://form.jotform.com/")</script>
     </div>
   </section>
 
