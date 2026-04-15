@@ -4329,7 +4329,7 @@ async function sendAdminAlert(errorType, details) {
       to_name:    'Kate',
       from_name:  'Board Portal',
       channel:    'system',
-      subject:    `⚠️ Board Portal Error: ${errorType}`,
+      subject:    `URGENT: Board Portal Error — ${errorType}`,
       message:    `A critical error occurred in the board portal.\n\nError type: ${errorType}\nTime: ${new Date().toLocaleString()}\n\nDetails:\n${details}\n\nThis is an automated alert. Log in to investigate: https://setd5syndrome.org/board/`,
       portal_url: 'https://setd5syndrome.org/board/'
     });
