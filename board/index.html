@@ -4050,7 +4050,7 @@ function renderFilteredMessages() {
     const currentType = msg.msgType || 'idea';
     const actions = ``; // action buttons hidden for now
 
-    const replyBtn  = `<button class="chat-reply-btn" data-msg-id="${msg.id}" data-author="${escapeHtml(author)}" data-text="${escapeHtml((msg.text || '').slice(0, 120).replace(/\n/g, ' '))}" onclick="chatSetReply(this.dataset.msgId, this.dataset.author, this.dataset.text)">↩ Reply</button>`;
+    const replyBtn  = `<button class="chat-reply-btn" data-msg-id="${msg.id}" data-author="${escapeHtml(author)}" data-text="${escapeHtml((msg.text || '').slice(0, 120).replace(/\n/g, ' '))}" data-tag="${currentTag}" onclick="chatSetReply(this.dataset.msgId, this.dataset.author, this.dataset.text, this.dataset.tag)">↩ Reply</button>`;
     const editMsgBtn = isOwn ? `<button class="chat-edit-msg-btn" data-msg-id="${msg.id}" onclick="chatEditMessage('${msg.id}', this)" title="Edit message">✎ Edit</button>` : '';
     const deleteBtn = isOwn ? `<button class="chat-delete-btn" onclick="chatAdminDelete(this)" data-msg-id="${msg.id}" data-author="${escapeHtml(author)}" title="Delete message">🗑</button>` : '';
 
@@ -4131,8 +4131,8 @@ let mentionFocusIdx   = -1;
 let mentionStart      = -1;     // caret position where @ was typed
 let replyingTo        = null;   // { id, author, text } or null
 
-function chatSetReply(msgId, author, text) {
-  replyingTo = { id: msgId, author, text };
+function chatSetReply(msgId, author, text, tag) {
+  replyingTo = { id: msgId, author, text, tag: tag || 'general' };
   document.getElementById('chat-reply-ind-author').textContent = author;
   document.getElementById('chat-reply-ind-text').textContent   = text.length > 70 ? text.slice(0, 70) + '…' : text;
   document.getElementById('chat-reply-indicator').classList.add('visible');
@@ -4495,7 +4495,7 @@ async function chatSend() {
     const sendReplyNeeded  = isReplyNeeded;
     // Compose tag — what the user selected in the tag picker (only for top-level posts)
     const composeTagEl = document.getElementById('compose-tag');
-    const composeTag   = (!replyingTo && composeTagEl) ? (composeTagEl.value || 'general') : 'general';
+    const composeTag   = replyingTo ? (replyingTo.tag || 'general') : (composeTagEl ? (composeTagEl.value || 'general') : 'general');
 
     const msgData = { text: sendText, author: chatUserName, ts: serverTimestamp(), msgType, tags: [composeTag] };
     if (fileData)        msgData.file          = fileData;
