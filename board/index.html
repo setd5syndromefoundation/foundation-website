@@ -1264,6 +1264,14 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     cursor:pointer;font-family:inherit;transition:all 0.15s;
   }
   .wr-reply-btn:hover { border-color:var(--teal);color:var(--teal);background:var(--teal-light); }
+
+/* ── Toast notifications ──────────────────────────────────────────────────── */
+#chat-toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+.chat-toast{background:#1e3a45;color:#fff;padding:10px 16px;border-radius:8px;font-size:0.8rem;font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.18);opacity:0;transform:translateY(8px);transition:opacity 0.25s,transform 0.25s;pointer-events:auto;max-width:320px;line-height:1.4;}
+.chat-toast.visible{opacity:1;transform:translateY(0);}
+.chat-toast.toast-error{background:#8b2e0a;border-left:3px solid #c96a38;}
+.chat-toast.toast-warn{background:#5a4200;border-left:3px solid #D8AB67;}
+.chat-toast.toast-ok{background:#1a4a2e;border-left:3px solid #4caf7d;}
 </style>
 </head>
 <body>
@@ -3428,6 +3436,7 @@ async function sendUrgentSMS(senderName, messageText, channel, mentionedNames = 
       console.log(`✅ Urgent alert email sent to ${member.name}`);
     } catch (err) {
       console.error(`❌ Urgent alert to ${member.name} failed:`, err.message);
+      showToast(`Urgent alert to ${member.name} could not be sent. Please contact them directly.`, 'error');
     }
   }
 }
@@ -3508,6 +3517,8 @@ function watchUnread() {
   bgUnsubs['board'] = onSnapshot(q, snap => {
     lastMsgSnap = snap;        // keep latest snapshot for cross-listener reuse
     recomputeUnreadBadge();    // re-evaluate badge with current read state
+  }, err => {
+    console.warn('watchUnread error — unread badge may be stale:', err);
   });
 }
 
@@ -4358,6 +4369,7 @@ async function sendMentionEmails(mentionedMembers, senderName, messageText, chan
       console.log(`✅ Mention email sent to ${member.name}`, response);
     } catch (err) {
       console.error(`❌ Mention email to ${member.name} FAILED:`, err.message, err);
+      showToast(`Could not notify ${member.name} by email. They may not receive an alert.`, 'warn');
     }
   }
 }
@@ -4444,6 +4456,22 @@ function fileIcon(name) {
   return '📎';
 }
 
+
+// ── Toast helper ──────────────────────────────────────────────────────────────
+function showToast(msg, type = 'error', duration = 4500) {
+  const container = document.getElementById('chat-toast-container');
+  if (!container) return;
+  const el = document.createElement('div');
+  el.className = `chat-toast toast-${type}`;
+  el.textContent = msg;
+  container.appendChild(el);
+  requestAnimationFrame(() => { requestAnimationFrame(() => { el.classList.add('visible'); }); });
+  setTimeout(() => {
+    el.classList.remove('visible');
+    setTimeout(() => el.remove(), 300);
+  }, duration);
+}
+
 // ── Send message ──────────────────────────────────────────────────────────────
 async function chatSend() {
   const input = document.getElementById('chat-input');
@@ -4460,10 +4488,14 @@ async function chatSend() {
   chatClearFile();
   closeMentionDropdown();
 
+  // Compute tag early so it's available for Storage path and msgData
+  const composeTagEl = document.getElementById('compose-tag');
+  const composeTag   = replyingTo ? (replyingTo.tag || 'general') : (composeTagEl ? (composeTagEl.value || 'general') : 'general');
+
   try {
     let fileData = null;
     if (fileToSend) {
-      const fileRef = ref(storage, `board-chat/${currentChannel}/${Date.now()}_${fileToSend.name}`);
+      const fileRef = ref(storage, `board-chat/${composeTag}/${Date.now()}_${fileToSend.name}`);
       const url = await new Promise((resolve, reject) => {
         const task = uploadBytesResumable(fileRef, fileToSend);
         task.on('state_changed', null, reject, async () => {
@@ -4481,21 +4513,9 @@ async function chatSend() {
     const aiStatus = document.getElementById('ai-status') ? document.getElementById('ai-status').value || 'open' : 'open';
     const aiTopic  = document.getElementById('ai-topic')  ? (document.getElementById('ai-topic').value || '').trim()  : '';
 
-    // Reset type selector and hide AI form
-    const typeSelectEl = document.getElementById('chat-msg-type');
-    if (typeSelectEl) typeSelectEl.value = 'idea';
-    const aiFormEl = document.getElementById('ai-extended-form');
-    if (aiFormEl) aiFormEl.classList.remove('visible');
-    ['ai-title','ai-due','ai-topic'].forEach(function(id) { const el = document.getElementById(id); if (el) el.value = ''; });
-    const ownerEl  = document.getElementById('ai-owner');  if (ownerEl)  ownerEl.value  = '';
-    const statusEl = document.getElementById('ai-status'); if (statusEl) statusEl.value = 'open';
-    if (input) delete input.dataset.linkedMsg;
-
     const sendUrgent       = isUrgent;
     const sendReplyNeeded  = isReplyNeeded;
-    // Compose tag — what the user selected in the tag picker (only for top-level posts)
-    const composeTagEl = document.getElementById('compose-tag');
-    const composeTag   = replyingTo ? (replyingTo.tag || 'general') : (composeTagEl ? (composeTagEl.value || 'general') : 'general');
+    // composeTag already computed above (before file upload)
 
     const msgData = { text: sendText, author: chatUserName, ts: serverTimestamp(), msgType, tags: [composeTag] };
     if (fileData)        msgData.file          = fileData;
@@ -4517,6 +4537,17 @@ async function chatSend() {
     if (isReplyNeeded)   chatToggleReplyNeeded();
   
     await addDoc(collection(db, 'board_messages'), msgData);
+
+    // Reset form fields only after successful send
+    const typeSelectEl = document.getElementById('chat-msg-type');
+    if (typeSelectEl) typeSelectEl.value = 'idea';
+    const aiFormEl = document.getElementById('ai-extended-form');
+    if (aiFormEl) aiFormEl.classList.remove('visible');
+    ['ai-title','ai-due','ai-topic'].forEach(function(id) { const el = document.getElementById(id); if (el) el.value = ''; });
+    const ownerEl  = document.getElementById('ai-owner');  if (ownerEl)  ownerEl.value  = '';
+    const statusEl = document.getElementById('ai-status'); if (statusEl) statusEl.value = 'open';
+    if (input) delete input.dataset.linkedMsg;
+
     markSeen('board');
     chatUpdateClearBtn();
     chatMaybeCollapseCompose();
@@ -4539,7 +4570,8 @@ async function chatSend() {
     }
   } catch (err) {
     console.error('Send error:', err);
-    alert('Message failed to send. Please try again.');
+    const errMsg = fileToSend ? 'Message failed to send. Please re-attach your file and try again.' : 'Message failed to send. Please try again.';
+    showToast(errMsg, 'error', 6000);
     input.value = sendText;
   }
 }
