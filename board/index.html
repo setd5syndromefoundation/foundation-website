@@ -4317,6 +4317,27 @@ function extractMentions(text) {
 const EMAILJS_SERVICE_ID  = 'service_7mrdcul';
 const EMAILJS_TEMPLATE_ID = 'template_kx0n1a4';
 const EMAILJS_PUBLIC_KEY  = '6pg6N6BN0V5OZM8MG';
+const ADMIN_EMAIL         = 'kate@fourrootsranch.com';
+
+// Sends a critical error report to the web admin (Kate).
+// Use sparingly — only for failures where data was lost or a message couldn't send.
+async function sendAdminAlert(errorType, details) {
+  try {
+    const ejs = await getEmailJS();
+    await ejs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      email:      ADMIN_EMAIL,
+      to_name:    'Kate',
+      from_name:  'Board Portal',
+      channel:    'system',
+      subject:    `⚠️ Board Portal Error: ${errorType}`,
+      message:    `A critical error occurred in the board portal.\n\nError type: ${errorType}\nTime: ${new Date().toLocaleString()}\n\nDetails:\n${details}\n\nThis is an automated alert. Log in to investigate: https://setd5syndrome.org/board/`,
+      portal_url: 'https://setd5syndrome.org/board/'
+    });
+  } catch (e) {
+    // Don't let admin alert failure cause additional noise
+    console.warn('Admin alert could not be sent:', e.message);
+  }
+}
 
 let emailjsLib = null;
 async function getEmailJS() {
@@ -4573,6 +4594,7 @@ async function chatSend() {
     const errMsg = fileToSend ? 'Message failed to send. Please re-attach your file and try again.' : 'Message failed to send. Please try again.';
     showToast(errMsg, 'error', 6000);
     input.value = sendText;
+    sendAdminAlert('Message send failed', `Sender: ${chatUserName}\nChannel: ${composeTag}\nError: ${err.message}\nHad file: ${!!fileToSend}`);
   }
 }
 
