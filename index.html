@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://setd5syndrome.org/social-preview.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500;1,8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -214,22 +214,20 @@ strong { color: var(--text); }
 .nav-logo-text { line-height: 1.15; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; margin-left: -8px; }
 .nav-logo-text .name {
   font-family: 'Source Serif 4', serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.85rem;
   color: var(--teal);
   display: block;
   white-space: nowrap;
-  letter-spacing: 0.015em;
 }
-.nav-logo-text .name .setd-label { margin-right: 0.40em; }
 .nav-logo-text .tagline {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 400;
-  font-size: 1rem;
-  margin-top: 6px;
+  font-size: 0.88rem;
+  margin-top: 9px;
   margin-bottom: 0;
   color: var(--coral);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   display: block;
 }
 .nav-links {
@@ -328,7 +326,7 @@ strong { color: var(--text); }
 .hero {
   background-color: #1e3a45;
   background-image: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 60%, #3d6b7d 100%);
-  padding: 72px 0 72px;
+  padding: 72px 0 112px;
   position: relative;
   overflow: hidden;
 }
@@ -391,7 +389,6 @@ strong { color: var(--text); }
   margin-bottom: 36px;
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-actions .btn, .hero-actions .btn-lg { padding: 8px 20px; font-size: 0.82rem; }
 .hero-card {
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.20);
@@ -469,7 +466,7 @@ strong { color: var(--text); }
   min-width: 160px;
 }
 .stat-item .num {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Source Serif 4', serif;
   font-size: 2.2rem;
   font-weight: 600;
   color: var(--gold);
@@ -1375,12 +1372,12 @@ footer {
 /* Shrink logo at mid-widths before it wraps */
 @media (max-width: 1100px) {
   .nav-logo-text .name { font-size: 1.65rem; }
-  .nav-logo-text .tagline { font-size: 0.82rem; }
+  .nav-logo-text .tagline { font-size: 0.72rem; }
   .nav-inner { gap: 20px; }
 }
 @media (max-width: 980px) {
   .nav-logo-text .name { font-size: 1.4rem; }
-  .nav-logo-text .tagline { font-size: 0.86rem; }
+  .nav-logo-text .tagline { font-size: 0.76rem; }
   .nav-inner { gap: 12px; }
   .nav-links { gap: 4px; }
   .nav-links a { padding: 6px 8px; font-size: 0.88rem; }
@@ -1396,8 +1393,8 @@ footer {
   .nav-links.open a { display: block; padding: 12px 8px; font-size: 1rem; }
   .nav-toggle { display: flex; }
   .nav-logo-text .name { font-size: 1.35rem; white-space: normal; line-height: 1.2; }
-  .nav-logo-text .tagline { font-size: 0.85rem; }
-  .logo-svg { width: 72px !important; height: 72px !important; }
+  .nav-logo-text .tagline { font-size: 0.75rem; }
+  .logo-svg { width: 56px !important; height: 56px !important; }
   /* Mobile dropdowns */
   .nav-item-dropdown { width: 100%; flex-wrap: wrap; }
   .nav-item-dropdown:hover .nav-dropdown-menu { display: none; }
@@ -1585,7 +1582,7 @@ footer {
       <a class="nav-logo" onclick="showPage('home')" href="#">
         <img src="logo_transparent.png" alt="SETD5 Syndrome Foundation logo" class="logo-svg" onerror="this.style.display='none'">
         <div class="nav-logo-text">
-          <span class="name"><span class="setd-label">SETD5</span>Syndrome Foundation</span>
+          <span class="name">SETD5 Syndrome Foundation</span>
           <span class="tagline">research · advocacy · community</span>
         </div>
       </a>
@@ -1633,9 +1630,9 @@ footer {
           <h1>Fueling Research.<br><em>Empowering</em> Families.</h1>
           <p class="hero-desc">We are a family-led nonprofit dedicated to advancing research for SETD5 Syndrome, a rare genetic condition, and building a global community of support, hope, and action.</p>
           <div class="hero-actions">
+            <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Donate Now</a>
             <a href="#" class="btn btn-secondary btn-lg" onclick="showPage('about')">Learn About SETD5 Syndrome</a>
             <a href="#" class="btn btn-lg" style="background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.50); letter-spacing:0.02em;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.50)'" onclick="scrollToNewsletter(); return false;">Get Updates</a>
-            <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Donate Now</a>
           </div>
         </div>
         <div class="hero-card">
@@ -1747,7 +1744,7 @@ footer {
   <!-- Foundation Stats Bar -->
   <section class="stats-bar">
     <div class="container">
-      <p style="text-align:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; opacity:0.9;">About the Foundation</p>
+      <p style="text-align:center; font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; opacity:0.9;">About the Foundation</p>
       <div class="stats-bar-inner">
         <div class="stat-item">
           <span class="num">Est. 2026</span>
@@ -2736,7 +2733,7 @@ footer {
       <div class="section-header">
         <span class="subhead">Community & Research</span>
         <h2>Connect, Learn, and Find Your People</h2>
-        <p>Trusted resources for families navigating a SETD5 Syndrome diagnosis, from community spaces where you can connect with other families to research registries where your participation makes a difference.</p>
+        <p>Trusted resources for families navigating a SETD5 Syndrome diagnosis, from community spaces where you can connect with other families to research registries where your participation makes a difference. These resources are independent and are not affiliated with or sponsored by the SETD5 Syndrome Foundation.</p>
       </div>
       <div class="grid-3">
         <div class="card">
@@ -2755,7 +2752,7 @@ footer {
               <svg width="22" height="22" viewBox="0 0 26 26" fill="none"><path d="M13 3C7.477 3 3 7.477 3 13s4.477 10 10 10 10-4.477 10-10S18.523 3 13 3z" stroke="#c96a38" stroke-width="2"/><path d="M3 13h20M13 3a15 15 0 000 20M13 3a15 15 0 010 20" stroke="#c96a38" stroke-width="2"/></svg>
             </div>
             <h3>The SETD5 Syndrome Companion</h3>
-            <p>A resource hub built by a parent to help families navigate SETD5 Syndrome in plain language. One place for explanations, a family toolkit, medical terms, and research summaries.</p>
+            <p>A resource hub for families living with SETD5 Syndrome, with custom handout builders for appointments and meetings, school and IEP support, links to community and benefits programs, resources for kids, and more.</p>
             <a href="https://setd5syndrome.com" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:16px;">Visit setd5syndrome.com</a>
           </div>
         </div>
@@ -3666,21 +3663,14 @@ jesiree: {
 
   function initSwmMap() {
     const svgEl = document.getElementById('swm-world-map');
-    if (!svgEl) return;
-    if (swmInitialized && svgEl.childNodes.length > 0) return;
+    if (!svgEl || swmInitialized) return;
+    // Fixed viewBox — no need to query offsetWidth, works when hidden
     swmInitialized = true;
-
-    while (svgEl.firstChild) svgEl.removeChild(svgEl.firstChild);
 
     const width = 960, height = 500;
     const svg = d3.select('#swm-world-map');
-    let container = document.querySelector('.swm-map-container');
-    let tooltip = document.getElementById('swm-tooltip');
-    if (!tooltip) {
-      tooltip = document.createElement('div');
-      tooltip.id = 'swm-tooltip';
-      container.appendChild(tooltip);
-    }
+    const container = document.getElementById('swm-tooltip').parentElement;
+    const tooltip = document.getElementById('swm-tooltip');
 
     const projection = d3.geoNaturalEarth1()
       .scale(153)
@@ -3688,11 +3678,13 @@ jesiree: {
 
     const path = d3.geoPath().projection(projection);
 
+    // Ocean
     svg.insert('path', ':first-child')
       .datum({ type: 'Sphere' })
       .attr('d', path)
       .attr('fill', '#ddeef7');
 
+    // Graticule
     svg.append('path')
       .datum(d3.geoGraticule()())
       .attr('d', path)
@@ -3700,65 +3692,51 @@ jesiree: {
       .attr('stroke', '#ddd8cf')
       .attr('stroke-width', 0.3);
 
-    var jsonUrls = [
-      'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json',
-      'https://unpkg.com/world-atlas@2/countries-110m.json'
-    ];
+    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(world) {
+      const countries = topojson.feature(world, world.objects.countries);
 
-    function tryLoad(i) {
-      d3.json(jsonUrls[i]).then(function(world) {
-        const countries = topojson.feature(world, world.objects.countries);
+      // Country fills
+      svg.selectAll('.swm-country')
+        .data(countries.features)
+        .enter().append('path')
+        .attr('class', function(d) {
+          return activeCodes.has(+d.id)
+            ? 'swm-country swm-country-active'
+            : 'swm-country swm-country-default';
+        })
+        .attr('d', path)
+        .on('mousemove', function(event, d) {
+          var id = +d.id;
+          if (!activeCodes.has(id)) return;
+          var name = countryInfo[id] || 'Country';
+          var rect = container.getBoundingClientRect();
+          var pos = d3.pointer(event, container);
+          tooltip.style.opacity = '1';
+          tooltip.style.left = Math.min(pos[0] + 12, rect.width - 215) + 'px';
+          tooltip.style.top = (pos[1] - 10) + 'px';
+          tooltip.innerHTML = '<strong>' + name + '</strong>';
+        })
+        .on('mouseleave', function() {
+          tooltip.style.opacity = '0';
+        });
 
-        svg.selectAll('.swm-country')
-          .data(countries.features)
-          .enter().append('path')
-          .attr('class', function(d) {
-            return activeCodes.has(+d.id)
-              ? 'swm-country swm-country-active'
-              : 'swm-country swm-country-default';
-          })
-          .attr('d', path)
-          .on('mousemove', function(event, d) {
-            var id = +d.id;
-            if (!activeCodes.has(id)) return;
-            var name = countryInfo[id] || 'Country';
-            var rect = container.getBoundingClientRect();
-            var pos = d3.pointer(event, container);
-            tooltip.style.opacity = '1';
-            tooltip.style.left = Math.min(pos[0] + 12, rect.width - 215) + 'px';
-            tooltip.style.top = (pos[1] - 10) + 'px';
-            tooltip.innerHTML = '<strong>' + name + '</strong>';
-          })
-          .on('mouseleave', function() {
-            tooltip.style.opacity = '0';
-          });
+      // Country borders (clean mesh layer)
+      svg.append('path')
+        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+        .attr('fill', 'none')
+        .attr('stroke', '#e8e2d9')
+        .attr('stroke-width', 0.5)
+        .attr('d', path);
 
-        svg.append('path')
-          .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-          .attr('fill', 'none')
-          .attr('stroke', '#e8e2d9')
-          .attr('stroke-width', 0.5)
-          .attr('d', path);
-
-      }).catch(function() {
-        if (i + 1 < jsonUrls.length) {
-          tryLoad(i + 1);
-        } else {
-          swmInitialized = false;
-          if (container) container.innerHTML =
-            '<svg id="swm-world-map" viewBox="0 0 960 500"></svg><div id="swm-tooltip"></div>' +
-            '<p style="text-align:center;padding:3rem;color:#6b6b6b;">Map could not be loaded. Please check your connection.</p>';
-        }
-      });
-    }
-    tryLoad(0);
+    }).catch(function() {
+      document.querySelector('.swm-map-container').innerHTML =
+        '<p style="text-align:center;padding:3rem;color:#6b6b6b;">Map could not be loaded. Please check your connection.</p>';
+    });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(initSwmMap, 100); });
-  } else {
+  document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initSwmMap, 100);
-  }
+  });
 
   var _prevShowPage = window.showPage;
   window.showPage = function(page) {
