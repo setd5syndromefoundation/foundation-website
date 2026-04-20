@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://setd5syndrome.org/social-preview.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500;1,8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500;1,8..60,600&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -224,7 +224,7 @@ strong { color: var(--text); }
 .nav-logo-text .name .setd-label { margin-right: 0.32em; }
 .nav-logo-text .tagline {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 600;
+  font-weight: 300;
   font-size: 1rem;
   margin-top: 6px;
   margin-bottom: 0;
@@ -1396,7 +1396,7 @@ footer {
   .nav-toggle { display: flex; }
   .nav-logo-text .name { font-size: 1.35rem; white-space: normal; line-height: 1.2; }
   .nav-logo-text .tagline { font-size: 0.85rem; }
-  .logo-svg { width: 56px !important; height: 56px !important; }
+  .logo-svg { width: 72px !important; height: 72px !important; }
   /* Mobile dropdowns */
   .nav-item-dropdown { width: 100%; flex-wrap: wrap; }
   .nav-item-dropdown:hover .nav-dropdown-menu { display: none; }
@@ -1632,9 +1632,9 @@ footer {
           <h1>Fueling Research.<br><em>Empowering</em> Families.</h1>
           <p class="hero-desc">We are a family-led nonprofit dedicated to advancing research for SETD5 Syndrome, a rare genetic condition, and building a global community of support, hope, and action.</p>
           <div class="hero-actions">
-            <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Donate Now</a>
             <a href="#" class="btn btn-secondary btn-lg" onclick="showPage('about')">Learn About SETD5 Syndrome</a>
             <a href="#" class="btn btn-lg" style="background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.50); letter-spacing:0.02em;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.50)'" onclick="scrollToNewsletter(); return false;">Get Updates</a>
+            <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Donate Now</a>
           </div>
         </div>
         <div class="hero-card">
@@ -3665,14 +3665,21 @@ jesiree: {
 
   function initSwmMap() {
     const svgEl = document.getElementById('swm-world-map');
-    if (!svgEl || swmInitialized) return;
-    // Fixed viewBox — no need to query offsetWidth, works when hidden
+    if (!svgEl) return;
+    if (swmInitialized && svgEl.childNodes.length > 0) return;
     swmInitialized = true;
+
+    while (svgEl.firstChild) svgEl.removeChild(svgEl.firstChild);
 
     const width = 960, height = 500;
     const svg = d3.select('#swm-world-map');
-    const container = document.getElementById('swm-tooltip').parentElement;
-    const tooltip = document.getElementById('swm-tooltip');
+    let container = document.querySelector('.swm-map-container');
+    let tooltip = document.getElementById('swm-tooltip');
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.id = 'swm-tooltip';
+      container.appendChild(tooltip);
+    }
 
     const projection = d3.geoNaturalEarth1()
       .scale(153)
@@ -3680,13 +3687,11 @@ jesiree: {
 
     const path = d3.geoPath().projection(projection);
 
-    // Ocean
     svg.insert('path', ':first-child')
       .datum({ type: 'Sphere' })
       .attr('d', path)
       .attr('fill', '#ddeef7');
 
-    // Graticule
     svg.append('path')
       .datum(d3.geoGraticule()())
       .attr('d', path)
@@ -3694,51 +3699,65 @@ jesiree: {
       .attr('stroke', '#ddd8cf')
       .attr('stroke-width', 0.3);
 
-    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(world) {
-      const countries = topojson.feature(world, world.objects.countries);
+    var jsonUrls = [
+      'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json',
+      'https://unpkg.com/world-atlas@2/countries-110m.json'
+    ];
 
-      // Country fills
-      svg.selectAll('.swm-country')
-        .data(countries.features)
-        .enter().append('path')
-        .attr('class', function(d) {
-          return activeCodes.has(+d.id)
-            ? 'swm-country swm-country-active'
-            : 'swm-country swm-country-default';
-        })
-        .attr('d', path)
-        .on('mousemove', function(event, d) {
-          var id = +d.id;
-          if (!activeCodes.has(id)) return;
-          var name = countryInfo[id] || 'Country';
-          var rect = container.getBoundingClientRect();
-          var pos = d3.pointer(event, container);
-          tooltip.style.opacity = '1';
-          tooltip.style.left = Math.min(pos[0] + 12, rect.width - 215) + 'px';
-          tooltip.style.top = (pos[1] - 10) + 'px';
-          tooltip.innerHTML = '<strong>' + name + '</strong>';
-        })
-        .on('mouseleave', function() {
-          tooltip.style.opacity = '0';
-        });
+    function tryLoad(i) {
+      d3.json(jsonUrls[i]).then(function(world) {
+        const countries = topojson.feature(world, world.objects.countries);
 
-      // Country borders (clean mesh layer)
-      svg.append('path')
-        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-        .attr('fill', 'none')
-        .attr('stroke', '#e8e2d9')
-        .attr('stroke-width', 0.5)
-        .attr('d', path);
+        svg.selectAll('.swm-country')
+          .data(countries.features)
+          .enter().append('path')
+          .attr('class', function(d) {
+            return activeCodes.has(+d.id)
+              ? 'swm-country swm-country-active'
+              : 'swm-country swm-country-default';
+          })
+          .attr('d', path)
+          .on('mousemove', function(event, d) {
+            var id = +d.id;
+            if (!activeCodes.has(id)) return;
+            var name = countryInfo[id] || 'Country';
+            var rect = container.getBoundingClientRect();
+            var pos = d3.pointer(event, container);
+            tooltip.style.opacity = '1';
+            tooltip.style.left = Math.min(pos[0] + 12, rect.width - 215) + 'px';
+            tooltip.style.top = (pos[1] - 10) + 'px';
+            tooltip.innerHTML = '<strong>' + name + '</strong>';
+          })
+          .on('mouseleave', function() {
+            tooltip.style.opacity = '0';
+          });
 
-    }).catch(function() {
-      document.querySelector('.swm-map-container').innerHTML =
-        '<p style="text-align:center;padding:3rem;color:#6b6b6b;">Map could not be loaded. Please check your connection.</p>';
-    });
+        svg.append('path')
+          .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+          .attr('fill', 'none')
+          .attr('stroke', '#e8e2d9')
+          .attr('stroke-width', 0.5)
+          .attr('d', path);
+
+      }).catch(function() {
+        if (i + 1 < jsonUrls.length) {
+          tryLoad(i + 1);
+        } else {
+          swmInitialized = false;
+          if (container) container.innerHTML =
+            '<svg id="swm-world-map" viewBox="0 0 960 500"></svg><div id="swm-tooltip"></div>' +
+            '<p style="text-align:center;padding:3rem;color:#6b6b6b;">Map could not be loaded. Please check your connection.</p>';
+        }
+      });
+    }
+    tryLoad(0);
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(initSwmMap, 100); });
+  } else {
     setTimeout(initSwmMap, 100);
-  });
+  }
 
   var _prevShowPage = window.showPage;
   window.showPage = function(page) {
