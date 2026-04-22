@@ -2328,15 +2328,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
           </button>
           <div class="doc-folder-body"><div data-doc-section="board-meetings" data-doc-sub="Presentations"><div class="doc-empty">No documents yet</div></div></div>
         </div>
-        <div class="doc-folder" data-section="board-meetings" data-sub="Historical Communications">
-          <button class="doc-folder-header" onclick="toggleFolder(this)">
-            <svg class="doc-folder-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 4h5l2 2h7v9H1V4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-            <span class="doc-folder-name">Historical Communications</span>
-            <span class="doc-folder-count"></span>
-            <svg class="doc-folder-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="doc-folder-body"><div data-doc-section="board-meetings" data-doc-sub="Historical Communications"><div class="doc-empty">No documents yet</div></div></div>
-        </div>
+
         <div class="doc-folder" data-section="board-meetings" data-sub="Other">
           <button class="doc-folder-header" onclick="toggleFolder(this)">
             <svg class="doc-folder-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 4h5l2 2h7v9H1V4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
@@ -5438,7 +5430,7 @@ window.trackerExportCSV = trackerExportCSV;
 let docEntries = [];
 
 const DOC_SECTIONS = {
-  'board-meetings':    { label: 'Board Meeting Materials',   subs: ['Meeting Minutes','Meeting Agendas','Presentations','Historical Communications','Other'] },
+  'board-meetings':    { label: 'Board Meeting Materials',   subs: ['Meeting Minutes','Meeting Agendas','Presentations','Other'] },
   'board-finance':     { label: 'Financial Documents',       subs: ['Budgets & Reports','Tax Filings','Audit & Compliance','Other'] },
   'board-governance':  { label: 'Governance Documents',      subs: ['Secretary Review — Pending','IRS & Tax Exemption','Bylaws & Articles','Policies','Conflict of Interest Forms'] },
   'board-committees':  { label: 'Committee Documents',       subs: ['Research Committee','Finance Committee','Other Committees','Other'] },
