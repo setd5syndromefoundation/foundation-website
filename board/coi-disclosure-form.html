@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conflict of Interest Disclosure — SETD5 Syndrome Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal:       #2F5361;
+  --teal-dark:  #1E3A45;
+  --coral:      #C96A38;
+  --gold:       #D8AB67;
+  --cream:      #F5F3F1;
+  --white:      #FFFFFF;
+  --text:       #1A3340;
+  --text-mid:   #4A6B78;
+  --text-light: #5C7D8C;
+  --border:     #DDE8EC;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  padding: 40px 20px 60px;
+}
+
+.form-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+}
+
+/* ── Header ──────────────────────────────────────────── */
+.form-header {
+  background: var(--teal-dark);
+  padding: 24px 36px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.form-header::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: -30px;
+  width: 120px;
+  height: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M44 5 C32 20 32 35 44 50 C56 65 56 80 44 95 C32 110 32 125 44 140' stroke='rgba(255,255,255,0.07)' stroke-width='5' fill='none'/%3E%3Cpath d='M66 5 C78 20 78 35 66 50 C54 65 54 80 66 95 C78 110 78 125 66 140' stroke='rgba(255,255,255,0.07)' stroke-width='5' fill='none'/%3E%3C/svg%3E") no-repeat center/contain;
+  pointer-events: none;
+}
+.form-header img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+.form-header-text .org {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1.2;
+}
+.form-header-text .doc-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-top: 4px;
+}
+
+/* ── Intro note ──────────────────────────────────────── */
+.form-intro {
+  background: #243e4a;
+  padding: 14px 36px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.80);
+  line-height: 1.6;
+}
+
+/* ── Form body ───────────────────────────────────────── */
+.form-body {
+  padding: 32px 36px 36px;
+}
+
+/* ── Section header ──────────────────────────────────── */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--coral);
+  margin-bottom: 18px;
+}
+
+/* ── Field rows ──────────────────────────────────────── */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.field-row.thirds {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+.field-row.full {
+  grid-template-columns: 1fr;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+.field input, .field select, .field textarea {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 11px;
+  background: white;
+  transition: border-color 0.15s;
+  outline: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(47,83,97,0.1);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 70px;
+  line-height: 1.5;
+}
+
+/* ── Disclosure block ────────────────────────────────── */
+.disclosure-block {
+  background: #f7fafc;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+.disclosure-block h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.disclosure-block .desc {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+.radio-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.4;
+}
+.radio-opt input[type="radio"] {
+  margin-top: 2px;
+  accent-color: var(--teal);
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}
+.detail-box {
+  display: none;
+  margin-top: 6px;
+}
+.detail-box.show { display: block; }
+.detail-box textarea {
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: white;
+  resize: vertical;
+  min-height: 60px;
+  line-height: 1.5;
+  outline: none;
+}
+.detail-box textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(47,83,97,0.1);
+}
+.detail-box label {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 4px;
+}
+
+/* ── Section spacer ──────────────────────────────────── */
+.sec-gap { margin-top: 28px; }
+
+/* ── Attestation ─────────────────────────────────────── */
+.attestation {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-top: 6px;
+}
+.attestation h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+.attest-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.attest-item input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: var(--teal);
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}
+
+/* ── Signature area ──────────────────────────────────── */
+.sig-area {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: end;
+}
+.sig-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 5px;
+}
+.sig-pad {
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: white;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: crosshair;
+  position: relative;
+  overflow: hidden;
+}
+.sig-pad canvas { display: block; }
+.sig-hint {
+  position: absolute;
+  font-size: 0.75rem;
+  color: #ccc;
+  pointer-events: none;
+  user-select: none;
+}
+.sig-clear {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  font-size: 0.68rem;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: none;
+}
+.sig-clear.show { display: block; }
+
+/* ── Secretary box ───────────────────────────────────── */
+.secretary-box {
+  margin-top: 28px;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.secretary-box .sec-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+.secretary-box .sec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.secretary-box .sec-grid .field label {
+  font-size: 0.72rem;
+}
+
+/* ── Submit / Print buttons ──────────────────────────── */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  justify-content: flex-end;
+}
+.btn {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-outline {
+  background: white;
+  border: 1.5px solid var(--teal);
+  color: var(--teal);
+}
+.btn-primary {
+  background: var(--teal);
+  color: white;
+}
+
+/* ── Print ───────────────────────────────────────────── */
+@media print {
+  body { background: white; padding: 0; }
+  .form-shell { box-shadow: none; border-radius: 0; }
+  .form-actions { display: none; }
+  .sig-clear { display: none !important; }
+  .sig-hint { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="form-shell">
+
+  <!-- HEADER -->
+  <div class="form-header">
+    <img src="../logo_transparent.png" alt="SETD5 Syndrome Foundation">
+    <div class="form-header-text">
+      <div class="org">SETD5 Syndrome Foundation</div>
+      <div class="doc-title">Conflict of Interest Disclosure Statement &nbsp;·&nbsp; Board of Directors</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="form-intro">
+    A conflict of interest exists when a board member has a personal, financial, or professional interest that could compromise their objectivity or judgment in Foundation matters. If you are unsure whether something constitutes a conflict, disclose it and let the Board make that determination.
+  </div>
+
+  <div class="form-body">
+
+    <!-- SECTION A: Board Member Info -->
+    <div class="section-label">A. Board Member Information</div>
+
+    <div class="field-row thirds">
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" placeholder="Legal name">
+      </div>
+      <div class="field">
+        <label>Date</label>
+        <input type="date">
+      </div>
+      <div class="field">
+        <label>Year Covered</label>
+        <input type="text" placeholder="e.g. 2025–2026">
+      </div>
+    </div>
+    <div class="field-row full">
+      <div class="field">
+        <label>Board Role / Officer Title (if applicable)</label>
+        <input type="text" placeholder="e.g. Treasurer, Secretary, Director at Large">
+      </div>
+    </div>
+
+    <!-- SECTION B: Disclosures -->
+    <div class="sec-gap">
+      <div class="section-label">B. Disclosure of Interests</div>
+    </div>
+
+    <!-- B1 -->
+    <div class="disclosure-block">
+      <h4>B1 — Financial Interests</h4>
+      <p class="desc">Do you have a direct or indirect financial interest in any organization that does business with the Foundation, competes with the Foundation, or operates in the same area?</p>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="b1" value="no" onchange="toggleDetail('b1-detail', false)">
+          No financial interests to disclose
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="b1" value="yes" onchange="toggleDetail('b1-detail', true)">
+          Yes, I disclose the following:
+        </label>
+      </div>
+      <div class="detail-box" id="b1-detail">
+        <label>Describe the organization, your interest, and the nature of the relationship:</label>
+        <textarea placeholder="Organization name, your role or interest, and how it relates to the Foundation…"></textarea>
+      </div>
+    </div>
+
+    <!-- B2 -->
+    <div class="disclosure-block">
+      <h4>B2 — Family and Personal Relationships</h4>
+      <p class="desc">Do you have a family member or close personal relationship with anyone employed by, contracted with, or otherwise having a financial relationship with the Foundation?</p>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="b2" value="no" onchange="toggleDetail('b2-detail', false)">
+          No relationships to disclose
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="b2" value="yes" onchange="toggleDetail('b2-detail', true)">
+          Yes, I disclose the following:
+        </label>
+      </div>
+      <div class="detail-box" id="b2-detail">
+        <label>Describe the relationship and the connection to the Foundation:</label>
+        <textarea placeholder="Name and relationship to you, their role or connection to the Foundation…"></textarea>
+      </div>
+    </div>
+
+    <!-- B3 -->
+    <div class="disclosure-block">
+      <h4>B3 — Other Affiliations</h4>
+      <p class="desc">Are you affiliated (as an officer, director, employee, or advisor) with any organization that may have interests that conflict with the Foundation?</p>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="b3" value="no" onchange="toggleDetail('b3-detail', false)">
+          No affiliations to disclose
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="b3" value="yes" onchange="toggleDetail('b3-detail', true)">
+          Yes, I disclose the following:
+        </label>
+      </div>
+      <div class="detail-box" id="b3-detail">
+        <label>Describe the organization and the nature of the potential conflict:</label>
+        <textarea placeholder="Organization name, your role, and how it may conflict with Foundation interests…"></textarea>
+      </div>
+    </div>
+
+    <!-- B4 -->
+    <div class="disclosure-block">
+      <h4>B4 — Personal Projects and Independent Activities</h4>
+      <p class="desc">Do you operate, manage, or have a material interest in any personal project, website, publication, or independent activity that relates to SETD5 Syndrome or that the Foundation may reference, link to, or consider working with?</p>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="b4" value="no" onchange="toggleDetail('b4-detail', false)">
+          No personal projects or independent activities to disclose
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="b4" value="yes" onchange="toggleDetail('b4-detail', true)">
+          Yes, I disclose the following:
+        </label>
+      </div>
+      <div class="detail-box" id="b4-detail">
+        <label>Describe the project or activity and your role or interest in it:</label>
+        <textarea placeholder="Project name, your role, and how it relates to SETD5 Syndrome or the Foundation…"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION C: Attestation -->
+    <div class="sec-gap">
+      <div class="section-label">C. Attestation</div>
+    </div>
+
+    <div class="attestation">
+      <h4>By signing below, I confirm that:</h4>
+      <div class="attest-item">
+        <input type="checkbox" id="a1">
+        <label for="a1">I have read and understand the SETD5 Syndrome Foundation's conflict of interest policy.</label>
+      </div>
+      <div class="attest-item">
+        <input type="checkbox" id="a2">
+        <label for="a2">I have disclosed all interests, relationships, and affiliations that may constitute a conflict of interest or the appearance of one.</label>
+      </div>
+      <div class="attest-item">
+        <input type="checkbox" id="a3">
+        <label for="a3">I agree to recuse myself from any Board discussion or vote in which I have a disclosed or undisclosed conflict of interest.</label>
+      </div>
+      <div class="attest-item">
+        <input type="checkbox" id="a4">
+        <label for="a4">I will promptly notify the Board if my circumstances change in a way that creates a new potential conflict.</label>
+      </div>
+    </div>
+
+    <!-- Signature -->
+    <div class="sig-area">
+      <div class="sig-field">
+        <label>Signature</label>
+        <div class="sig-pad" id="sig-pad">
+          <canvas id="sig-canvas"></canvas>
+          <span class="sig-hint" id="sig-hint">Sign here</span>
+          <button class="sig-clear" id="sig-clear" onclick="clearSig()">Clear</button>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>Printed Name</label>
+          <input type="text" placeholder="Full legal name">
+        </div>
+        <div class="field" style="margin-top:10px;">
+          <label>Date Signed</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+
+    <!-- Secretary Use -->
+    <div class="secretary-box">
+      <div class="sec-label">For Secretary Use Only</div>
+      <div class="sec-grid">
+        <div class="field"><label>Date Received</label><input type="date"></div>
+        <div class="field"><label>Meeting / Context</label><input type="text" placeholder="e.g. Annual board meeting, May 2026"></div>
+        <div class="field"><label>Reviewed by Secretary</label><input type="text" placeholder="Secretary name"></div>
+        <div class="field"><label>Filed In</label><input type="text" placeholder="e.g. Board records / Google Drive"></div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button class="btn btn-outline" onclick="window.print()">Print / Save as PDF</button>
+      <button class="btn btn-primary" onclick="submitForm()">Submit to Secretary</button>
+    </div>
+
+  </div><!-- /form-body -->
+</div><!-- /form-shell -->
+
+<script>
+// ── Toggle detail boxes ──────────────────────────────────────────
+function toggleDetail(id, show) {
+  const el = document.getElementById(id);
+  if (show) el.classList.add('show');
+  else el.classList.remove('show');
+}
+
+// ── Signature canvas ─────────────────────────────────────────────
+const pad = document.getElementById('sig-pad');
+const canvas = document.getElementById('sig-canvas');
+const ctx = canvas.getContext('2d');
+const hint = document.getElementById('sig-hint');
+const clearBtn = document.getElementById('sig-clear');
+
+function resizeCanvas() {
+  const rect = pad.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  ctx.strokeStyle = '#1A3340';
+  ctx.lineWidth = 1.8;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+}
+resizeCanvas();
+
+let drawing = false;
+let hasSig = false;
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const src = e.touches ? e.touches[0] : e;
+  return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+}
+
+pad.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+pad.addEventListener('mousemove', e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); markSig(); });
+pad.addEventListener('mouseup', () => drawing = false);
+pad.addEventListener('mouseleave', () => drawing = false);
+pad.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+pad.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); markSig(); }, { passive: false });
+pad.addEventListener('touchend', () => drawing = false);
+
+function markSig() {
+  if (!hasSig) {
+    hasSig = true;
+    hint.style.display = 'none';
+    clearBtn.classList.add('show');
+  }
+}
+
+function clearSig() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hasSig = false;
+  hint.style.display = '';
+  clearBtn.classList.remove('show');
+}
+
+// ── Submit ────────────────────────────────────────────────────────
+function submitForm() {
+  const allChecked = ['a1','a2','a3','a4'].every(id => document.getElementById(id).checked);
+  if (!allChecked) {
+    alert('Please check all attestation items before submitting.');
+    return;
+  }
+  if (!hasSig) {
+    alert('Please sign the form before submitting.');
+    return;
+  }
+  alert('Thank you. Please print this form or save it as a PDF (use the Print button) and send it to the Foundation Secretary at info@setd5syndrome.org.');
+}
+</script>
+</body>
+</html>
