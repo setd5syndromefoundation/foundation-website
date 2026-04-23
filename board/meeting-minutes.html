@@ -307,8 +307,6 @@
     <div class="action-bar-title">Board Meeting Minutes</div>
     <div class="action-bar-btns">
       <button class="btn btn-secondary" onclick="printBlank()">🖨️ Print Blank Template</button>
-      <button class="btn btn-gold"      onclick="window.print()">📄 Print / Export</button>
-      <button class="btn btn-primary"   id="save-btn" onclick="saveToPortal()">💾 Save to Board Portal</button>
     </div>
   </div>
   <div id="save-status"></div>
@@ -560,9 +558,10 @@ const firebaseConfig = {
   messagingSenderId: '1041702466779',
   appId:             '1:1041702466779:web:22d00333b4fd011e11c8fe'
 };
-const app     = initializeApp(firebaseConfig);
-const db      = getFirestore(app);
-const storage = getStorage(app);
+const app       = initializeApp(firebaseConfig);
+const db        = getFirestore(app);
+const storage   = getStorage(app);
+const editDocId = new URLSearchParams(location.search).get('edit');
 
 // ── Board members ────────────────────────────────────────────────────────────
 const BOARD_MEMBERS = [
@@ -733,11 +732,24 @@ window.addActionItem = function() {
   tbody.appendChild(tr);
 };
 
-// Seed with one row each
-addReport();
-addOldBiz();
-addNewBiz();
-addActionItem();
+// Seed form rows — auto-load inaugural template on fresh page load
+if (!editDocId) {
+  loadInauguralTemplate();   // hides inapplicable sections + pre-fills New Business
+  addActionItem();           // seed one action item row
+} else {
+  addReport();
+  addOldBiz();
+  addNewBiz();
+  addActionItem();
+}
+
+// ── Meeting type toggle: show/hide sections when type is changed ──────────────
+document.getElementById('mtg-type').addEventListener('change', function() {
+  const isInaugural = this.value === 'Inaugural Board Meeting';
+  document.getElementById('card-prior-minutes').style.display   = isInaugural ? 'none' : '';
+  document.getElementById('card-officer-reports').style.display = isInaugural ? 'none' : '';
+  document.getElementById('card-old-business').style.display    = isInaugural ? 'none' : '';
+});
 
 // ── Print blank ──────────────────────────────────────────────────────────────
 window.printBlank = function() {
@@ -874,7 +886,6 @@ function restoreFormData(d) {
 }
 
 // ── Edit mode: load existing record ──────────────────────────────────────────
-const editDocId = new URLSearchParams(location.search).get('edit');
 if (editDocId) {
   document.querySelector('.action-bar-title').textContent = 'Edit Meeting Minutes';
   setSaveBtns(false, '💾 Update Board Portal');
