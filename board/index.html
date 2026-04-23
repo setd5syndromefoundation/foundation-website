@@ -1397,6 +1397,17 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
         </a>
       </div>
 
+      <!-- Prompt shown when neither panel is open yet -->
+      <div id="comm-launch-prompt" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
+        <button onclick="commTab('messenger');document.getElementById('comm-launch-prompt').style.display='none';" style="display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;font-size:0.85rem;font-weight:600;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;letter-spacing:0.02em;box-shadow:0 1px 4px rgba(0,0,0,0.10);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Open Messenger
+        </button>
+        <button onclick="commTab('directory');document.getElementById('comm-launch-prompt').style.display='none';" style="display:inline-flex;align-items:center;gap:8px;background:var(--teal-light,#eef4f8);color:var(--teal);font-size:0.85rem;font-weight:600;padding:10px 20px;border-radius:8px;border:1px solid var(--border);cursor:pointer;font-family:inherit;letter-spacing:0.02em;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          Open Directory
+        </button>
+      </div>
 
       <!-- Directory tab panel -->
       <div id="comm-panel-directory" class="comm-panel" role="tabpanel" aria-labelledby="comm-tab-directory" style="display:none;">
@@ -1493,7 +1504,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
       </div>
 
       <!-- Messenger tab panel -->
-      <div id="comm-panel-messenger" class="comm-panel" role="tabpanel" aria-labelledby="comm-tab-messenger">
+      <div id="comm-panel-messenger" class="comm-panel" role="tabpanel" aria-labelledby="comm-tab-messenger" style="display:none;">
       <!-- Name setup prompt (shown on first visit or when changing identity) -->
       <div id="chat-setup" style="display:none; max-width:520px; margin:0 auto 24px; background:var(--teal-light); border-radius:12px; padding:28px; border:1px solid var(--border); text-align:center;">
         <div style="font-size:2rem; margin-bottom:12px;">👋</div>
@@ -3013,6 +3024,9 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
       const app = document.getElementById('chat-app');
       if (app && app.style.display === 'none') app.style.display = 'flex';
     }
+    // Hide the launch prompt once a panel is open
+    const prompt = document.getElementById('comm-launch-prompt');
+    if (prompt) prompt.style.display = 'none';
     // Update sidebar nav active state
     const navMessenger = document.getElementById('nav-messenger');
     const navDirectory = document.getElementById('nav-directory');
@@ -3940,7 +3954,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function showChatApp() {
   document.getElementById('chat-setup').style.display = 'none';
-  // Keep chat hidden until user actively navigates to Messenger tab
+  const app = document.getElementById('chat-app');
+  app.style.display = 'flex';
   document.getElementById('chat-current-name').textContent = chatUserName;
   // Auto-fill Website Review name from authenticated identity
   const wrNameDisplay = document.getElementById('wr-name-display');
