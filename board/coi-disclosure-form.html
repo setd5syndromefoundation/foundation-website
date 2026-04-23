@@ -230,8 +230,11 @@ body {
   /* Prevent orphaned lines */
   p, li { orphans: 3; widows: 3; }
 
-  /* Ensure inputs show their values */
+  /* Ensure inputs show their values, hide placeholder text */
   input, textarea, select { border: 1px solid #ccc !important; box-shadow: none !important; }
+  input::placeholder, textarea::placeholder { color: transparent !important; }
+  ::-webkit-input-placeholder { color: transparent !important; }
+  ::-moz-placeholder { color: transparent !important; }
 }
 </style>
 </head>
