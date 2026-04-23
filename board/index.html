@@ -2892,19 +2892,23 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
   }
 
   function boardSetActive(sectionId) {
+    const navMessenger = document.getElementById('nav-messenger');
+    const navDirectory = document.getElementById('nav-directory');
     document.querySelectorAll('#board-sidebar-links a').forEach(a => {
-      // Messenger and Directory both point to #board-communications — managed by commTab
+      // Messenger and Directory both point to #board-communications — managed below
       if (a.id === 'nav-messenger' || a.id === 'nav-directory') return;
       a.classList.toggle('bsnav-active', a.getAttribute('href') === '#' + sectionId);
     });
-    // When scrolling into the communications section, keep whichever tab is active highlighted
     if (sectionId === 'board-communications') {
+      // Highlight whichever comm tab is currently active
       const activeTab = document.querySelector('.comm-tab.active');
       const which = activeTab ? activeTab.id.replace('comm-tab-', '') : 'messenger';
-      const navMessenger = document.getElementById('nav-messenger');
-      const navDirectory = document.getElementById('nav-directory');
       if (navMessenger) navMessenger.classList.toggle('bsnav-active', which === 'messenger');
       if (navDirectory) navDirectory.classList.toggle('bsnav-active', which === 'directory');
+    } else {
+      // Clear both when scrolled away from Communications
+      if (navMessenger) navMessenger.classList.remove('bsnav-active');
+      if (navDirectory) navDirectory.classList.remove('bsnav-active');
     }
   }
 
