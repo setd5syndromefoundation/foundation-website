@@ -277,6 +277,22 @@
       body.print-blank .rep-item { padding-bottom: 24pt; }
       body.print-blank .att-item { height: 32pt; }
 
+      /* Pre-populated fields stay visible in blank template */
+      body.print-blank input.print-keep-value,
+      body.print-blank select.print-keep-value {
+        color: var(--ink) !important;
+        height: auto !important;
+        min-height: 0 !important;
+        border: none !important;
+        border-bottom: 1pt solid #bbb !important;
+        background: transparent !important;
+        font-weight: 600 !important;
+        padding: 2pt 0 !important;
+      }
+      /* Hide timezone conversion display and select in print */
+      body.print-blank #tz-display,
+      body.print-blank #mtg-tz { display: none !important; }
+
       @page { margin: 2cm; }
     }
   </style>
@@ -333,7 +349,18 @@
     <div class="field-row">
       <div>
         <label>Called to Order</label>
-        <input type="time" id="mtg-start">
+        <div style="display:flex;gap:8px;">
+          <input type="time" id="mtg-start" style="flex:1;min-width:0;">
+          <select id="mtg-tz" style="flex:1.3;min-width:0;">
+            <option value="America/Los_Angeles">Pacific (PT)</option>
+            <option value="America/Denver">Mountain (MT)</option>
+            <option value="America/Chicago">Central (CT)</option>
+            <option value="America/New_York">Eastern (ET)</option>
+            <option value="Australia/Perth">Perth (AWST)</option>
+            <option value="UTC">UTC</option>
+          </select>
+        </div>
+        <div id="tz-display" style="font-size:0.74rem;color:var(--text-light);margin-top:5px;line-height:1.5;"></div>
       </div>
       <div>
         <label>Location / Platform</label>
@@ -734,12 +761,20 @@ window.addActionItem = function() {
 
 // ── Print blank ──────────────────────────────────────────────────────────────
 window.printBlank = function() {
-  const fields        = [...document.querySelectorAll('input:not([type=radio]), textarea, select')];
-  const saved         = fields.map(el => ({ el, val: el.value, idx: el.selectedIndex }));
-  const savedAttend   = { ...attendState };
+  // Keep inaugural pre-populated fields visible on the printed template
+  const keepIds   = ['mtg-date', 'mtg-type', 'mtg-location', 'mtg-start'];
+  const fields    = [...document.querySelectorAll('input:not([type=radio]), textarea, select')];
+  const saved     = fields.map(el => ({ el, val: el.value, idx: el.selectedIndex }));
+  const savedAttend = { ...attendState };
 
-  // Clear everything
-  fields.forEach(el => { if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = ''; });
+  // Clear non-kept fields; mark kept ones for visible printing
+  fields.forEach(el => {
+    if (keepIds.includes(el.id)) {
+      el.classList.add('print-keep-value');
+    } else {
+      if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = '';
+    }
+  });
   BOARD_MEMBERS.forEach(n => { attendState[n] = 'unknown'; renderAttend(n); });
   updateQuorumCount();
 
@@ -749,6 +784,7 @@ window.printBlank = function() {
   function restore() {
     window.removeEventListener('afterprint', restore);
     document.body.classList.remove('print-blank');
+    keepIds.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('print-keep-value'); });
     saved.forEach(({ el, val, idx }) => { if (el.tagName === 'SELECT') el.selectedIndex = idx; else el.value = val; });
     BOARD_MEMBERS.forEach(n => { attendState[n] = savedAttend[n]; renderAttend(n); });
     updateQuorumCount();
@@ -950,6 +986,8 @@ window.loadInauguralTemplate = function() {
   document.getElementById('mtg-type').value     = 'Inaugural Board Meeting';
   document.getElementById('mtg-location').value = 'Zoom';
   document.getElementById('mtg-start').value    = '16:00';
+  document.getElementById('mtg-tz').value       = 'America/Los_Angeles';
+  updateTzDisplay();
 
   // Hide sections not applicable to inaugural meeting
   document.getElementById('card-prior-minutes').style.display  = 'none';
@@ -1186,6 +1224,61 @@ ${adjNotes ? `<p style="margin-top:6pt;">${nl2br(adjNotes)}</p>` : ''}
 </body>
 </html>`;
 }
+
+// ── Timezone display ─────────────────────────────────────────────────────────
+function updateTzDisplay() {
+  const timeVal = document.getElementById('mtg-start').value;
+  const tz      = document.getElementById('mtg-tz').value;
+  const display = document.getElementById('tz-display');
+  if (!timeVal || !tz) { display.textContent = ''; return; }
+
+  const dateVal = document.getElementById('mtg-date').value || '2026-04-29';
+
+  // Step 1: create a reference UTC date from the entered time treated naively as UTC
+  const ref = new Date(`${dateVal}T${timeVal}:00Z`);
+
+  // Step 2: find what time that UTC moment shows in the selected timezone
+  const tzFmt = t => new Intl.DateTimeFormat('en-US', {
+    timeZone: t, hour: '2-digit', minute: '2-digit', hour12: false
+  }).format(ref);
+
+  const shown   = tzFmt(tz);
+  const [sH, sM] = shown.split(':').map(Number);
+  const [tH, tM] = timeVal.split(':').map(Number);
+  const diffMin  = (tH * 60 + tM) - (sH * 60 + sM);
+
+  // Step 3: the true UTC moment for timeVal in tz
+  const utc = new Date(ref.getTime() + diffMin * 60000);
+
+  // Step 4: display in the other relevant zones
+  const zones = [
+    { tz: 'America/Los_Angeles', abbr: 'PT'   },
+    { tz: 'America/New_York',    abbr: 'ET'   },
+    { tz: 'Australia/Perth',     abbr: 'AWST' },
+  ].filter(z => z.tz !== tz);
+
+  const meetingDay = new Intl.DateTimeFormat('en-CA', {
+    timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+  }).format(utc);
+
+  const parts = zones.map(z => {
+    const t = new Intl.DateTimeFormat('en-US', {
+      timeZone: z.tz, hour: 'numeric', minute: '2-digit', hour12: true
+    }).format(utc);
+    const targetDay = new Intl.DateTimeFormat('en-CA', {
+      timeZone: z.tz, year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(utc);
+    const dayNote = targetDay !== meetingDay
+      ? ` (${new Intl.DateTimeFormat('en-US',{timeZone:z.tz,month:'short',day:'numeric'}).format(utc)})`
+      : '';
+    return `${t} ${z.abbr}${dayNote}`;
+  });
+
+  display.textContent = parts.join(' · ');
+}
+
+document.getElementById('mtg-start').addEventListener('change', updateTzDisplay);
+document.getElementById('mtg-tz').addEventListener('change', updateTzDisplay);
 
 // ── Meeting type toggle: show/hide sections when type is changed ─────────────
 document.getElementById('mtg-type').addEventListener('change', function() {
