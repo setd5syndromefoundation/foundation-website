@@ -27,20 +27,80 @@
   .resolved { margin: 16px 0; padding: 14px 18px; background: #EEF4F8; border-left: 4px solid #2F5361; border-radius: 0 4px 4px 0; font-size: 0.88rem; line-height: 1.75; color: #1A3340; }
   .resolved strong { font-weight: 700; color: #2F5361; }
 
-  .blank { display: inline-block; border-bottom: 1px solid #1A3340; min-width: 200px; height: 18px; vertical-align: bottom; }
-  .blank-sm { min-width: 80px; }
-  .blank-lg { min-width: 300px; }
+  /* Input fields */
+  input[type="text"], input[type="date"] {
+    border: none;
+    border-bottom: 1.5px solid #1A3340;
+    background: transparent;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.88rem;
+    color: #1A3340;
+    padding: 2px 4px;
+    outline: none;
+    width: 100%;
+  }
+  input[type="text"]:focus, input[type="date"]:focus {
+    border-bottom-color: #2F5361;
+    background: #f0f7fa;
+  }
+  .inline-input {
+    display: inline-block;
+    border-bottom: 1.5px solid #1A3340;
+    min-width: 160px;
+  }
+  .inline-input input { width: 100%; }
 
-  .sig-block { margin-top: 24px; }
-  .sig-row { display: flex; gap: 40px; margin-bottom: 24px; flex-wrap: wrap; }
-  .sig-field { flex: 1; min-width: 180px; }
-  .sig-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #c96a38; margin-bottom: 6px; display: block; }
-  .sig-line { border-bottom: 1px solid #1A3340; height: 28px; }
-
+  /* Vote tables */
   .vote-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
   .vote-table th { background: #1e3a45; color: #D8AB67; padding: 8px 12px; text-align: left; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
-  .vote-table td { padding: 8px 12px; border-bottom: 1px solid #dde8ec; color: #1A3340; }
+  .vote-table td { padding: 6px 12px; border-bottom: 1px solid #dde8ec; color: #1A3340; vertical-align: middle; }
   .vote-table tr:nth-child(even) td { background: #F7F3EE; }
+  .vote-table td input[type="text"] { font-size: 0.85rem; }
+  .vote-table td input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: #2F5361; }
+  .vote-td-check { text-align: center; width: 70px; }
+
+  .result-row { font-size: 0.82rem; color: #4a6b78; margin-top: 10px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .result-row label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 600; color: #1A3340; }
+  .result-row input[type="radio"] { accent-color: #2F5361; width: 15px; height: 15px; }
+  .vote-count { display: flex; align-items: center; gap: 6px; }
+  .vote-count input { width: 40px; text-align: center; }
+
+  /* Officer table */
+  .officer-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88rem; }
+  .officer-table th { background: #1e3a45; color: #D8AB67; padding: 8px 12px; text-align: left; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+  .officer-table td { padding: 8px 12px; border-bottom: 1px solid #dde8ec; }
+
+  /* Signature block */
+  .sig-section { background: #f8fafb; border: 1px solid #dde8ec; border-radius: 6px; padding: 24px 28px; margin-top: 8px; }
+  .sig-section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #2F5361; margin-bottom: 16px; }
+  .sig-canvas-wrap { border: 1.5px solid #dde8ec; border-radius: 4px; background: #fff; margin-bottom: 8px; position: relative; }
+  canvas#sig-pad { display: block; width: 100%; height: 100px; cursor: crosshair; touch-action: none; }
+  .sig-clear { font-size: 0.72rem; color: #4a6b78; background: none; border: none; cursor: pointer; padding: 2px 0; text-decoration: underline; }
+  .sig-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .sig-field label { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #c96a38; margin-bottom: 6px; }
+  .sig-field input { border: none; border-bottom: 1.5px solid #1A3340; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; color: #1A3340; padding: 2px 4px; outline: none; width: 100%; }
+  .sig-field input:focus { border-bottom-color: #2F5361; background: #f0f7fa; }
+
+  /* Actions */
+  .form-actions { margin-top: 28px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .btn-file { background: #1e3a45; color: #fff; border: none; border-radius: 6px; padding: 11px 24px; font-size: 0.88rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.15s; }
+  .btn-file:hover { background: #2F5361; }
+  .btn-file:disabled { background: #6b8f9c; cursor: default; }
+  .btn-print { background: none; border: 1.5px solid #dde8ec; color: #4a6b78; border-radius: 6px; padding: 10px 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .btn-print:hover { border-color: #2F5361; color: #2F5361; }
+
+  /* Confirm panel */
+  #submit-confirm { display:none; background:#EFF7EF; border:1px solid #b2d9b2; border-radius:8px; padding:18px 22px; margin-top:20px; }
+  #submit-confirm strong { color:#2e6b2e; }
+
+  /* Print */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { border: none; border-radius: 0; }
+    .header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .form-actions, #submit-confirm { display: none !important; }
+    input[type="text"], input[type="date"] { border-bottom: 1px solid #999; }
+  }
 
   .footer { background: #F2F2F0; border-top: 1px solid #dde8ec; padding: 14px 40px; font-size: 0.72rem; color: #4a6b78; text-align: center; }
 </style>
@@ -59,148 +119,145 @@
     <div class="resolution">
       <div class="res-label">Resolution 1</div>
       <div class="res-title">Adoption of bylaws</div>
-
       <p class="whereas"><strong>WHEREAS,</strong> the incorporators of SETD5 Syndrome Foundation, Inc. have presented bylaws for the governance of the Corporation; and</p>
       <p class="whereas"><strong>WHEREAS,</strong> the Board of Directors has reviewed the bylaws and finds them to be in the best interests of the Corporation;</p>
-
       <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the Board of Directors of SETD5 Syndrome Foundation, Inc. hereby adopts the bylaws as presented, effective April 29, 2026, and directs the Secretary to certify and maintain a copy of the adopted bylaws in the Corporation's permanent records.</div>
-
       <table class="vote-table">
-        <thead><tr><th>Director</th><th>In Favor</th><th>Opposed</th><th>Abstain</th></tr></thead>
+        <thead><tr><th>Director</th><th class="vote-td-check">In Favor</th><th class="vote-td-check">Opposed</th><th class="vote-td-check">Abstain</th></tr></thead>
         <tbody>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
         </tbody>
       </table>
-      <p style="font-size:0.82rem;color:#4a6b78;margin-top:8px;">Result: &nbsp; ☐ Adopted &nbsp;&nbsp; ☐ Failed &nbsp;&nbsp; Vote: <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span></p>
+      <div class="result-row">
+        <span>Result:</span>
+        <label><input type="radio" name="r1-result" value="adopted"> Adopted</label>
+        <label><input type="radio" name="r1-result" value="failed"> Failed</label>
+        <span class="vote-count">Vote: <input type="text" placeholder="Y" style="width:36px;text-align:center;"> — <input type="text" placeholder="N" style="width:36px;text-align:center;"> — <input type="text" placeholder="A" style="width:36px;text-align:center;"></span>
+      </div>
     </div>
 
     <!-- RESOLUTION 2: OFFICERS -->
     <div class="resolution">
       <div class="res-label">Resolution 2</div>
       <div class="res-title">Election of officers</div>
-
       <p class="whereas"><strong>WHEREAS,</strong> the bylaws of SETD5 Syndrome Foundation, Inc. require the Board to elect officers including a President/Board Chair, Secretary, and Treasurer;</p>
-
       <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the following individuals are elected to serve as officers of SETD5 Syndrome Foundation, Inc., effective April 29, 2026, for a term of two years or until their successors are duly elected:</div>
-
-      <table class="vote-table" style="margin-top:12px;">
+      <table class="officer-table">
         <thead><tr><th>Position</th><th>Name</th></tr></thead>
         <tbody>
-          <tr><td>President/Board Chair</td><td><span class="blank blank-lg"></span></td></tr>
-          <tr><td>Secretary</td><td><span class="blank blank-lg"></span></td></tr>
-          <tr><td>Treasurer</td><td><span class="blank blank-lg"></span></td></tr>
+          <tr><td>President/Board Chair</td><td><input type="text" placeholder="Name"></td></tr>
+          <tr><td>Secretary</td><td><input type="text" placeholder="Name"></td></tr>
+          <tr><td>Treasurer</td><td><input type="text" placeholder="Name"></td></tr>
         </tbody>
       </table>
-
       <table class="vote-table" style="margin-top:16px;">
-        <thead><tr><th>Director</th><th>In Favor</th><th>Opposed</th><th>Abstain</th></tr></thead>
+        <thead><tr><th>Director</th><th class="vote-td-check">In Favor</th><th class="vote-td-check">Opposed</th><th class="vote-td-check">Abstain</th></tr></thead>
         <tbody>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
         </tbody>
       </table>
-      <p style="font-size:0.82rem;color:#4a6b78;margin-top:8px;">Result: &nbsp; ☐ Adopted &nbsp;&nbsp; ☐ Failed &nbsp;&nbsp; Vote: <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span></p>
+      <div class="result-row">
+        <span>Result:</span>
+        <label><input type="radio" name="r2-result" value="adopted"> Adopted</label>
+        <label><input type="radio" name="r2-result" value="failed"> Failed</label>
+        <span class="vote-count">Vote: <input type="text" placeholder="Y" style="width:36px;text-align:center;"> — <input type="text" placeholder="N" style="width:36px;text-align:center;"> — <input type="text" placeholder="A" style="width:36px;text-align:center;"></span>
+      </div>
     </div>
 
     <!-- RESOLUTION 3: BOARD POLICIES HANDBOOK -->
     <div class="resolution">
       <div class="res-label">Resolution 3</div>
       <div class="res-title">Adoption of Board Policies Handbook</div>
-
       <p class="whereas"><strong>WHEREAS,</strong> the Board of Directors has reviewed the Board Policies Handbook governing the Foundation's operations, committees, decision-making, financial controls, and conduct; and</p>
       <p class="whereas"><strong>WHEREAS,</strong> the Board finds the handbook to be consistent with the adopted bylaws and in the best interests of the Corporation;</p>
-
       <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the Board of Directors of SETD5 Syndrome Foundation, Inc. hereby adopts the Board Policies Handbook as presented, effective April 29, 2026, and directs the Secretary to maintain the adopted handbook in the Corporation's board portal and permanent records.</div>
-
       <table class="vote-table" style="margin-top:16px;">
-        <thead><tr><th>Director</th><th>In Favor</th><th>Opposed</th><th>Abstain</th></tr></thead>
+        <thead><tr><th>Director</th><th class="vote-td-check">In Favor</th><th class="vote-td-check">Opposed</th><th class="vote-td-check">Abstain</th></tr></thead>
         <tbody>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
         </tbody>
       </table>
-      <p style="font-size:0.82rem;color:#4a6b78;margin-top:8px;">Result: &nbsp; ☐ Adopted &nbsp;&nbsp; ☐ Failed &nbsp;&nbsp; Vote: <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span></p>
+      <div class="result-row">
+        <span>Result:</span>
+        <label><input type="radio" name="r3-result" value="adopted"> Adopted</label>
+        <label><input type="radio" name="r3-result" value="failed"> Failed</label>
+        <span class="vote-count">Vote: <input type="text" placeholder="Y" style="width:36px;text-align:center;"> — <input type="text" placeholder="N" style="width:36px;text-align:center;"> — <input type="text" placeholder="A" style="width:36px;text-align:center;"></span>
+      </div>
     </div>
 
     <!-- RESOLUTION 4: DOCUMENT RETENTION POLICY -->
     <div class="resolution">
       <div class="res-label">Resolution 4</div>
       <div class="res-title">Adoption of Document Retention and Destruction Policy</div>
-
       <p class="whereas"><strong>WHEREAS,</strong> the bylaws of SETD5 Syndrome Foundation, Inc. require the Board to adopt a written Document Retention and Destruction Policy; and</p>
       <p class="whereas"><strong>WHEREAS,</strong> the Board has reviewed the proposed Document Retention and Destruction Policy and finds it to be appropriate for the Foundation's current stage and operations;</p>
-
       <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the Board of Directors of SETD5 Syndrome Foundation, Inc. hereby adopts the Document Retention and Destruction Policy as presented, effective April 29, 2026, and directs the Secretary to maintain the adopted policy in the Corporation's board portal and permanent records.</div>
-
       <table class="vote-table" style="margin-top:16px;">
-        <thead><tr><th>Director</th><th>In Favor</th><th>Opposed</th><th>Abstain</th></tr></thead>
+        <thead><tr><th>Director</th><th class="vote-td-check">In Favor</th><th class="vote-td-check">Opposed</th><th class="vote-td-check">Abstain</th></tr></thead>
         <tbody>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
         </tbody>
       </table>
-      <p style="font-size:0.82rem;color:#4a6b78;margin-top:8px;">Result: &nbsp; ☐ Adopted &nbsp;&nbsp; ☐ Failed &nbsp;&nbsp; Vote: <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span></p>
+      <div class="result-row">
+        <span>Result:</span>
+        <label><input type="radio" name="r4-result" value="adopted"> Adopted</label>
+        <label><input type="radio" name="r4-result" value="failed"> Failed</label>
+        <span class="vote-count">Vote: <input type="text" placeholder="Y" style="width:36px;text-align:center;"> — <input type="text" placeholder="N" style="width:36px;text-align:center;"> — <input type="text" placeholder="A" style="width:36px;text-align:center;"></span>
+      </div>
     </div>
 
     <!-- RESOLUTION 5: BANK ACCOUNT -->
     <div class="resolution">
       <div class="res-label">Resolution 5</div>
       <div class="res-title">Bank account authorization</div>
-
       <p class="whereas"><strong>WHEREAS,</strong> the Corporation requires a bank account to conduct financial operations;</p>
-
-      <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the Board of Directors authorizes the opening of one or more bank accounts in the name of SETD5 Syndrome Foundation, Inc. at <span class="blank"></span> (financial institution); and</div>
-
+      <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the Board of Directors authorizes the opening of one or more bank accounts in the name of SETD5 Syndrome Foundation, Inc. at <span class="inline-input"><input type="text" id="bank-name" placeholder="financial institution"></span>; and</div>
       <div class="resolved"><strong>BE IT FURTHER RESOLVED</strong> that the Treasurer is designated as the authorized signatory on all Foundation bank accounts, with authority to open accounts, make deposits, and authorize payments consistent with board-approved budgets and spending authority thresholds.</div>
-
       <div class="resolved" style="margin-top:12px;"><strong>BE IT FURTHER RESOLVED</strong> that the Secretary is authorized to certify this resolution and provide a certified copy to the financial institution as required to open the account.</div>
-
       <table class="vote-table" style="margin-top:16px;">
-        <thead><tr><th>Director</th><th>In Favor</th><th>Opposed</th><th>Abstain</th></tr></thead>
+        <thead><tr><th>Director</th><th class="vote-td-check">In Favor</th><th class="vote-td-check">Opposed</th><th class="vote-td-check">Abstain</th></tr></thead>
         <tbody>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
         </tbody>
       </table>
-      <p style="font-size:0.82rem;color:#4a6b78;margin-top:8px;">Result: &nbsp; ☐ Adopted &nbsp;&nbsp; ☐ Failed &nbsp;&nbsp; Vote: <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span></p>
+      <div class="result-row">
+        <span>Result:</span>
+        <label><input type="radio" name="r5-result" value="adopted"> Adopted</label>
+        <label><input type="radio" name="r5-result" value="failed"> Failed</label>
+        <span class="vote-count">Vote: <input type="text" placeholder="Y" style="width:36px;text-align:center;"> — <input type="text" placeholder="N" style="width:36px;text-align:center;"> — <input type="text" placeholder="A" style="width:36px;text-align:center;"></span>
+      </div>
     </div>
 
-    <!-- RESOLUTION 4: SPENDING THRESHOLD -->
+    <!-- RESOLUTION 6: SPENDING THRESHOLD -->
     <div class="resolution">
       <div class="res-label">Resolution 6</div>
       <div class="res-title">Spending authority threshold</div>
-
       <p class="whereas"><strong>WHEREAS,</strong> the Board Policies Handbook requires the Board to set a dollar threshold below which the Treasurer may approve expenditures without additional board approval;</p>
-
-      <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the Treasurer's spending authority threshold is hereby set at $<span class="blank blank-sm"></span> per expenditure, effective immediately. Expenditures within approved budget categories and below this threshold may be approved by the Treasurer without a board vote. Any expenditure above this threshold or outside approved budget categories requires board approval prior to commitment.</div>
-
+      <div class="resolved"><strong>NOW, THEREFORE, BE IT RESOLVED</strong> that the Treasurer's spending authority threshold is hereby set at $<span class="inline-input" style="min-width:80px;"><input type="text" id="spending-threshold" placeholder="amount"></span> per expenditure, effective immediately. Expenditures within approved budget categories and below this threshold may be approved by the Treasurer without a board vote. Any expenditure above this threshold or outside approved budget categories requires board approval prior to commitment.</div>
       <table class="vote-table" style="margin-top:16px;">
-        <thead><tr><th>Director</th><th>In Favor</th><th>Opposed</th><th>Abstain</th></tr></thead>
+        <thead><tr><th>Director</th><th class="vote-td-check">In Favor</th><th class="vote-td-check">Opposed</th><th class="vote-td-check">Abstain</th></tr></thead>
         <tbody>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
-          <tr><td><span class="blank blank-lg"></span></td><td></td><td></td><td></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
+          <tr><td><input type="text" placeholder="Director name"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td><td class="vote-td-check"><input type="checkbox"></td></tr>
         </tbody>
       </table>
-      <p style="font-size:0.82rem;color:#4a6b78;margin-top:8px;">Result: &nbsp; ☐ Adopted &nbsp;&nbsp; ☐ Failed &nbsp;&nbsp; Vote: <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span> — <span class="blank blank-sm"></span></p>
+      <div class="result-row">
+        <span>Result:</span>
+        <label><input type="radio" name="r6-result" value="adopted"> Adopted</label>
+        <label><input type="radio" name="r6-result" value="failed"> Failed</label>
+        <span class="vote-count">Vote: <input type="text" placeholder="Y" style="width:36px;text-align:center;"> — <input type="text" placeholder="N" style="width:36px;text-align:center;"> — <input type="text" placeholder="A" style="width:36px;text-align:center;"></span>
+      </div>
     </div>
 
     <!-- CERTIFICATION -->
@@ -208,14 +265,32 @@
       <div class="res-label">Certification</div>
       <div class="res-title">Secretary's certification</div>
       <p style="font-size:0.88rem;line-height:1.75;color:#1A3340;margin-bottom:20px;">I hereby certify that the foregoing resolutions were duly adopted by the Board of Directors of SETD5 Syndrome Foundation, Inc. at the Inaugural Meeting of the Board of Directors held on April 29, 2026, at which a quorum was present throughout.</p>
-      <div class="sig-block">
-        <div class="sig-row">
-          <div class="sig-field"><span class="sig-label">Secretary signature</span><div class="sig-line"></div></div>
-          <div class="sig-field"><span class="sig-label">Date</span><div class="sig-line"></div></div>
+
+      <div class="sig-section">
+        <div class="sig-section-label">Secretary Signature</div>
+        <div class="sig-canvas-wrap">
+          <canvas id="sig-pad" width="620" height="100"></canvas>
         </div>
-        <div class="sig-row">
-          <div class="sig-field"><span class="sig-label">Secretary name (print)</span><div class="sig-line"></div></div>
+        <button class="sig-clear" onclick="clearSig()">Clear signature</button>
+        <div class="sig-fields">
+          <div class="sig-field">
+            <label>Secretary name (print)</label>
+            <input type="text" id="sec-name" placeholder="Full name">
+          </div>
+          <div class="sig-field">
+            <label>Date</label>
+            <input type="date" id="sec-date">
+          </div>
         </div>
+      </div>
+
+      <div class="form-actions" id="form-actions">
+        <button class="btn-file" id="btn-submit" onclick="submitResolutions()">Sign &amp; File to Meeting Minutes</button>
+        <button class="btn-print" onclick="window.print()">Print</button>
+      </div>
+
+      <div id="submit-confirm">
+        <strong>Filed successfully.</strong> The signed resolutions have been saved to Board Meeting Materials → Meeting Minutes in the board portal.
       </div>
     </div>
 
@@ -223,5 +298,130 @@
 
   <div class="footer">SETD5 Syndrome Foundation &nbsp;·&nbsp; Confidential Board Document &nbsp;·&nbsp; April 29, 2026</div>
 </div>
+
+<!-- Signature pad -->
+<script>
+  const canvas = document.getElementById('sig-pad');
+  const ctx = canvas.getContext('2d');
+  let drawing = false, hasSig = false;
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / r.width;
+    const scaleY = canvas.height / r.height;
+    if (e.touches) {
+      return { x: (e.touches[0].clientX - r.left) * scaleX, y: (e.touches[0].clientY - r.top) * scaleY };
+    }
+    return { x: (e.clientX - r.left) * scaleX, y: (e.clientY - r.top) * scaleY };
+  }
+
+  ctx.strokeStyle = '#1A3340'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+
+  canvas.addEventListener('mousedown',  e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); });
+  canvas.addEventListener('mousemove',  e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); hasSig = true; e.preventDefault(); });
+  canvas.addEventListener('mouseup',    () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+  canvas.addEventListener('touchstart', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); });
+  canvas.addEventListener('touchmove',  e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); hasSig = true; e.preventDefault(); });
+  canvas.addEventListener('touchend',   () => drawing = false);
+
+  function clearSig() { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSig = false; }
+</script>
+
+<!-- html2canvas + jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
+  import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCepPZKGGgPJSGnlgEjPNvBxoO7TST8aJs",
+    authDomain: "setd5-board.firebaseapp.com",
+    projectId: "setd5-board",
+    storageBucket: "setd5-board.appspot.com",
+    messagingSenderId: "308069511960",
+    appId: "1:308069511960:web:7a5d4b2c1c7d4f8e9a0b1c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
+  const db = getFirestore(app);
+
+  window.submitResolutions = async function() {
+    const nameVal = document.getElementById('sec-name').value.trim();
+    const dateVal = document.getElementById('sec-date').value;
+
+    if (!hasSig) { alert('Please sign the certification before filing.'); return; }
+    if (!nameVal) { alert('Please enter the secretary\'s name.'); return; }
+    if (!dateVal) { alert('Please enter the date.'); return; }
+
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'Filing…';
+
+    const actions = document.getElementById('form-actions');
+    actions.style.display = 'none';
+
+    try {
+      const { jsPDF } = window.jspdf;
+      const pageEl = document.querySelector('.page');
+
+      const cvs = await html2canvas(pageEl, { scale: 2, useCORS: true, logging: false });
+      const imgData = cvs.toDataURL('image/png');
+
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+      const pW = pdf.internal.pageSize.getWidth();
+      const pH = pdf.internal.pageSize.getHeight();
+      const ratio = cvs.width / pW;
+      const totalH = cvs.height / ratio;
+      let yOffset = 0;
+
+      while (yOffset < totalH) {
+        if (yOffset > 0) pdf.addPage();
+        const sliceH = Math.min(pH, totalH - yOffset);
+        const slicePx = sliceH * ratio;
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = cvs.width;
+        sliceCanvas.height = slicePx;
+        sliceCanvas.getContext('2d').drawImage(cvs, 0, yOffset * ratio, cvs.width, slicePx, 0, 0, cvs.width, slicePx);
+        pdf.addImage(sliceCanvas.toDataURL('image/png'), 'PNG', 0, 0, pW, sliceH);
+        yOffset += pH;
+      }
+
+      const pdfBlob = pdf.output('blob');
+      const timestamp = Date.now();
+      const fileName = `Board_Resolutions_April29_2026_${timestamp}.pdf`;
+      const storageRef = ref(storage, `board-documents/board-meetings/${fileName}`);
+      await uploadBytes(storageRef, pdfBlob, { contentType: 'application/pdf' });
+      const fileURL = await getDownloadURL(storageRef);
+
+      await addDoc(collection(db, 'board_documents'), {
+        section: 'board-meetings',
+        sub: 'Meeting Minutes',
+        categories: [{ section: 'board-meetings', sub: 'Meeting Minutes' }],
+        name: `Board Resolutions — April 29, 2026 — Certified by ${nameVal}`,
+        date: dateVal,
+        uploadedBy: nameVal,
+        fileName,
+        fileURL,
+        createdAt: serverTimestamp()
+      });
+
+      document.getElementById('submit-confirm').style.display = 'block';
+      btn.textContent = 'Filed ✓';
+
+    } catch (err) {
+      console.error(err);
+      actions.style.display = 'flex';
+      btn.disabled = false;
+      btn.textContent = 'Sign & File to Meeting Minutes';
+      alert('Something went wrong. Please try again.');
+    }
+  };
+</script>
 </body>
 </html>
