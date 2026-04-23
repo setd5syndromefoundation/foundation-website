@@ -207,11 +207,31 @@ body {
 
 /* ── Print ───────────────────────────────────────────── */
 @media print {
-  body { background: white; padding: 0; }
+  @page { margin: 0.75in; size: letter; }
+  body { background: white; padding: 0; margin: 0; font-size: 0.82rem; }
+  .form-shell { max-width: 100%; }
   .form-actions { display: none; }
   #submit-confirm { display: none !important; }
   .sig-clear { display: none !important; }
   .sig-hint { display: none; }
+
+  /* Keep major blocks from splitting across pages */
+  .disclosure-block   { page-break-inside: avoid; break-inside: avoid; }
+  .attestation        { page-break-inside: avoid; break-inside: avoid; }
+  .sig-area           { page-break-inside: avoid; break-inside: avoid; }
+  .form-header        { page-break-inside: avoid; break-inside: avoid; page-break-after: avoid; break-after: avoid; }
+  .field-row          { page-break-inside: avoid; break-inside: avoid; }
+  .sec-gap            { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Keep section label with content below it */
+  .section-label      { page-break-after: avoid; break-after: avoid; }
+  .sec-gap + *        { page-break-before: avoid; break-before: avoid; }
+
+  /* Prevent orphaned lines */
+  p, li { orphans: 3; widows: 3; }
+
+  /* Ensure inputs show their values */
+  input, textarea, select { border: 1px solid #ccc !important; box-shadow: none !important; }
 }
 </style>
 </head>
@@ -236,16 +256,16 @@ body {
 
   <div class="field-row thirds">
     <div class="field">
-      <label>Full Name</label>
-      <input type="text" id="f-name" placeholder="Legal name">
+      <label>Full Name *</label>
+      <input type="text" id="f-name" placeholder="Legal name" required>
     </div>
     <div class="field">
-      <label>Date</label>
-      <input type="date" id="f-date">
+      <label>Date *</label>
+      <input type="date" id="f-date" required>
     </div>
     <div class="field">
-      <label>Year Covered</label>
-      <input type="text" placeholder="e.g. 2025–2026">
+      <label>Year Covered *</label>
+      <input type="text" id="f-year" placeholder="e.g. 2025–2026" required>
     </div>
   </div>
   <div class="field-row full">
@@ -266,7 +286,7 @@ body {
     <p class="desc">Do you have a direct or indirect financial interest in any organization that does business with the Foundation, competes with the Foundation, or operates in the same area?</p>
     <div class="radio-group">
       <label class="radio-opt">
-        <input type="radio" name="b1" value="no" onchange="toggleDetail('b1-detail', false)">
+        <input type="radio" name="b1" value="no" required onchange="toggleDetail('b1-detail', false)">
         No financial interests to disclose
       </label>
       <label class="radio-opt">
@@ -286,7 +306,7 @@ body {
     <p class="desc">Do you have a family member or close personal relationship with anyone employed by, contracted with, or otherwise having a financial relationship with the Foundation?</p>
     <div class="radio-group">
       <label class="radio-opt">
-        <input type="radio" name="b2" value="no" onchange="toggleDetail('b2-detail', false)">
+        <input type="radio" name="b2" value="no" required onchange="toggleDetail('b2-detail', false)">
         No relationships to disclose
       </label>
       <label class="radio-opt">
@@ -306,7 +326,7 @@ body {
     <p class="desc">Are you affiliated (as an officer, director, employee, or advisor) with any organization that may have interests that conflict with the Foundation?</p>
     <div class="radio-group">
       <label class="radio-opt">
-        <input type="radio" name="b3" value="no" onchange="toggleDetail('b3-detail', false)">
+        <input type="radio" name="b3" value="no" required onchange="toggleDetail('b3-detail', false)">
         No affiliations to disclose
       </label>
       <label class="radio-opt">
@@ -326,7 +346,7 @@ body {
     <p class="desc">Do you operate, manage, or have a material interest in any personal project, website, publication, or independent activity that relates to SETD5 Syndrome or that the Foundation may reference, link to, or consider working with?</p>
     <div class="radio-group">
       <label class="radio-opt">
-        <input type="radio" name="b4" value="no" onchange="toggleDetail('b4-detail', false)">
+        <input type="radio" name="b4" value="no" required onchange="toggleDetail('b4-detail', false)">
         No personal projects or independent activities to disclose
       </label>
       <label class="radio-opt">
@@ -377,12 +397,12 @@ body {
     </div>
     <div>
       <div class="field">
-        <label>Printed Name</label>
-        <input type="text" placeholder="Full legal name">
+        <label>Printed Name *</label>
+        <input type="text" id="f-printed-name" placeholder="Full legal name" required>
       </div>
       <div class="field" style="margin-top:10px;">
-        <label>Date Signed</label>
-        <input type="date">
+        <label>Date Signed *</label>
+        <input type="date" id="f-date-signed" required>
       </div>
     </div>
   </div>
@@ -483,28 +503,47 @@ window.clearSig = function() {
 
 // ── Submit: generate PDF → upload → Firestore ────────────────────
 window.submitForm = async function() {
+  // Validate required text fields
+  const nameVal = (document.getElementById('f-name').value || '').trim();
+  const yearVal = (document.getElementById('f-year').value || '').trim();
+  const dateVal = document.getElementById('f-date').value;
+  const printedName = (document.getElementById('f-printed-name').value || '').trim();
+  const dateSigned  = document.getElementById('f-date-signed').value;
+  if (!nameVal)       { alert('Please enter your full name before submitting.'); document.getElementById('f-name').focus(); return; }
+  if (!dateVal)       { alert('Please enter the form date before submitting.'); document.getElementById('f-date').focus(); return; }
+  if (!yearVal)       { alert('Please enter the year covered before submitting.'); document.getElementById('f-year').focus(); return; }
+
+  // Validate radio selections
+  const radios = ['b1','b2','b3','b4'];
+  for (const name of radios) {
+    if (!document.querySelector(`input[name="${name}"]:checked`)) {
+      alert(`Please select an answer for section ${name.toUpperCase().replace('B','B')} before submitting.`);
+      return;
+    }
+  }
+
   const allChecked = ['a1','a2','a3','a4'].every(id => document.getElementById(id).checked);
-  if (!allChecked) { alert('Please check all four attestation items before submitting.'); return; }
-  if (!hasSig)     { alert('Please sign the form before submitting.'); return; }
+  if (!allChecked)    { alert('Please check all four attestation items before submitting.'); return; }
+  if (!printedName)   { alert('Please enter your printed name in the signature area.'); document.getElementById('f-printed-name').focus(); return; }
+  if (!dateSigned)    { alert('Please enter the date signed in the signature area.'); document.getElementById('f-date-signed').focus(); return; }
+  if (!hasSig)        { alert('Please sign the form before submitting.'); return; }
 
   const submitBtn = document.getElementById('submit-btn');
   submitBtn.disabled = true;
   submitBtn.textContent = 'Generating PDF…';
 
   try {
-    // Submitter name + filename
-    const nameVal  = (document.getElementById('f-name').value || '').trim();
-    const dateVal  = document.getElementById('f-date').value || new Date().toISOString().slice(0,10);
+    // Filename
     const safeName = nameVal.replace(/[^a-z0-9]/gi, '_') || 'Board_Member';
     const fileName = `COI_${safeName}_${dateVal}.pdf`;
-    const docName  = `COI Disclosure — ${nameVal || 'Board Member'} — ${dateVal}`;
+    const docName  = `COI Disclosure — ${nameVal} — ${dateVal}`;
 
     // Hide UI chrome before capture
     const actionsEl = document.getElementById('form-actions');
     actionsEl.style.display = 'none';
     clearBtn.style.visibility = 'hidden';
 
-    // Capture
+    // Capture full form at 2× resolution
     const formEl = document.getElementById('form-capture');
     const captured = await html2canvas(formEl, {
       scale: 2,
@@ -517,26 +556,48 @@ window.submitForm = async function() {
     actionsEl.style.display = '';
     clearBtn.style.visibility = '';
 
-    // Build letter-size PDF (pt units: 612 × 792)
+    // Build letter-size PDF (pt: 612 × 792, margin 36pt each side)
     const { jsPDF } = window.jspdf;
     const pdf    = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
     const pgW    = pdf.internal.pageSize.getWidth();
     const pgH    = pdf.internal.pageSize.getHeight();
-    const margin = 24;
+    const margin = 36;
     const cW     = pgW - margin * 2;
     const scale  = cW / captured.width;
-    const pgCanH = (pgH - margin * 2) / scale; // canvas pixels per page
+    const pgCanH = (pgH - margin * 2) / scale; // canvas pixels per printed page
+
+    // Build list of element y-ranges that should not be split across pages
+    const formRect = formEl.getBoundingClientRect();
+    const SCALE = 2;
+    const noBreakElems = formEl.querySelectorAll('.disclosure-block,.attestation,.sig-area,.form-header,.field-row,.sec-gap');
+    const noBreakZones = Array.from(noBreakElems).map(el => {
+      const r = el.getBoundingClientRect();
+      return { top: (r.top - formRect.top) * SCALE, bottom: (r.bottom - formRect.top) * SCALE };
+    });
+
+    // Find the best break point near idealY that avoids splitting a block
+    function smartBreak(currentY, totalH) {
+      const ideal = currentY + pgCanH;
+      if (ideal >= totalH) return totalH;
+      // Try to retreat to a gap between elements
+      for (let y = ideal; y > currentY + pgCanH * 0.6; y -= 1) {
+        const splits = noBreakZones.some(z => z.top < y && z.bottom > y);
+        if (!splits) return Math.floor(y);
+      }
+      return Math.floor(ideal);
+    }
 
     let srcY = 0, page = 0;
     while (srcY < captured.height) {
       if (page > 0) pdf.addPage();
-      const sliceH   = Math.min(pgCanH, captured.height - srcY);
+      const breakY   = smartBreak(srcY, captured.height);
+      const sliceH   = breakY - srcY;
       const sliceCv  = document.createElement('canvas');
       sliceCv.width  = captured.width;
       sliceCv.height = sliceH;
       sliceCv.getContext('2d').drawImage(captured, 0, srcY, captured.width, sliceH, 0, 0, captured.width, sliceH);
       pdf.addImage(sliceCv.toDataURL('image/jpeg', 0.93), 'JPEG', margin, margin, cW, sliceH * scale);
-      srcY += pgCanH;
+      srcY = breakY;
       page++;
     }
 
