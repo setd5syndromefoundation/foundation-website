@@ -404,7 +404,7 @@
   </div>
 
   <!-- APPROVAL OF PRIOR MINUTES -->
-  <div class="card">
+  <div class="card" id="card-prior-minutes">
     <div class="card-title">Approval of Prior Minutes</div>
     <div class="field-row">
       <div>
@@ -438,14 +438,14 @@
   </div>
 
   <!-- OFFICER & COMMITTEE REPORTS -->
-  <div class="card">
+  <div class="card" id="card-officer-reports">
     <div class="card-title">Officer &amp; Committee Reports</div>
     <div id="reports-list"></div>
     <button class="rep-add" onclick="addReport()">+ Add report</button>
   </div>
 
   <!-- OLD BUSINESS -->
-  <div class="card">
+  <div class="card" id="card-old-business">
     <div class="card-title">Old Business</div>
     <div id="old-biz-list"></div>
     <button class="rep-add" onclick="addOldBiz()">+ Add item</button>
@@ -959,8 +959,10 @@ window.loadInauguralTemplate = function() {
   document.getElementById('mtg-location').value = 'Zoom';
   document.getElementById('mtg-start').value    = '16:00';
 
-  // Prior minutes — none for inaugural meeting
-  document.getElementById('prior-result').value = 'Deferred — no prior minutes';
+  // Hide sections not applicable to inaugural meeting
+  document.getElementById('card-prior-minutes').style.display  = 'none';
+  document.getElementById('card-officer-reports').style.display = 'none';
+  document.getElementById('card-old-business').style.display    = 'none';
 
   // Hide the banner
   const banner = document.getElementById('inaugural-banner');
