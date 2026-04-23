@@ -735,12 +735,12 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     gap: 5px !important;
   }
   .chat-channel-btn.active {
-    border-bottom-color: var(--gold) !important;
-    background: rgba(255,255,255,0.11) !important;
-    color: var(--white) !important;
+    border-bottom-color: rgba(255,255,255,0.8) !important;
+    background: rgba(255,255,255,0.18) !important;
+    color: #1A3340 !important;
     font-weight: 600 !important;
   }
-  .chat-channel-btn:hover { background: rgba(255,255,255,0.07) !important; }
+  .chat-channel-btn:hover { background: rgba(255,255,255,0.12) !important; }
 
   /* ── Messages scroll area ── */
   #chat-messages { padding: 12px 14px !important; }
@@ -980,7 +980,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     padding: 7px 12px 7px 14px;
     font-size: 0.82rem;
     font-weight: 500;
-    color: rgba(255,255,255,0.65);
+    color: rgba(30,26,12,0.72);
     cursor: pointer;
     border-left: 3px solid transparent;
     transition: background 0.12s, color 0.12s;
@@ -990,8 +990,8 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     justify-content: space-between;
     gap: 6px;
   }
-  .chat-channel-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.9); }
-  .chat-channel-btn.active { background: rgba(255,255,255,0.13); color: var(--white); font-weight: 600; border-left-color: var(--gold); }
+  .chat-channel-btn:hover { background: rgba(255,255,255,0.15); color: #1A3340; }
+  .chat-channel-btn.active { background: rgba(255,255,255,0.22); color: #1A3340; font-weight: 600; border-left-color: #1A3340; }
   .chat-channel-btn .ch-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .chat-unread-badge { font-size: 0.62rem; font-weight: 700; background: var(--gold); color: white; border-radius: 20px; padding: 1px 6px; min-width: 18px; text-align: center; flex-shrink: 0; display: none; }
   .chat-unread-badge.visible { display: block; }
@@ -1262,7 +1262,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
   }
   #chat-app.chat-expanded .chat-main { background: var(--white) !important; }
   #chat-app.chat-expanded #chat-messages { background: var(--white) !important; }
-  #chat-expand-btn:hover { background: rgba(255,255,255,0.18) !important; }
+  #chat-expand-btn:hover { background: rgba(255,255,255,0.32) !important; }
 
   #chat-reply-indicator {
     display:none;align-items:center;gap:8px;
@@ -1517,18 +1517,18 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
       <div id="chat-app" class="chat-app-frame" style="display:none; border-radius:16px; border:1px solid var(--border); overflow:hidden; box-shadow:var(--shadow-sm); flex-direction:column;">
 
         <!-- Chat header -->
-        <div style="background:#2c3245; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+        <div style="background:rgba(184,131,42,0.82); padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:36px;height:36px;border-radius:10px;background:rgba(200,146,42,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(26,51,64,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
             <div>
-              <div style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;color:var(--white);line-height:1.2;">Board Messaging</div>
-              <div style="font-size:0.72rem;color:rgba(255,255,255,0.55);margin-top:1px;" id="chat-status">Connecting…</div>
+              <div style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;color:#1A3340;line-height:1.2;">Board Messaging</div>
+              <div style="font-size:0.72rem;color:rgba(26,51,64,0.6);margin-top:1px;" id="chat-status">Connecting…</div>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;">
-            <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);">Signed in as</span>
-            <span id="chat-current-name" style="font-size:0.78rem;font-weight:600;color:var(--gold);"></span>
-            <button id="chat-expand-btn" onclick="chatToggleExpand()" title="Expand messaging" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:7px;padding:5px 8px;cursor:pointer;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:5px;font-size:0.7rem;font-family:inherit;transition:background 0.15s;">
+            <span style="font-size:0.72rem;color:rgba(26,51,64,0.55);">Signed in as</span>
+            <span id="chat-current-name" style="font-size:0.78rem;font-weight:600;color:#1A3340;"></span>
+            <button id="chat-expand-btn" onclick="chatToggleExpand()" title="Expand messaging" style="background:rgba(255,255,255,0.2);border:1px solid rgba(26,51,64,0.2);border-radius:7px;padding:5px 8px;cursor:pointer;color:#1A3340;display:flex;align-items:center;gap:5px;font-size:0.7rem;font-family:inherit;transition:background 0.15s;">
               <svg id="chat-expand-icon" width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span id="chat-expand-label">Expand</span>
             </button>
@@ -1539,17 +1539,17 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
         <div class="chat-body" style="display:flex;flex:1;min-height:0;">
 
           <!-- Channel list -->
-          <div class="chat-channel-list" style="width:185px;flex-shrink:0;background:#232a3c;display:flex;flex-direction:column;padding:10px 0;overflow-y:auto;">
-            <div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.4);padding:8px 14px 4px;">Topics</div>
+          <div class="chat-channel-list" style="width:185px;flex-shrink:0;background:rgba(163,116,35,0.85);display:flex;flex-direction:column;padding:10px 0;overflow-y:auto;">
+            <div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(26,51,64,0.5);padding:8px 14px 4px;">Topics</div>
             <!-- Search — top of sidebar, before channel list -->
             <div style="padding:5px 10px 8px;">
               <div style="position:relative;">
                 <input type="text" id="chat-channel-search" placeholder="Search messages…"
                   oninput="chatSearchMessages(this.value)"
                   onkeydown="if(event.key==='Enter'){chatSearchMessages(this.value);} if(event.key==='Escape'){this.value='';chatSearchMessages('');}"
-                  style="width:100%;padding:6px 26px 6px 10px;border:1.5px solid rgba(255,255,255,0.18);border-radius:7px;font-family:inherit;font-size:0.75rem;background:rgba(255,255,255,0.08);color:white;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
+                  style="width:100%;padding:6px 26px 6px 10px;border:1.5px solid rgba(26,51,64,0.2);border-radius:7px;font-family:inherit;font-size:0.75rem;background:rgba(255,255,255,0.2);color:#1A3340;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
                   autocomplete="off" />
-                <svg style="position:absolute;right:8px;top:50%;transform:translateY(-50%);opacity:0.45;pointer-events:none;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <svg style="position:absolute;right:8px;top:50%;transform:translateY(-50%);opacity:0.4;pointer-events:none;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1A3340" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               </div>
             </div>
             <div class="chat-channel-btn active" data-tag="all"          onclick="chatSetTag('all')"><span class="ch-label" style="display:inline-flex;align-items:center;gap:5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="11" width="18" height="4" rx="1"/><rect x="3" y="18" width="18" height="4" rx="1"/></svg> All Messages</span></div>
