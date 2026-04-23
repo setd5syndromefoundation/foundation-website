@@ -546,6 +546,17 @@ window.submitForm = async function() {
     actionsEl.style.display = 'none';
     clearBtn.style.visibility = 'hidden';
 
+    // Inject a temporary style to suppress placeholder text during canvas capture
+    // (html2canvas renders screen styles, not @media print, so we do this manually)
+    const capStyle = document.createElement('style');
+    capStyle.id = 'pdf-cap-style';
+    capStyle.textContent = [
+      'input::placeholder,textarea::placeholder{color:transparent!important;opacity:0!important;}',
+      '::-webkit-input-placeholder{color:transparent!important;opacity:0!important;}',
+      '::-moz-placeholder{color:transparent!important;opacity:0!important;}'
+    ].join('');
+    document.head.appendChild(capStyle);
+
     // Capture full form at 2× resolution
     const formEl = document.getElementById('form-capture');
     const captured = await html2canvas(formEl, {
@@ -555,46 +566,83 @@ window.submitForm = async function() {
       logging: false
     });
 
+    // Remove temporary style
+    document.getElementById('pdf-cap-style').remove();
+
     // Restore
     actionsEl.style.display = '';
     clearBtn.style.visibility = '';
 
-    // Build letter-size PDF (pt: 612 × 792, margin 36pt each side)
+    // Build letter-size PDF (pt: 612 × 792, margin 40pt each side)
     const { jsPDF } = window.jspdf;
     const pdf    = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
     const pgW    = pdf.internal.pageSize.getWidth();
     const pgH    = pdf.internal.pageSize.getHeight();
-    const margin = 36;
+    const margin = 40;
     const cW     = pgW - margin * 2;
     const scale  = cW / captured.width;
-    const pgCanH = (pgH - margin * 2) / scale; // canvas pixels per printed page
+    const pgCanH = Math.floor((pgH - margin * 2) / scale); // canvas pixels per printed page
 
-    // Build list of element y-ranges that should not be split across pages
+    // ── Build no-break zones ─────────────────────────────────────────────────
+    // Use Math.ceil for tops and Math.floor for bottoms so adjacent elements
+    // have a guaranteed integer-safe gap between them (avoids float rounding bugs).
     const formRect = formEl.getBoundingClientRect();
     const SCALE = 2;
-    const noBreakElems = formEl.querySelectorAll('.disclosure-block,.attestation,.sig-area,.form-header,.field-row,.sec-gap');
-    const noBreakZones = Array.from(noBreakElems).map(el => {
+    const allElems = Array.from(formEl.querySelectorAll(
+      '.disclosure-block,.attestation,.sig-area,.form-header,.field-row,.sec-gap'
+    )).map(el => {
       const r = el.getBoundingClientRect();
-      return { top: (r.top - formRect.top) * SCALE, bottom: (r.bottom - formRect.top) * SCALE };
-    });
+      return {
+        el,
+        top:    Math.ceil( (r.top    - formRect.top) * SCALE),
+        bottom: Math.floor((r.bottom - formRect.top) * SCALE),
+        isSecGap: el.classList.contains('sec-gap')
+      };
+    }).sort((a, b) => a.top - b.top);
 
-    // Find the best break point near idealY that avoids splitting a block
+    // Merge each sec-gap with the block immediately following it so section
+    // headers (e.g. "C. ATTESTATION") can never be orphaned at a page bottom.
+    const noBreakZones = [];
+    for (let i = 0; i < allElems.length; i++) {
+      const cur  = allElems[i];
+      const next = allElems[i + 1];
+      if (cur.isSecGap && next && next.top - cur.bottom < 40) {
+        noBreakZones.push({ top: cur.top, bottom: next.bottom });
+        i++; // skip next — merged
+      } else {
+        noBreakZones.push({ top: cur.top, bottom: cur.bottom });
+      }
+    }
+
+    // ── Smart page-break finder ──────────────────────────────────────────────
     function smartBreak(currentY, totalH) {
       const ideal = currentY + pgCanH;
       if (ideal >= totalH) return totalH;
-      // Try to retreat to a gap between elements
-      for (let y = ideal; y > currentY + pgCanH * 0.6; y -= 1) {
-        const splits = noBreakZones.some(z => z.top < y && z.bottom > y);
-        if (!splits) return Math.floor(y);
+
+      // Scan backward from ideal down to 40% of page looking for a safe gap
+      const minY = currentY + pgCanH * 0.4;
+      for (let y = ideal; y > minY; y--) {
+        if (!noBreakZones.some(z => z.top < y && z.bottom > y)) return y;
       }
-      return Math.floor(ideal);
+
+      // No safe gap found in backward scan — find the latest-starting block
+      // that straddles the ideal cut point and push it to the next page instead.
+      const offenders = noBreakZones
+        .filter(z => z.top >= minY && z.top < ideal && z.bottom > ideal)
+        .sort((a, b) => b.top - a.top); // latest-starting first
+
+      for (const z of offenders) {
+        if (z.top > currentY + 20) return z.top; // cut just before this block
+      }
+
+      return Math.floor(ideal); // last resort: cut at ideal
     }
 
     let srcY = 0, page = 0;
     while (srcY < captured.height) {
       if (page > 0) pdf.addPage();
       const breakY   = smartBreak(srcY, captured.height);
-      const sliceH   = breakY - srcY;
+      const sliceH   = Math.max(1, breakY - srcY);
       const sliceCv  = document.createElement('canvas');
       sliceCv.width  = captured.width;
       sliceCv.height = sliceH;
