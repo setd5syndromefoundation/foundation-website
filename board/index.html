@@ -1532,7 +1532,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
               <svg id="chat-expand-icon" width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span id="chat-expand-label">Expand</span>
             </button>
-            <button onclick="collapseMessenger()" title="Close messenger" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:7px;padding:5px 8px;cursor:pointer;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:5px;font-size:0.7rem;font-family:inherit;transition:background 0.15s;">
+            <button onclick="document.getElementById('comm-panel-messenger').style.display='none';document.getElementById('comm-launch-prompt').style.display='flex';var nm=document.getElementById('nav-messenger');if(nm)nm.classList.remove('bsnav-active');" title="Close messenger" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:7px;padding:5px 8px;cursor:pointer;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:5px;font-size:0.7rem;font-family:inherit;transition:background 0.15s;">
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
               Close
             </button>
@@ -3086,11 +3086,14 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
   window.toggleAirtableFullscreen = toggleAirtableFullscreen;
 
   // Initialize on page load
+  // Prevent browser from restoring a mid-page scroll position on refresh
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
   document.addEventListener('DOMContentLoaded', function() {
+    window.scrollTo(0, 0);
     boardSyncSubnavTop();
     requestAnimationFrame(() => requestAnimationFrame(boardSyncSubnavTop));
     boardScrollspySetup();
-
   });
   window.addEventListener('scroll', function() {
     boardSyncSubnavTop();
