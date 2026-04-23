@@ -294,6 +294,15 @@
 
 <main class="page-main">
 
+  <!-- Inaugural meeting banner -->
+  <div id="inaugural-banner" style="background:#1e3a45;border-radius:10px;padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#D8AB67;margin-bottom:3px;">April 29, 2026 · Inaugural Board Meeting</div>
+      <div style="font-size:0.82rem;color:rgba(255,255,255,0.7);">Pre-fill this form with the agenda items for the first meeting.</div>
+    </div>
+    <button class="btn btn-gold" onclick="loadInauguralTemplate()" style="white-space:nowrap;flex-shrink:0;">Load Inaugural Meeting Template</button>
+  </div>
+
   <div class="action-bar">
     <div class="action-bar-title">Board Meeting Minutes</div>
     <div class="action-bar-btns">
@@ -316,6 +325,7 @@
         <label>Meeting Type</label>
         <select id="mtg-type">
           <option>Regular Board Meeting</option>
+          <option>Inaugural Board Meeting</option>
           <option>Special Meeting</option>
           <option>Emergency Meeting</option>
           <option>Annual Meeting</option>
@@ -939,6 +949,76 @@ window.saveToPortal = async function() {
     setSaveStatus('error', 'Save failed — please try again or check your connection.');
     setSaveBtns(false, editDocId ? '💾 Update Board Portal' : '💾 Save to Board Portal');
   }
+};
+
+// ── Inaugural meeting template ───────────────────────────────────────────────
+window.loadInauguralTemplate = function() {
+  // Meeting details
+  document.getElementById('mtg-date').value     = '2026-04-29';
+  document.getElementById('mtg-type').value     = 'Inaugural Board Meeting';
+  document.getElementById('mtg-location').value = 'Zoom';
+  document.getElementById('mtg-start').value    = '16:00';
+
+  // Prior minutes — none for inaugural meeting
+  document.getElementById('prior-result').value = 'Deferred — no prior minutes';
+
+  // Hide the banner
+  const banner = document.getElementById('inaugural-banner');
+  if (banner) banner.style.display = 'none';
+
+  // Clear and pre-fill New Business with all 7 agenda votes
+  const newBizList = document.getElementById('new-biz-list');
+  newBizList.innerHTML = '';
+
+  const items = [
+    {
+      item: 'Adoption of bylaws',
+      notes: 'Board reviewed the SETD5 Syndrome Foundation bylaws as presented. Motion to adopt.'
+    },
+    {
+      item: 'Election of officers — President/Board Chair, Secretary, Treasurer',
+      notes: 'Board nominated and voted to elect officers for a two-year term effective April 29, 2026.'
+    },
+    {
+      item: 'Conflict of interest disclosures',
+      notes: 'All board members confirmed completion of the annual Conflict of Interest Disclosure Form prior to or during the meeting.'
+    },
+    {
+      item: 'Adoption of Board Policies Handbook',
+      notes: 'Board reviewed the Board Policies Handbook. Motion to adopt as presented, effective April 29, 2026.'
+    },
+    {
+      item: 'Adoption of Document Retention and Destruction Policy',
+      notes: 'Board reviewed the Document Retention and Destruction Policy. Motion to adopt as presented, effective April 29, 2026.'
+    },
+    {
+      item: 'Resolution: Bank account authorization',
+      notes: 'Board voted to authorize opening of Foundation bank account(s) and designated the Treasurer as authorized signatory.'
+    },
+    {
+      item: 'Resolution: Spending authority threshold',
+      notes: 'Board voted to set the Treasurer\'s spending authority threshold. Amount to be recorded.'
+    },
+    {
+      item: 'Preview: Foundation structure and first-year priorities',
+      notes: 'Deferred to next meeting.'
+    },
+    {
+      item: 'Preview: Committee assignments',
+      notes: 'Deferred to next meeting. Formal assignments to be made at the next board meeting.'
+    },
+  ];
+
+  items.forEach(({ item, notes }) => {
+    addNewBiz();
+    const lastItem = newBizList.querySelector('.rep-item:last-child');
+    const inputs = lastItem.querySelectorAll('input[type=text], textarea');
+    if (inputs[0]) inputs[0].value = item;
+    if (inputs[1]) inputs[1].value = notes;
+  });
+
+  // Scroll to meeting details
+  document.querySelector('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
