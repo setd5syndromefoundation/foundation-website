@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Board Meeting Agenda — April 29, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #F7F3EE;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1A3340;
+    padding: 40px 20px;
+  }
+
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #dde8ec;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .header {
+    background: #1e3a45;
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+  .header-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #D8AB67;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 18px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.03em;
+  }
+  .meta-item strong {
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+  }
+
+  .body {
+    padding: 36px 40px 48px;
+  }
+
+  .agenda-item {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f4f6;
+  }
+  .agenda-item:last-of-type {
+    border-bottom: none;
+  }
+
+  .item-num {
+    flex-shrink: 0;
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #D8AB67;
+    background: #1e3a45;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+  }
+
+  .item-content {
+    flex: 1;
+  }
+
+  .item-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1A3340;
+    line-height: 1.4;
+  }
+
+  .item-sub {
+    font-size: 0.82rem;
+    color: #4a6b78;
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  .item-badge {
+    flex-shrink: 0;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  .badge-vote { background: #1e3a45; color: #D8AB67; }
+  .badge-action { background: #FDF1EE; color: #7A3020; }
+  .badge-next { background: #EEF4F8; color: #2F5361; }
+  .badge-open { background: #F7F3EE; color: #4a6b78; }
+
+  .divider {
+    border: none;
+    border-top: 2px solid #dde8ec;
+    margin: 8px 0;
+  }
+
+  .materials {
+    margin-top: 32px;
+    padding: 16px 18px;
+    background: #EEF4F8;
+    border-left: 4px solid #2F5361;
+    border-radius: 0 4px 4px 0;
+  }
+  .materials-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2F5361;
+    margin-bottom: 10px;
+  }
+  .materials ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .materials ul li {
+    font-size: 0.85rem;
+    color: #1A3340;
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .materials ul li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #2F5361;
+    flex-shrink: 0;
+  }
+
+  .action-note {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #dde8ec;
+    font-size: 0.82rem;
+    color: #4a6b78;
+  }
+  .action-note strong { color: #c96a38; }
+
+  .footer {
+    background: #F2F2F0;
+    border-top: 1px solid #dde8ec;
+    padding: 14px 40px;
+    font-size: 0.72rem;
+    color: #4a6b78;
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">SETD5 Syndrome Foundation — Board of Directors</div>
+    <h1>Inaugural board meeting agenda</h1>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Date:</strong> April 29, 2026</div>
+      <div class="meta-item"><strong>Time:</strong> 4:00 PM PST · 7:00 PM EST · 7:00 AM AWST (April 30)</div>
+      <div class="meta-item"><strong>Location:</strong> Zoom · <a href="https://us05web.zoom.us/j/87841454731?pwd=EUdrDOEvEh1aVQs2FvTpELJjFHaur4.1" style="color:#D8AB67;">Join meeting</a> · ID: 878 4145 4731 · Passcode: 861486</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="agenda-item">
+      <div class="item-num">1</div>
+      <div class="item-content">
+        <div class="item-title">Call to order and roll call</div>
+      </div>
+      <div class="item-badge badge-open">Opening</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">2</div>
+      <div class="item-content">
+        <div class="item-title">Welcome and purpose of the meeting</div>
+      </div>
+      <div class="item-badge badge-open">Opening</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="agenda-item">
+      <div class="item-num">3</div>
+      <div class="item-content">
+        <div class="item-title">Adoption of bylaws</div>
+        <div class="item-sub"><a href="https://setd5syndrome.org/board/bylaws.html" style="color:#2F5361;">Bylaws</a> &nbsp;·&nbsp; <a href="https://setd5syndrome.org/board/bylaws-changes-summary.html" style="color:#2F5361;">Bylaws changes summary</a></div>
+      </div>
+      <div class="item-badge badge-vote">Vote</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">4</div>
+      <div class="item-content">
+        <div class="item-title">Election of officers</div>
+        <div class="item-sub">President/Board Chair · Secretary · Treasurer</div>
+      </div>
+      <div class="item-badge badge-vote">Vote</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">5</div>
+      <div class="item-content">
+        <div class="item-title">Conflict of interest disclosures</div>
+        <div class="item-sub"><a href="https://setd5syndrome.org/board/coi-disclosure-form.html" style="color:#2F5361;">Complete form before the meeting</a> &nbsp;·&nbsp; All board members sign individually</div>
+      </div>
+      <div class="item-badge badge-action">Action</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">6</div>
+      <div class="item-content">
+        <div class="item-title">Adoption of Board Policies Handbook</div>
+        <div class="item-sub"><a href="https://setd5syndrome.org/board/board-policies-handbook.html" style="color:#2F5361;">Board Policies Handbook</a></div>
+      </div>
+      <div class="item-badge badge-vote">Vote</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">7</div>
+      <div class="item-content">
+        <div class="item-title">Adoption of Document Retention and Destruction Policy</div>
+        <div class="item-sub"><a href="https://setd5syndrome.org/board/document-retention-policy.html" style="color:#2F5361;">Document Retention and Destruction Policy</a> &nbsp;·&nbsp; All board members review · Secretary signs to certify adoption</div>
+      </div>
+      <div class="item-badge badge-vote">Vote</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">8</div>
+      <div class="item-content">
+        <div class="item-title">Resolution: bank account authorization</div>
+      </div>
+      <div class="item-badge badge-vote">Vote</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">9</div>
+      <div class="item-content">
+        <div class="item-title">Resolution: spending authority threshold</div>
+      </div>
+      <div class="item-badge badge-vote">Vote</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="agenda-item">
+      <div class="item-num">10</div>
+      <div class="item-content">
+        <div class="item-title">Preview: Foundation structure and first-year priorities</div>
+        <div class="item-sub">Discussion deferred to the next meeting</div>
+      </div>
+      <div class="item-badge badge-next">Next meeting</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">11</div>
+      <div class="item-content">
+        <div class="item-title">Preview: committee assignments</div>
+        <div class="item-sub">To be formally assigned at the next meeting</div>
+      </div>
+      <div class="item-badge badge-next">Next meeting</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="agenda-item">
+      <div class="item-num">12</div>
+      <div class="item-content">
+        <div class="item-title">Next meeting date</div>
+      </div>
+      <div class="item-badge badge-open">Closing</div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="item-num">13</div>
+      <div class="item-content">
+        <div class="item-title">Adjournment</div>
+      </div>
+      <div class="item-badge badge-open">Closing</div>
+    </div>
+
+    <div class="materials">
+      <div class="materials-label">Before the meeting</div>
+      <ul>
+        <li><a href="https://setd5syndrome.org/board/coi-disclosure-form.html" style="color:#2F5361;font-weight:600;">Complete the conflict of interest disclosure form</a></li>
+      </ul>
+      <div class="action-note" style="margin-top:10px;">If you have questions about any item on the agenda, please reach out before the meeting so we can address them in advance rather than on the day.</div>
+    </div>
+
+  </div>
+
+  <div class="footer">SETD5 Syndrome Foundation &nbsp;·&nbsp; Confidential Board Document &nbsp;·&nbsp; April 29, 2026</div>
+
+</div>
+</body>
+</html>
