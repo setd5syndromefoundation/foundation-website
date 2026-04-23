@@ -2312,19 +2312,27 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
         <p style="color:var(--text-light);font-size:0.95rem;margin-top:8px;">Minutes, agendas, and presentation decks from board meetings and special sessions.</p>
       <button class="section-upload-btn" onclick="docModalOpen('board-meetings','')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Upload Document</button>
       </div>
-      <!-- Pinned: Minutes form -->
-      <a href="meeting-minutes.html" style="display:flex;align-items:center;gap:14px;background:var(--white);border:1.5px solid #c96a38;border-radius:10px;padding:16px 20px;margin-bottom:12px;text-decoration:none;box-shadow:var(--shadow-sm);transition:box-shadow 0.15s;" onmouseover="this.style.boxShadow='var(--shadow)'" onmouseout="this.style.boxShadow='var(--shadow-sm)'">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
-        <div>
-          <div style="font-size:0.87rem;font-weight:700;color:var(--text);margin-bottom:2px;">Fill Out Meeting Minutes</div>
-          <div style="font-size:0.8rem;color:var(--text-light);">Online form — saves directly to Meeting Minutes when complete</div>
-        </div>
-        <span style="margin-left:auto;font-size:0.8rem;color:var(--text);font-weight:600;flex-shrink:0;">Open →</span>
-      </a>
-
-
-
       <div class="doc-folder-list">
+
+        <!-- ── SECRETARY ONLY ── -->
+        <div class="doc-folder" id="secretary-only-folder" style="border:1.5px solid #b85c1a;background:rgba(201,106,56,0.06);border-radius:10px;margin-bottom:4px;">
+          <button class="doc-folder-header" onclick="toggleFolder(this)" style="border-radius:8px;">
+            <svg class="doc-folder-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="color:#b85c1a;"><path d="M1 4h5l2 2h7v9H1V4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            <span class="doc-folder-name" style="color:#b85c1a;font-size:0.78rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;">Secretary Only</span>
+            <svg class="doc-folder-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:#b85c1a;"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="doc-folder-body" style="padding:4px 12px 12px;">
+            <a href="meeting-minutes.html" style="display:flex;align-items:center;gap:14px;background:var(--white);border:1.5px solid #c96a38;border-radius:10px;padding:14px 18px;margin-top:4px;text-decoration:none;box-shadow:var(--shadow-sm);transition:box-shadow 0.15s;" onmouseover="this.style.boxShadow='var(--shadow)'" onmouseout="this.style.boxShadow='var(--shadow-sm)'">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+              <div>
+                <div style="font-size:0.87rem;font-weight:700;color:var(--text);margin-bottom:2px;">Fill Out Meeting Minutes</div>
+                <div style="font-size:0.8rem;color:var(--text-light);">Online form — saves directly to Meeting Minutes when complete</div>
+              </div>
+              <span style="margin-left:auto;font-size:0.8rem;color:var(--text);font-weight:600;flex-shrink:0;">Open →</span>
+            </a>
+          </div>
+        </div>
+        <!-- ── END SECRETARY ONLY ── -->
 
         <!-- ── MEETING PACKETS (static) ── -->
         <div class="doc-folder" id="meeting-packets-folder">
