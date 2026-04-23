@@ -732,25 +732,6 @@ window.addActionItem = function() {
   tbody.appendChild(tr);
 };
 
-// Seed form rows — auto-load inaugural template on fresh page load
-if (!editDocId) {
-  loadInauguralTemplate();   // hides inapplicable sections + pre-fills New Business
-  addActionItem();           // seed one action item row
-} else {
-  addReport();
-  addOldBiz();
-  addNewBiz();
-  addActionItem();
-}
-
-// ── Meeting type toggle: show/hide sections when type is changed ──────────────
-document.getElementById('mtg-type').addEventListener('change', function() {
-  const isInaugural = this.value === 'Inaugural Board Meeting';
-  document.getElementById('card-prior-minutes').style.display   = isInaugural ? 'none' : '';
-  document.getElementById('card-officer-reports').style.display = isInaugural ? 'none' : '';
-  document.getElementById('card-old-business').style.display    = isInaugural ? 'none' : '';
-});
-
 // ── Print blank ──────────────────────────────────────────────────────────────
 window.printBlank = function() {
   const fields        = [...document.querySelectorAll('input:not([type=radio]), textarea, select')];
@@ -1204,6 +1185,25 @@ ${adjNotes ? `<p style="margin-top:6pt;">${nl2br(adjNotes)}</p>` : ''}
 
 </body>
 </html>`;
+}
+
+// ── Meeting type toggle: show/hide sections when type is changed ─────────────
+document.getElementById('mtg-type').addEventListener('change', function() {
+  const isInaugural = this.value === 'Inaugural Board Meeting';
+  document.getElementById('card-prior-minutes').style.display   = isInaugural ? 'none' : '';
+  document.getElementById('card-officer-reports').style.display = isInaugural ? 'none' : '';
+  document.getElementById('card-old-business').style.display    = isInaugural ? 'none' : '';
+});
+
+// ── Seed form rows — runs after all functions are defined ────────────────────
+if (!editDocId) {
+  loadInauguralTemplate();   // hides inapplicable sections + pre-fills New Business
+  addActionItem();           // seed one action item row
+} else {
+  addReport();
+  addOldBiz();
+  addNewBiz();
+  addActionItem();
 }
 
 </script>
