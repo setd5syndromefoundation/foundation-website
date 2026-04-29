@@ -288,9 +288,54 @@
     .doc-footer { padding: 14px 24px; }
   }
   @media print {
+    body { font-size: 10.5pt; }
     .adoption-bar { display: none; }
-    .doc-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-    .doc-footer { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .toc-bar { display: none; }
+
+    /* Strip color from header */
+    .doc-header {
+      background: #fff !important;
+      padding: 0 0 18pt 0;
+      border-bottom: 2px solid #000;
+      margin-bottom: 18pt;
+    }
+    .header-label { color: #000 !important; font-size: 8pt; }
+    .doc-header h1 { color: #000 !important; font-size: 18pt; margin-bottom: 4pt; }
+    .header-meta { border-top: 1px solid #ccc; margin-top: 10pt; padding-top: 8pt; }
+    .header-meta-item { color: #000 !important; font-size: 9pt; }
+    .header-meta-item strong { color: #000 !important; }
+
+    /* Section heads */
+    .section-head {
+      background: #fff !important;
+      border-left: 3px solid #000 !important;
+      color: #000 !important;
+    }
+    .section-num { color: #000 !important; }
+    .section-title { color: #000 !important; }
+
+    /* TOC links */
+    .toc-link { color: #000 !important; }
+
+    /* Footer */
+    .doc-footer {
+      background: #fff !important;
+      border-top: 1px solid #000;
+      color: #000 !important;
+    }
+    .doc-footer span { color: #000 !important; }
+
+    /* Adoption note */
+    .adoption-note { color: #000 !important; font-style: italic; }
+
+    /* Tables */
+    .participation-table thead tr { background: #fff !important; }
+    .participation-table thead th { color: #000 !important; border-bottom: 1.5px solid #000; }
+
+    /* General text */
+    .content, main { color: #000 !important; }
+    h2, h3 { color: #000 !important; }
+    a { color: #000 !important; text-decoration: none; }
   }
 
   /* ── PARTICIPATION TABLE ── */
