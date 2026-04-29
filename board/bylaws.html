@@ -216,28 +216,30 @@
   .adoption-bar.adopted { background: #1a4d2e; border-bottom-color: #5cb87a; }
   .adoption-bar.adopted .bar-hint { color: rgba(255,255,255,0.6); }
   @media print {
-    body { background: #fff; padding: 0; font-size: 10.5pt; }
-    .page { border: none; border-radius: 0; box-shadow: none; }
+    /* Force economy mode — no background colors printed */
+    * {
+      -webkit-print-color-adjust: economy !important;
+      print-color-adjust: economy !important;
+      color-adjust: economy !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    body { background: #fff; padding: 0; font-size: 10.5pt; color: #000 !important; }
+    .page { border: none; border-radius: 0; }
     .adoption-bar { display: none; }
 
-    /* Strip all color from the header — make it plain black on white */
+    /* Header — black on white, ruled border */
     .header {
-      background: #fff !important;
       padding: 0 0 18pt 0;
       border-bottom: 2px solid #000;
       margin-bottom: 18pt;
     }
-    .header-label {
-      color: #000 !important;
-      font-size: 11pt;
-      letter-spacing: 0.06em;
-    }
-    .header h1 {
-      color: #000 !important;
-      font-size: 18pt;
-      margin-bottom: 4pt;
-    }
-    .header-sub { color: #000 !important; font-size: 9pt; }
+    .header-label { color: #000 !important; font-size: 11pt; letter-spacing: 0.06em; }
+    .header h1   { color: #000 !important; font-size: 18pt; margin-bottom: 4pt; }
+    .header-sub  { color: #000 !important; font-size: 9pt; }
 
     /* Draft/adopted badge — plain bordered pill */
     .draft-badge {
