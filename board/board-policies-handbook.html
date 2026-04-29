@@ -229,11 +229,68 @@
     border-top: 1px solid var(--border);
   }
 
+  /* adoption bar */
+  .adoption-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1e3a45;
+    border-bottom: 3px solid #D8AB67;
+    padding: 11px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .adoption-bar label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    cursor: pointer;
+    user-select: none;
+  }
+  .adoption-bar input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #D8AB67;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .adoption-bar .bar-hint {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+  }
+  .adoption-bar .btn-print {
+    margin-left: auto;
+    background: #D8AB67;
+    color: #1A3340;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+  }
+  .adoption-bar .btn-print:hover { background: #c99a50; }
+  .adoption-bar.adopted { background: #1a4d2e; border-bottom-color: #5cb87a; }
+  .adoption-bar.adopted .bar-hint { color: rgba(255,255,255,0.6); }
+
   @media (max-width: 600px) {
     .doc-header { padding: 28px 24px; }
     .toc-bar { padding: 0 24px; }
     .content { padding: 32px 24px 60px; }
     .doc-footer { padding: 14px 24px; }
+  }
+  @media print {
+    .adoption-bar { display: none; }
+    .doc-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .doc-footer { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   }
 
   /* ── PARTICIPATION TABLE ── */
@@ -277,6 +334,15 @@
 </style>
 </head>
 <body>
+
+<div class="adoption-bar" id="adoptionBar">
+  <label>
+    <input type="checkbox" id="adoptToggle" onchange="handleAdoption(this.checked)">
+    Mark as adopted — the board has voted to adopt this handbook
+  </label>
+  <span class="bar-hint" id="barHint">Check this box after the adoption vote to update the document</span>
+  <button class="btn-print" id="printBtn" onclick="window.print()">🖨 Print / Save as PDF</button>
+</div>
 
 <header class="doc-header">
   <div class="header-label">SETD5 Syndrome Foundation — Governance</div>
@@ -690,5 +756,58 @@
   <span>Board Policies Handbook — Draft for Adoption April 29, 2026</span>
 </footer>
 
+<script>
+function handleAdoption(adopted) {
+  const bar = document.getElementById('adoptionBar');
+  const hint = document.getElementById('barHint');
+  const printBtn = document.getElementById('printBtn');
+
+  if (adopted) {
+    // Update bar
+    bar.classList.add('adopted');
+    hint.textContent = '✓ Adopted April 29, 2026 — ready to print or save as PDF';
+    printBtn.style.display = 'inline-block';
+
+    // Update page title
+    document.title = 'Board Policies Handbook — SETD5 Syndrome Foundation';
+
+    // Update header meta items
+    const metaItems = document.querySelectorAll('.header-meta-item');
+    metaItems.forEach(item => {
+      if (item.innerHTML.includes('Status:')) {
+        item.innerHTML = '<strong>Status:</strong> Adopted';
+      }
+      if (item.innerHTML.includes('Meeting:')) {
+        item.innerHTML = '<strong>Adopted:</strong> April 29, 2026 — Inaugural Board Meeting';
+      }
+    });
+
+    // Update adoption note
+    const note = document.querySelector('.adoption-note');
+    if (note) {
+      note.textContent = 'Adopted by the Board of Directors of the SETD5 Syndrome Foundation at the inaugural meeting of April 29, 2026.';
+      note.style.color = '#1E6B42';
+      note.style.fontStyle = 'normal';
+      note.style.fontWeight = '600';
+    }
+
+    // Update footer
+    const footerSpans = document.querySelectorAll('.doc-footer span');
+    footerSpans.forEach(span => {
+      if (span.textContent.includes('Draft for Adoption')) {
+        span.textContent = 'Board Policies Handbook — Adopted April 29, 2026';
+      }
+    });
+
+  } else {
+    // Revert
+    if (confirm('Uncheck will reload the page and restore the draft version. Continue?')) {
+      location.reload();
+    } else {
+      document.getElementById('adoptToggle').checked = true;
+    }
+  }
+}
+</script>
 </body>
 </html>

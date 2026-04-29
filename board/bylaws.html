@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRAFT — Bylaws — SETD5 Syndrome Foundation, Inc.</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream:     #F7F3EE;
+    --surface:   #ffffff;
+    --border:    #dde8ec;
+    --teal:      #2F5361;
+    --dark-teal: #1e3a45;
+    --coral:     #c96a38;
+    --gold:      #D8AB67;
+    --ink:       #1A3340;
+    --mid:       #4a6b78;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--ink);
+    background: var(--cream);
+    padding: 40px 20px;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .header {
+    background: var(--dark-teal);
+    padding: 32px 48px 28px;
+  }
+  .header-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+  }
+  .body {
+    padding: 40px 48px 56px;
+  }
+  /* TOC */
+  .toc {
+    background: #EEF4F8;
+    border-left: 4px solid var(--teal);
+    border-radius: 0 4px 4px 0;
+    padding: 18px 22px;
+    margin-bottom: 36px;
+  }
+  .toc-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+  }
+  .toc ul li a {
+    font-size: 0.82rem;
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc ul li a:hover { text-decoration: underline; }
+  /* Body content */
+  .content p { margin-bottom: 14px; }
+  .content p:last-child { margin-bottom: 0; }
+  .content blockquote {
+    margin: 12px 0 12px 24px;
+    padding-left: 16px;
+    border-left: 3px solid var(--border);
+    color: var(--mid);
+    font-size: 0.88rem;
+  }
+  .content .article-heading {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--dark-teal);
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    scroll-margin-top: 24px;
+  }
+  .content .section-heading {
+    font-weight: 700;
+    color: var(--ink);
+    margin: 20px 0 8px;
+  }
+  .content .underline { text-decoration: underline; }
+  .content strong { font-weight: 700; }
+  .content em { font-style: italic; color: var(--mid); }
+  .content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 20px 0;
+  }
+  .content table th {
+    background: var(--dark-teal);
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .content table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .content table tr:nth-child(even) td {
+    background: #f5f9fb;
+  }
+  /* draft badge */
+  .draft-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #FDF1EE;
+    color: #7A3020;
+    border: 1px solid #f0cfc5;
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-bottom: 14px;
+  }
+  .footer {
+    background: #F2F2F0;
+    border-top: 1px solid var(--border);
+    padding: 14px 48px;
+    font-size: 0.72rem;
+    color: var(--mid);
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+  /* adoption bar */
+  .adoption-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1e3a45;
+    border-bottom: 3px solid #D8AB67;
+    padding: 11px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .adoption-bar label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    cursor: pointer;
+    user-select: none;
+  }
+  .adoption-bar input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #D8AB67;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .adoption-bar .bar-hint {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+  }
+  .adoption-bar .btn-print {
+    margin-left: auto;
+    background: #D8AB67;
+    color: #1A3340;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+  }
+  .adoption-bar .btn-print:hover { background: #c99a50; }
+  .adoption-bar.adopted { background: #1a4d2e; border-bottom-color: #5cb87a; }
+  .adoption-bar.adopted .bar-hint { color: rgba(255,255,255,0.6); }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { border: none; border-radius: 0; }
+    .header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .adoption-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="adoption-bar" id="adoptionBar">
+  <label>
+    <input type="checkbox" id="adoptToggle" onchange="handleAdoption(this.checked)">
+    Mark as adopted — the board has voted to adopt these bylaws
+  </label>
+  <span class="bar-hint" id="barHint">Check this box after the adoption vote to update the document</span>
+  <button class="btn-print" id="printBtn" onclick="window.print()">🖨 Print / Save as PDF</button>
+</div>
+<div class="page">
+  <div class="header">
+    <div class="header-label">SETD5 Syndrome Foundation, Inc. &nbsp;·&nbsp; A Virginia Nonstock Corporation</div>
+    <h1>Bylaws</h1>
+    <div class="header-sub">Proposed for adoption at the inaugural board meeting — April 29, 2026</div>
+  </div>
+  <div class="body">
+    <div class="draft-badge">Draft</div>
+    <nav class="toc">
+      <div class="toc-label">Contents</div>
+      <ul>
+        <li><a href="#art-i">Article I — Name, Location &amp; Purpose</a></li>
+        <li><a href="#art-ii">Article II — Board of Directors</a></li>
+        <li><a href="#art-iii">Article III — Officers</a></li>
+        <li><a href="#art-iv">Article IV — Meetings</a></li>
+        <li><a href="#art-v">Article V — Committees</a></li>
+        <li><a href="#art-vi">Article VI — Finances</a></li>
+        <li><a href="#art-vii">Article VII — Records</a></li>
+        <li><a href="#art-viii">Article VIII — Indemnification</a></li>
+        <li><a href="#art-ix">Article IX — Conflicts of Interest</a></li>
+        <li><a href="#art-x">Article X — Dissolution</a></li>
+        <li><a href="#art-xi">Article XI — Amendments</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+<p><strong>BYLAWS</strong></p><p><strong>OF</strong></p><p><strong>SETD5 SYNDROME FOUNDATION, INC.</strong></p><p>A Virginia Nonstock Corporation</p><p>DRAFT — Proposed for Adoption April 29, 2026</p><p>Date: _______________________</p><blockquote><p><em>These Bylaws govern the internal operations of SETD5 Syndrome Foundation, Inc. and are intended to comply with the Virginia Nonstock Corporation Act (Va. Code § 13.1-801 et seq.), IRS requirements for 501(c)(3) tax-exempt status, and NORD RareLaunch governance best practices. They are designed to be flexible for a founding board of three directors and scalable as the organization grows.</em></p></blockquote><p id="art-i" class="article-heading"><span class="underline">ARTICLE I — NAME, LOCATION, AND PURPOSE</span></p><p><strong>Section 1. Name.</strong></p><p>The name of the Corporation shall be SETD5 Syndrome Foundation, Inc. (hereinafter referred to as the "Corporation" or the "Foundation").</p><p><strong>Section 2. Place of Business.</strong></p><p>The principal office of the Corporation shall be located at such place within or outside the Commonwealth of Virginia as the Board of Directors may designate from time to time. The Corporation may maintain additional offices as the Board determines necessary. The Corporation shall have no members. All corporate powers shall be exercised by or under the authority of the Board of Directors.</p><p><strong>Section 3. Purpose.</strong></p><p>The Corporation is organized and shall be operated exclusively for charitable, educational, and scientific purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code of 1986, as amended (the "Code"), including but not limited to:</p><blockquote><p><strong>(a)</strong> supporting individuals and families affected by SETD5 Syndrome, a rare neurodevelopmental disorder caused by pathogenic variants in the SETD5 gene;</p><p><strong>(b)</strong> promoting earlier and more accurate diagnosis of SETD5 Syndrome through education, awareness, and collaboration with clinicians, laboratories, and researchers, in order to improve patient outcomes and advance scientific understanding;</p><p><strong>(c)</strong> funding and facilitating scientific research into the causes, natural history, and treatment of SETD5 Syndrome;</p><p><strong>(d)</strong> educating patients, families, clinicians, and the public about SETD5 Syndrome;</p><p><strong>(e)</strong> advocating for the interests of the SETD5 community with government agencies, healthcare systems, and policymakers, to the extent permitted under Section 501(c)(3) of the Code; and</p><p><strong>(f)</strong> collaborating and partnering with other nonprofit organizations, research institutions, patient advocacy groups, and governmental entities engaged in rare disease research, education, and support, in furtherance of the Corporation’s charitable purposes.</p></blockquote><p>The specific activities undertaken in furtherance of these purposes shall be determined by the Board of Directors and may be updated over time without amendment to these Bylaws.</p><p>No substantial part of the activities of the Corporation shall consist of carrying on propaganda or otherwise attempting to influence legislation, except as permitted under Section 501(c)(3) of the Internal Revenue Code. The Corporation may engage in limited lobbying activities consistent with Section 501(c)(3) and may elect to operate under Section 501(h) of the Code. The Corporation shall not participate in or intervene in (including the publishing or distributing of statements) any political campaign on behalf of or in opposition to any candidate for public office. Notwithstanding any other provision of these Bylaws, the Corporation shall not carry on any activities not permitted to be carried on by an organization exempt under Section 501(c)(3) of the Internal Revenue Code.</p><p><strong>Section 4. Non-Discrimination.</strong></p><p>No person shall be denied membership on the Board of Directors, participation in any program, or benefit of any service of the Corporation because of race, color, sex, age, religion, national origin, sexual orientation, disability, or any other basis prohibited by law.</p><p id="art-i" class="article-heading"><span class="underline">ARTICLE II — BOARD OF DIRECTORS</span></p><p><strong>Section 1. Powers and Responsibilities.</strong></p><p>The Board of Directors (the "Board") shall have ultimate authority over, and responsibility for, the affairs and property of the Corporation. The Board shall exercise all corporate powers, ensure that the Corporation operates in furtherance of its exempt purposes, and provide oversight of the Corporation's finances, programs, and executive leadership. The Board shall manage the Corporation in a manner consistent with its fiduciary duties of care, loyalty, and obedience.</p><p><strong>Section 2. Number of Directors.</strong></p><p>The Board shall consist of not fewer than three (3) nor more than fifteen (15) directors, as determined by the Board from time to time by resolution. The founding Board shall consist of three (3) to seven (7) directors. The term of any director then in office shall not be affected by any change in the authorized number of directors. The Board should seek to maintain an odd number of directors to prevent voting deadlocks.</p><blockquote><p><em>Founding note: Starting with three directors satisfies both Virginia law (minimum one director, Va. Code § 13.1-853) and IRS best practice (minimum three unrelated directors). The Board may expand at any time within the 3–15 range by resolution, without amending these Bylaws.</em></p></blockquote><p><strong>Section 3. Qualifications.</strong></p><p>Directors shall be individuals who are committed to the mission of the Corporation. Directors need not be residents of Virginia. No more than one member of any immediate family may serve on the Board at the same time without approval of two-thirds (2/3) of the remaining Board members. A majority of the Board shall at all times be composed of individuals who are not related by blood, marriage, or domestic partnership and who do not share the same household. The Board should seek directors with expertise in areas including medicine, genetics, research, law, finance, nonprofit management, patient advocacy, or lived experience with SETD5 Syndrome, and shall strive to maintain a diverse composition reflecting the communities it serves.</p><p><strong>Section 4. Election and Terms.</strong></p><p>Directors shall be recruited and elected by a majority vote of the current Board at any duly held meeting. Each director shall serve a term of two (2) years with no limit on the number of consecutive terms, unless the Board adopts a term limit policy by resolution. Terms shall be staggered where practicable so that not all directors' terms expire in the same year. Directors elected during the course of the year shall serve until the end of the current term cycle as determined by the Board at the time of election. For the founding Board, initial terms may be set at one (1) and two (2) years respectively to establish staggering.</p><p><strong>Section 5. Non-Voting Board Participation.</strong></p><p>In the absence of a paid Executive Director, the President/Board Chair shall serve as the chief executive officer of the Corporation, including signing contracts and opening financial accounts. If a paid Executive Director is employed, they shall serve as a non-voting ex officio participant at Board meetings. Scientific Advisory Board and Medical Advisory Board members may attend Board meetings at the invitation of the President/Board Chair but shall have no voting rights.</p><p><strong>Section 6. Quorum and Voting.</strong></p><p>At any meeting of the Board, a majority of directors then in office shall constitute a quorum for the transaction of business. The act of a majority of the directors present at a duly called meeting at which a quorum is present shall be the act of the Board, except as otherwise required by law or these Bylaws. There shall be no voting by proxy. A director who is present at a meeting when a vote is taken is deemed to have assented to the action unless the director objects at the start of the meeting or votes against or abstains from the action.</p><blockquote><p><em>Virginia law note: Va. Code § 13.1-868 allows quorum to be set as low as one-third of the board. This Foundation sets quorum at a majority of directors then in office, which is a higher standard that ensures meaningful participation at all board meetings regardless of board size.</em></p></blockquote><p><strong>Section 7. Meetings.</strong></p><p>The Board shall hold at least four (4) regular meetings per year, including one annual meeting, at such times and places as the Board may determine. Meetings may be held in person, by telephone conference call, video conference, or any other means by which all participating directors can simultaneously communicate with each other. The Annual Meeting shall be held in the first quarter of each calendar year, or at such other time as determined by the President/Board Chair.</p><p><strong>Section 8. Special Meetings.</strong></p><p>Special meetings of the Board may be called at any time by the President/Board Chair, the Executive Director (if employed), or any two (2) directors. Notice of a special meeting, stating the purpose, shall be given to each director at least fourteen (14) days prior, by mail, email, telephone, or orally. In urgent circumstances where fourteen days notice is not practicable, a special meeting may be called with at least forty-eight (48) hours notice provided to all directors by email or telephone, provided that a two-thirds (2/3) majority of all directors then in office vote to proceed. The nature of the emergency shall be stated in the notice and recorded in the minutes.</p><p><strong>Section 9. Notice and Waiver.</strong></p><p>Notice of all regular and special meetings shall be provided to all directors at least fourteen (14) days before the meeting by mail, email, telephone, or orally. A director who attends a meeting without objecting to lack of proper notice shall be deemed to have waived notice. Any director may waive notice in writing before or after a meeting.</p><p><strong>Section 10. Action Without a Meeting.</strong></p><p>Any action required or permitted to be taken at a meeting of the Board may be taken without a meeting if a majority of directors consent to the action in writing (including by email or other electronic transmission). All directors must receive notice of the proposed action and have the opportunity to respond before the action is taken. Written consent actions shall be filed with the minutes of the Board and shall reflect each director’s response. This provision is particularly useful for routine matters between scheduled meetings.</p><p><strong>Section 11. Minutes.</strong></p><p>The Secretary shall keep, or cause to be kept, accurate minutes of all meetings of the Board. Minutes shall record the date, time, and location or platform of the meeting; directors present and absent; any conflicts of interest disclosed; and all actions taken. Minutes shall be approved at the next subsequent Board meeting and maintained in the Corporation's permanent records.</p><p><strong>Section 12. Election, Resignation, and Removal.</strong></p><p>Any director may resign at any time by giving written notice to the President/Board Chair or Secretary. Such resignation shall take effect at the time specified therein or, if no time is specified, upon receipt. Any director may be removed with or without cause by a two-thirds (2/3) vote of the Board; provided, however, that removal may occur only at a meeting called for that purpose, and the written meeting notice must state that removal of a director is a purpose of the meeting.</p><p><strong>Section 13. Vacancies.</strong></p><p>Any vacancy on the Board arising from death, resignation, removal, or an increase in the number of directors may be filled by a majority vote of the remaining directors at any duly held meeting, even if less than a quorum. A director elected to fill a vacancy shall serve the remainder of the unexpired term.</p><p><strong>Section 14. Compensation.</strong></p><p>No director shall receive compensation for service as a director. However, directors may be reimbursed for reasonable and necessary expenses incurred in the performance of their duties, upon Board approval. Members of the Board are prohibited from accepting gifts, gratuities, or payments from: (a) persons receiving benefits or services under any program financed by the Corporation; (b) any person or agency performing services under contract with the Corporation; or (c) persons who are otherwise in a position to benefit from the actions of a Board member. Nothing in this section prohibits the Corporation from compensating a director for services rendered in a capacity other than as a director, provided such compensation is reasonable, arm's-length, and approved in accordance with the Corporation's Conflict of Interest Policy.</p><p><strong>Section 15. Fiscal Year.</strong></p><p>The fiscal year of the Corporation shall extend from January 1 through December 31 of each year, unless otherwise determined by resolution of the Board.</p><p id="art-i" class="article-heading"><span class="underline">ARTICLE III — OFFICERS</span></p><p><strong>Section 1. Positions.</strong></p><p>The officers of the Corporation shall be a President/Board Chair, a Secretary, and a Treasurer. The Board may elect additional officers — including a Vice President/Vice Chair or Executive Director — as it deems appropriate. No one person may hold two officer positions simultaneously, except that the same person may serve as both Secretary and Treasurer if the Board determines this is appropriate given the size of the organization. All officers shall be elected by the Board from among its members, except that the Executive Director, if employed, may be a non-voting participant as provided in Article II, Section 5.</p><blockquote><p><em>Founding note: For a three-member founding board, it is common and acceptable for each founding director to hold one officer role. The Board may also elect a non-director as Executive Director as the organization grows.</em></p></blockquote><p><strong>Section 2. Duties.</strong></p><p>The duties of each Officer shall be:</p><blockquote><p><strong>(a)</strong> President/Board Chair. The President/Board Chair shall preside at all meetings of the Board, facilitate the work of the Board, serve as the chief executive officer of the Corporation in the absence of a paid Executive Director, provides strategic leadership to ensure the Foundation operates cohesively in the absence of an Executive Director, serve as a liaison between the Board and the Executive Director, sign on behalf of the Corporation all deeds, contracts, and other formal instruments as authorized by the Board, and perform such other duties as may be prescribed by the Board. The President/Board Chair may delegate signing authority to another officer or the Executive Director as authorized by the Board.</p><p><strong>(b)</strong> Vice President/Vice Chair (if elected). The Vice President/Vice Chair shall fulfill the responsibilities of the President/Board Chair during the President/Board Chair's absence or incapacitation, assist the President/Board Chair as directed, and fulfill any other duties determined by the Board.</p><p><strong>(c)</strong> Secretary. The Secretary shall be responsible for keeping accurate minutes of all meetings of the Board; distributing a final agenda and meeting materials to directors at least seven (7) days before each meeting; providing draft minutes to directors at least seven (7) days prior to the subsequent meeting; maintaining the Corporation's official records; giving notice of meetings as required; and performing such other duties as the Board may direct.</p><p><strong>(d)</strong> Treasurer. The Treasurer shall have charge of all financial records of the Corporation; be responsible for the safekeeping of funds; keep full and accurate accounts and records of all receipts and disbursements; present financial reports to the Board at each regular meeting; oversee the preparation of the annual budget; and ensure compliance with applicable tax and financial reporting obligations, including IRS Form 990. The Treasurer shall chair the Finance Committee if one is established. All financial records shall be kept at the principal place of business and be open to inspection by any director with reasonable advance notice.</p><p><strong>(e)</strong> Executive Director (if employed). The Executive Director shall be the chief executive officer of the Corporation, responsible for carrying out the policies and programs approved by the Board, managing day-to-day operations, and performing such other duties as the Board directs. The Executive Director may but need not be a director. Upon hiring an Executive Director, the President/Board Chair shall relinquish the President title and serve as Board Chair only, unless otherwise determined by the Board.</p></blockquote><p><strong>Section 3. Term.</strong></p><p>The term of office for all officers shall be two (2) years. Officers are eligible for re-election to successive terms without limit, unless the Board adopts a term limit policy by resolution. Officers shall be elected at the Annual Meeting of the Board.</p><p><strong>Section 4. Vacancies and Removal.</strong></p><p>The Board may make interim appointments to fill officer vacancies at any duly held meeting. Such appointments shall be effective until the next Annual Meeting. Any officer may be removed with or without cause by a majority vote of the Board at any duly held meeting. Removal of a person as an officer shall not constitute removal from the Board of Directors.</p><p id="art-i" class="article-heading"><span class="underline">ARTICLE IV — NOMINATING AND GOVERNANCE COMMITTEE</span></p><p><strong>Section 1. Purpose.</strong></p><p>The Board shall establish a Nominating and Governance Committee (the "Nominating Committee") to identify and recruit qualified candidates for the Board, oversee the annual conflict of interest review, monitor governance best practices, and recommend improvements to Board structure and these Bylaws.</p><p><strong>Section 2. Composition.</strong></p><p>The Nominating Committee shall consist of a minimum of two (2) directors, appointed annually by the President/Board Chair. For a founding board of three, all three directors may constitute the Nominating Committee, provided that any director being considered for re-election recuses themselves from deliberations about their own nomination.</p><p><strong>Section 3. Duties.</strong></p><p>The duties of the Nominating Committee are:</p><blockquote><p><strong>(a)</strong> To identify, recruit, and nominate persons as members of the Board of Directors for regular and vacant terms;</p><p><strong>(b)</strong> To nominate persons as officers of the Corporation;</p><p><strong>(c)</strong> To send a slate of candidates to each Board member at least fourteen (14) days prior to the election meeting. Nominations from the floor shall also be accepted, and any director may nominate themselves; and</p><p><strong>(d)</strong> To conduct an annual review of Board composition, governance practices, and these Bylaws, and to report findings to the full Board.</p></blockquote><p><strong>Section 4. Quorum.</strong></p><p>A quorum for meetings of the Nominating Committee shall be a majority of its members, but not fewer than two (2).</p><p id="art-v" class="article-heading"><span class="underline">ARTICLE V — OTHER COMMITTEES AND ADVISORY BODIES</span></p><p><strong>Section 1. Standing and Ad Hoc Committees.</strong></p><p>The President/Board Chair or the Board may designate standing or ad hoc committees at any time by majority vote of the Board. All Board committees shall be advisory and recommending in nature and shall report to the Board for action. Committee reports shall be read into or appended to the minutes of the meeting at which they are presented. The Board may appoint relevant persons to committees or dissolve committees by majority vote. No committee may fill vacancies on the Board, amend these Bylaws, amend the Articles of Incorporation, or take any action reserved by Virginia law to the Board of Directors.</p><p><strong>Section 2. Standing Program Committees.</strong></p><p>The Board hereby establishes the following standing committees as the Foundation's core program areas. Each standing committee shall be led by a board member designated as committee chair, shall meet regularly, shall develop relationships and programs within its area, and shall report to the full board at each board meeting. Working groups may be established beneath any standing committee to carry out specific tasks or projects.</p><blockquote><p><strong>(a)</strong> Finance Committee: oversees budgeting, financial controls, audit or Form 990 review, and financial reporting to the Board. Chaired by the Treasurer.</p><p><strong>(b)</strong> Research Committee: identifies and cultivates relationships with researchers, scientists, and rare disease organizations; evaluates research opportunities relevant to SETD5 syndrome; and brings research partnership proposals to the full board for approval. All research commitments must be approved by the board before the Foundation proceeds.</p><p><strong>(c)</strong> Community Committee: connects with SETD5 syndrome-affected families, identifies their needs, coordinates support programming, and gathers community input to inform the Foundation’s priorities. All new programs or commitments must be approved by the board before the Foundation proceeds.</p><p><strong>(d)</strong> Nominating and Governance Committee: as described in Article IV.</p></blockquote><p><strong>Section 3. Scientific Advisory Board (SAB).</strong></p><p>The Board may establish a Scientific Advisory Board composed of clinicians, researchers, geneticists, and other experts with relevant expertise in SETD5 Syndrome or related fields. The SAB shall advise the Board on scientific and medical matters including research priorities, grant review, clinical trial readiness, and natural history study design. SAB members are not directors of the Corporation and carry no governance authority. SAB membership criteria, terms, and procedures shall be set by the Board.</p><p><strong>Section 4. Medical Advisory Board (MAB).</strong></p><p>The Board may establish a Medical Advisory Board to provide clinical guidance on patient care standards, diagnostic criteria, and physician education related to SETD5 Syndrome. MAB members are not directors and carry no governance authority. The MAB shall be distinct from the SAB and shall include clinicians with direct patient care experience.</p><p><strong>Section 5. Committee Membership and Removal.</strong></p><p>The President/Board Chair or the Board may appoint relevant persons to committees or remove persons from committees by majority vote of the Board. Removal of a committee member may be done by majority vote of the Board.</p><p id="art-v" class="article-heading"><span class="underline">ARTICLE VI — CONFLICT OF INTEREST</span></p><p><strong>Section 1. Policy Required.</strong></p><p>The Corporation shall maintain a written Conflict of Interest Policy that meets or exceeds the requirements described in Appendix A of IRS Form 1023. The policy shall be reviewed and acknowledged in writing by all directors and officers annually, and signed copies shall be retained in the Corporation's permanent records.</p><p><strong>Section 2. Disclosure.</strong></p><p>No member of the Board shall participate in any discussion or vote on any matter in which the director, or a member of their immediate family, has a direct or indirect material financial interest. When such a situation arises, the director must promptly disclose the potential conflict to the President/Board Chair or Secretary, disqualify themselves from the discussion and vote, and be excused from the meeting until the matter is resolved. The President/Board Chair shall make inquiry if such a conflict appears to exist and the director has not disclosed it.</p><p><strong>Section 3. Recusal Process.</strong></p><p>After disclosure, the interested director shall leave the room during deliberations and shall not vote. The remaining directors shall determine by majority vote whether the transaction is in the Corporation's best interest and whether the terms are fair and reasonable. The minutes shall record the disclosure, the recusal, the deliberations, and the decision.</p><p><strong>Section 4. Compensation Decisions.</strong></p><p>A director who receives compensation from the Corporation for services is precluded from voting on matters pertaining to that director's own compensation. All compensation arrangements shall be reviewed and approved using an independent approval process and comparable compensation data, consistent with IRS intermediate sanctions rules under Section 4958 of the Code.</p><p><strong>Section 5. Annual Acknowledgment.</strong></p><p>Each director and officer shall annually sign a statement affirming that they have received, read, and agreed to comply with the Conflict of Interest Policy, and that they understand the Corporation must engage primarily in activities that accomplish its exempt purposes.</p><p id="art-v" class="article-heading"><span class="underline">ARTICLE VII — FINANCES</span></p><p><strong>Section 1. Budget.</strong></p><p>The Board shall approve an annual operating budget prior to the start of each fiscal year. The Treasurer, or Executive Director if one is employed, shall operate within the approved budget and shall seek Board approval for any unbudgeted expenditure above a threshold established by the Board.</p><p><strong>Section 2. Financial Controls.</strong></p><p>The Corporation shall maintain accurate books of account and shall implement reasonable internal financial controls, including dual authorization for expenditures above a threshold set by the Board and segregation of financial duties where practicable. All grants, contracts, and other financial arrangements entered into by the Corporation shall be reviewed and approved by the Board to ensure they are fair, reasonable, and consistent with the Corporation’s charitable purposes. Such arrangements shall be supported by appropriate documentation, including the basis for determining that the terms reflect fair market value where applicable.</p><p><strong>Section 3. Audit and Review.</strong></p><p>The Treasurer shall present financial reports to the Board at each regular meeting. The Board shall cause the financial statements to be reviewed or audited annually by an independent certified public accountant when required by law, by grant agreement, or when the Board determines it to be in the best interests of the Corporation. The Board shall require an independent financial review or audit when required by law, grant obligations, or as otherwise determined appropriate. The Board shall ensure the timely and accurate filing of IRS Form 990 and any required state charitable registration filings. All financial records shall be kept at the principal office and be open to inspection by any director with reasonable advance notice.</p><p><strong>Section 4. Checks and Authorizations.</strong></p><p>All checks, drafts, or other orders for payment shall be signed by such officers or agents as the Board may authorize. The Board shall establish written authorization thresholds.</p><p><strong>Section 5. No Private Inurement.</strong></p><p>No part of the net earnings of the Corporation shall inure to the benefit of any director, officer, or private individual. The Corporation shall not pay excessive compensation, and all compensation shall be reviewed and approved by the Board using comparable data consistent with IRS intermediate sanctions rules.</p><p id="art-v" class="article-heading"><span class="underline">ARTICLE VIII — RECORDS AND TRANSPARENCY</span></p><p><strong>Section 1. Corporate Records.</strong></p><p>The Corporation shall keep accurate and complete books and records of account; minutes of all meetings of the Board and its committees; and the names and addresses of directors and officers. All records shall be maintained at the principal office or such other location as the Board designates.</p><p><strong>Section 2. Public Disclosure.</strong></p><p>The Corporation shall make available for public inspection its Form 990 tax returns for the three most recent fiscal years and its application for recognition of exemption (Form 1023) as required by law. The Corporation is committed to transparency with donors, grantors, and the public, consistent with NORD membership standards for rare disease patient advocacy organizations.</p><p><strong>Section 3. Document Retention.</strong></p><p>The Board shall adopt a written Document Retention and Destruction Policy establishing minimum retention periods for corporate records and prohibiting destruction of documents relevant to any pending legal matter or government investigation.</p><p><strong>Section 4. Whistleblower Protection.</strong></p><p>The Corporation shall adopt a written Whistleblower Protection Policy that prohibits retaliation against any director, officer, employee, or volunteer who in good faith reports a suspected violation of law, these Bylaws, or the Corporation's policies. The policy shall provide a mechanism for confidential reporting and shall be reviewed and acknowledged by all directors and officers annually alongside the Conflict of Interest Policy. No director, officer, employee, or volunteer who reports a concern in good faith shall be subject to dismissal, demotion, suspension, harassment, or other adverse action as a result of such report.</p><p id="art-i" class="article-heading"><span class="underline">ARTICLE IX — INDEMNIFICATION AND INSURANCE</span></p><p><strong>Section 1. Indemnification.</strong></p><p>To the fullest extent permitted by the Virginia Nonstock Corporation Act, the Corporation shall indemnify any person who is or was a director, officer, employee, or agent of the Corporation against expenses (including reasonable attorneys' fees), judgments, fines, and amounts paid in settlement actually and reasonably incurred in connection with any threatened, pending, or completed action, suit, or proceeding, provided that such person acted in good faith and in a manner reasonably believed to be in the best interests of the Corporation.</p><p><strong>Section 2. Insurance.</strong></p><p>The Corporation may purchase and maintain directors' and officers' (D&amp;O) liability insurance and such other coverage as the Board deems appropriate. The Board shall review insurance coverage annually.</p><p id="art-x" class="article-heading"><span class="underline">ARTICLE X — DISSOLUTION</span></p><p>Upon dissolution of the Corporation, the Board shall, after paying or making provision for payment of all liabilities, distribute all remaining assets exclusively to one or more organizations qualifying as tax-exempt under Section 501(c)(3) of the Code, or to the federal, state, or local government for a public purpose, as determined by the Board. If the Board fails to make such determination, a court of competent jurisdiction in the locality of the Corporation's principal office shall make such determination.</p><p id="art-x" class="article-heading"><span class="underline">ARTICLE XI — ADOPTION AND AMENDMENT OF BYLAWS</span></p><p><strong>Section 1. Amendment.</strong></p><p>These Bylaws may be amended, altered, or repealed at any legal meeting of the Board — regular or special — by a two-thirds (2/3) vote of the directors entitled to vote, at a meeting that has been properly noticed at least ten (10) days before any such change, with the proposed amendment included in the notice. Notwithstanding the foregoing, an amendment may be adopted with a minimum of five (5) days' notice — including by email or electronic communication — if approved by unanimous vote of all directors then in office, including by electronic consent. No amendment shall cause the Corporation to lose its tax-exempt status under Section 501(c)(3) or conflict with the Corporation's Articles of Incorporation.</p><blockquote><p><em>Note: The NORD template and Blue Avocado both recommend 14-day notice for bylaw amendments. A 2/3 supermajority (rather than simple majority) is best practice for protecting founding governance decisions.</em></p></blockquote><p><strong>Section 2. Rules of Order.</strong></p><p>The current edition of Robert's Rules of Order Newly Revised shall govern the Corporation's meetings in all cases where applicable and not inconsistent with these Bylaws or any special rules of order the Board may adopt. Where Robert's Rules conflict with these Bylaws, these Bylaws shall control.</p><p><strong>Section 3. Revision History.</strong></p><p>The date of adoption and any subsequent amendments shall be recorded at the end of this document. A copy of the current, dated Bylaws shall be maintained by the Secretary and distributed to all directors.</p><p id="art-x" class="article-heading"><span class="underline">ARTICLE XII — GENERAL PROVISIONS</span></p><p><strong>Section 1. Severability.</strong></p><p>If any provision of these Bylaws is found to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.</p><p><strong>Section 2. References to Law.</strong></p><p>Any reference in these Bylaws to the Internal Revenue Code, the Virginia Nonstock Corporation Act, or any other statute shall be deemed to refer to the applicable law as amended from time to time.</p><p><strong>Section 3. Governing Law.</strong></p><p>These Bylaws shall be governed by and construed in accordance with the laws of the Commonwealth of Virginia, including the Virginia Nonstock Corporation Act, Va. Code § 13.1-801 et seq., as amended. Electronic signatures shall be deemed valid for all purposes under these Bylaws."</p><p><strong><span class="underline">REVISION HISTORY</span></strong></p><p>Amendment dates and change descriptions are maintained in the working document. <a href="DRAFT_SETD5_Bylaws.docx" style="color:#2F5361;font-weight:600;">Download bylaws (DOCX)</a></p><p><strong>CONFLICT OF INTEREST POLICY</strong></p><p>SETD5 Syndrome Foundation, Inc.</p><blockquote><p><em>This policy is required by IRS Form 1023 Appendix A. It is adopted as a companion to the Bylaws but maintained as a separate document. All directors and officers must review and sign this policy annually. Signed copies are retained in the Corporation's permanent records.</em></p></blockquote><p><strong><span class="underline">Article 1 — Purpose</span></strong></p><p>The purpose of this Conflict of Interest Policy is to protect the tax-exempt status of SETD5 Syndrome Foundation, Inc. (the "Corporation") when it is contemplating entering into a transaction or arrangement that might benefit the private interest of a director, officer, or key employee. This policy supplements, but does not replace, applicable state and federal laws governing conflicts of interest for nonprofit and charitable organizations.</p><p><strong><span class="underline">Article 2 — Definitions</span></strong></p><p><strong>2.1 Interested Person.</strong></p><p>Any director, principal officer, member of a committee with Board-delegated powers, or key employee who has a direct or indirect Financial Interest, as defined below, is an "Interested Person."</p><p><strong>2.2 Financial Interest.</strong></p><p>A person has a Financial Interest if the person has, directly or indirectly, through business, investment, or family: (a) an ownership or investment interest in any entity with which the Corporation has a transaction or arrangement; (b) a compensation arrangement with the Corporation or with any entity or individual with which the Corporation has a transaction or arrangement; or (c) a potential ownership or investment interest in, or compensation arrangement with, any entity or individual with which the Corporation is negotiating a transaction or arrangement. A Financial Interest is not necessarily a conflict of interest — a conflict exists only when the Board decides it does under Article 3.</p><p><strong><span class="underline">Article 3 — Procedures</span></strong></p><p><strong>3.1 Duty to Disclose.</strong></p><p>An Interested Person must disclose the existence of the Financial Interest and all material facts to the directors and members of committees considering the proposed transaction or arrangement.</p><p><strong>3.2 Determining Whether a Conflict Exists.</strong></p><p>After disclosure, the Interested Person shall leave the Board or committee meeting while the determination of a conflict of interest is discussed and voted upon. The remaining members shall decide if a conflict of interest exists.</p><p><strong>3.3 Addressing the Conflict.</strong></p><p>The President/Board Chair shall, if appropriate, appoint a disinterested person or committee to investigate alternatives. After due diligence, the Board shall determine whether the Corporation can obtain a more advantageous transaction from a person or entity that would not give rise to a conflict. If a more advantageous transaction is not reasonably possible, the Board may authorize the transaction by a majority vote of disinterested directors, documenting the basis for its decision.</p><p><strong>3.4 Violations.</strong></p><p>If the Board has reasonable cause to believe a director has failed to disclose an actual or possible conflict, it shall inform the director and afford an opportunity to explain. If the Board determines the director has failed to disclose, it shall take appropriate corrective action, which may include removal.</p><p><strong><span class="underline">Article 4 — Records</span></strong></p><p>The minutes of the Board and all committees with Board-delegated powers shall record: (a) the names of persons who disclosed a financial interest; (b) the nature of the interest; (c) any action taken to determine whether a conflict existed; and (d) the Board's or committee's decision as to whether a conflict in fact existed and what action was taken.</p><p><strong><span class="underline">Article 5 — Compensation</span></strong></p><p>A director who receives compensation from the Corporation for services is precluded from voting on matters pertaining to that director's own compensation. The same applies to committee members with compensation jurisdiction.</p><p><strong><span class="underline">Article 6 — Annual Statements</span></strong></p><p>Each director, officer, and member of a committee with Board-delegated powers shall annually sign a statement affirming that such person: (a) has received a copy of this Policy; (b) has read and understands the Policy; (c) has agreed to comply with the Policy; and (d) understands that the Corporation must engage primarily in activities that accomplish its exempt purposes.</p><p><strong><span class="underline">Article 7 — Periodic Reviews</span></strong></p><p>Periodic reviews shall examine: (a) whether compensation arrangements and benefits are reasonable and based on competent survey information and arm's-length bargaining; and (b) whether partnerships, joint ventures, and arrangements with management organizations conform to written policies, reflect reasonable payments, further charitable purposes, and do not result in inurement or impermissible private benefit.</p><p><strong><span class="underline">ANNUAL ACKNOWLEDGMENT AND SIGNATURE</span></strong></p><p>I have received, read, and agree to comply with the Conflict of Interest Policy of SETD5 Syndrome Foundation, Inc.</p><p>Name (print): ______________________________________</p><p>Title: ______________________________________</p><p>Signature: ______________________________________</p><p>Date: ______________________________________</p>
+
+    </div>
+  </div>
+  <div class="footer">SETD5 Syndrome Foundation &nbsp;·&nbsp; Confidential Board Document &nbsp;·&nbsp; Draft — April 29, 2026</div>
+</div>
+<script>
+function handleAdoption(adopted) {
+  const bar = document.getElementById('adoptionBar');
+  const hint = document.getElementById('barHint');
+  const printBtn = document.getElementById('printBtn');
+  const badge = document.querySelector('.draft-badge');
+  const headerSub = document.querySelector('.header-sub');
+  const footer = document.querySelector('.footer');
+  const content = document.querySelector('.content');
+
+  if (adopted) {
+    // Update bar
+    bar.classList.add('adopted');
+    hint.textContent = '✓ Adopted April 29, 2026 — ready to print or save as PDF';
+    printBtn.style.display = 'inline-block';
+
+    // Update page title
+    document.title = 'Bylaws — SETD5 Syndrome Foundation, Inc.';
+
+    // Update badge
+    badge.textContent = 'Adopted April 29, 2026';
+    badge.style.background = '#E8F5EE';
+    badge.style.color = '#1E6B42';
+    badge.style.border = '1px solid #A8D5BC';
+
+    // Update header subtitle
+    headerSub.textContent = 'Adopted by the Board of Directors — April 29, 2026';
+
+    // Update footer
+    footer.innerHTML = footer.innerHTML.replace(
+      'Draft — April 29, 2026',
+      'Adopted April 29, 2026'
+    );
+
+    // Update content text
+    content.innerHTML = content.innerHTML
+      .replace('DRAFT — Proposed for Adoption April 29, 2026', 'Adopted April 29, 2026')
+      .replace('Date: _______________________', 'Date: April 29, 2026');
+
+  } else {
+    // Revert — reload the page to restore all original text
+    if (confirm('Uncheck will reload the page and restore the draft version. Continue?')) {
+      location.reload();
+    } else {
+      document.getElementById('adoptToggle').checked = true;
+    }
+  }
+}
+</script>
+</body>
+</html>
