@@ -717,13 +717,31 @@ window.addNewBiz = function() {
       <label>Discussion Summary</label>
       <textarea placeholder="Key points raised during discussion..."></textarea>
     </div>
+    <div style="background:#f5f0fa;border-radius:6px;padding:12px 14px;margin:10px 0 6px;border:1px solid #d4c8e8;">
+      <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#7a5ca8;margin-bottom:10px;">Vote 1 — Amendment (leave blank if no amendment was made)</div>
+      <div class="field-row-3">
+        <div><label>Motion to Amend By</label>
+             <input type="text" placeholder="Name (or leave blank)"></div>
+        <div><label>Seconded By</label>
+             <input type="text" placeholder="Name (or leave blank)"></div>
+        <div><label>Vote (Y / N / Abstain)</label>
+             <input type="text" placeholder="e.g., 6-0-0"></div>
+      </div>
+      <div class="field-row">
+        <div><label>Amendment Result</label>
+             <input type="text" placeholder="e.g., Amendment carried"></div>
+        <div><label>What was amended</label>
+             <input type="text" placeholder="e.g., Section 4.1 updated to read..."></div>
+      </div>
+    </div>
+    <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#2F5361;margin:12px 0 8px;">Vote 2 — Final adoption (or Vote 1 if no amendment)</div>
     <div class="field-row-3">
       <div><label>Motion By</label>
            <input type="text" placeholder="Name (or N/A)"></div>
       <div><label>Seconded By</label>
            <input type="text" placeholder="Name (or N/A)"></div>
       <div><label>Vote (Y / N / Abstain)</label>
-           <input type="text" placeholder="e.g., 5-0-0"></div>
+           <input type="text" placeholder="e.g., 6-0-0"></div>
     </div>
     <div class="field-row">
       <div><label>Result</label>
@@ -1110,7 +1128,19 @@ function buildMinutesHTML() {
 
   const newBiz = [...document.querySelectorAll('#new-biz-list .rep-item')].map(el => {
     const txt = el.querySelectorAll('input[type=text], textarea');
-    return { item: txt[0]?.value, notes: txt[1]?.value };
+    return {
+      item:          txt[0]?.value,
+      notes:         txt[1]?.value,
+      amendMotion:   txt[2]?.value,
+      amendSecond:   txt[3]?.value,
+      amendVote:     txt[4]?.value,
+      amendResult:   txt[5]?.value,
+      amendWhat:     txt[6]?.value,
+      motionBy:      txt[7]?.value,
+      secondBy:      txt[8]?.value,
+      voteCount:     txt[9]?.value,
+      itemNotes:     txt[10]?.value,
+    };
   }).filter(b => b.item || b.notes);
 
   const actions = [...document.querySelectorAll('#action-items-body tr')].map(tr => {
@@ -1194,7 +1224,20 @@ ${oldBiz.length ? oldBiz.map(b => `
 ${newBiz.length ? newBiz.map(b => `
 <div class="section-block">
   <div class="block-label">${esc(b.item) || '(no title)'}</div>
-  <div class="block-body">${nl2br(b.notes)}</div>
+  ${b.notes ? `<div class="block-body" style="margin-bottom:10pt;">${nl2br(b.notes)}</div>` : ''}
+  ${(b.amendMotion || b.amendVote || b.amendResult) ? `
+  <div style="background:#f5f0fa;border-radius:5pt;padding:9pt 12pt;margin:8pt 0;border:1pt solid #d4c8e8;">
+    <div style="font-size:7.5pt;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#7a5ca8;margin-bottom:6pt;">Vote 1 — Amendment</div>
+    <p style="font-size:9.5pt;"><strong>Motion to amend by:</strong> ${esc(b.amendMotion)||'—'} &nbsp;·&nbsp; <strong>Seconded by:</strong> ${esc(b.amendSecond)||'—'}<br>
+    <strong>Vote:</strong> ${esc(b.amendVote)||'—'} &nbsp;·&nbsp; <strong>Result:</strong> ${esc(b.amendResult)||'—'}</p>
+    ${b.amendWhat ? `<p style="font-size:9.5pt;margin-top:4pt;"><strong>What was amended:</strong> ${esc(b.amendWhat)}</p>` : ''}
+  </div>` : ''}
+  ${(b.motionBy || b.voteCount) ? `
+  <div style="margin-top:6pt;">
+    <div style="font-size:7.5pt;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#2F5361;margin-bottom:6pt;">${(b.amendMotion || b.amendVote) ? 'Vote 2 — Final adoption' : 'Vote'}</div>
+    <p style="font-size:9.5pt;"><strong>Motion by:</strong> ${esc(b.motionBy)||'—'} &nbsp;·&nbsp; <strong>Seconded by:</strong> ${esc(b.secondBy)||'—'}<br>
+    <strong>Vote:</strong> ${esc(b.voteCount)||'—'}${b.itemNotes ? ` &nbsp;·&nbsp; <strong>Notes:</strong> ${esc(b.itemNotes)}` : ''}</p>
+  </div>` : ''}
 </div>`).join('') : '<p><em style="color:#999">None</em></p>'}
 
 <h2>Action Items</h2>
