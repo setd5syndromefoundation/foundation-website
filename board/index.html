@@ -1909,6 +1909,27 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
             </div>
           </div>
         </div>
+        <!-- File to Networking -->
+        <div class="tracker-grid full" style="margin-bottom:8px;">
+          <div class="tracker-field">
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="tr-file-networking" onchange="trackerToggleNetworking()" style="width:15px;height:15px;accent-color:var(--teal);cursor:pointer;">
+              <span>Also file this contact to the <strong>Networking</strong> folder</span>
+            </label>
+          </div>
+        </div>
+        <div id="tr-networking-sub-row" style="display:none;margin-bottom:20px;">
+          <div class="tracker-field">
+            <label>Networking subfolder</label>
+            <select id="tr-networking-sub" style="font-family:inherit;font-size:0.875rem;padding:9px 11px;border:1.5px solid var(--border);border-radius:8px;width:100%;background:white;color:var(--text);">
+              <option value="Partner Organizations">Partner Organizations — rare disease orgs, foundations, alliances</option>
+              <option value="Research Collaborations">Research Collaborations — researchers, clinicians, labs</option>
+              <option value="Community Connections">Community Connections — families, advocates, community groups</option>
+              <option value="Conferences &amp; Events">Conferences &amp; Events — conference contacts, event networking</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
         <input type="hidden" id="tr-edit-id" value="">
         <div class="tracker-actions">
           <button class="btn btn-primary" id="tr-save-btn" onclick="trackerAdd()">Save Entry</button>
@@ -2973,7 +2994,11 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
       const hits = docEntries.filter(d => d.name && d.name.toLowerCase().includes(q));
       if (hits.length > 0) {
         panel.style.display = 'block';
-        hits.slice(0, 20).forEach(d => {
+        const docHeader = document.createElement('div');
+        docHeader.style.cssText = 'font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);padding:8px 14px 4px;';
+        docHeader.textContent = 'Documents';
+        panel.appendChild(docHeader);
+        hits.slice(0, 10).forEach(d => {
           // Determine location label
           let locLabel = '';
           if (d.categories && d.categories.length) {
@@ -2992,6 +3017,60 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
           row.onclick = () => jumpToDoc(d, row);
           panel.appendChild(row);
         });
+      }
+    }
+
+    // --- Search 3: contact/outreach tracker entries ---
+    if (panel && typeof trackerEntries !== 'undefined' && trackerEntries.length) {
+      const trackerHits = trackerEntries.filter(e =>
+        (e.name     || '').toLowerCase().includes(q) ||
+        (e.internal || '').toLowerCase().includes(q) ||
+        (e.entity   || '').toLowerCase().includes(q) ||
+        (e.takeaway || '').toLowerCase().includes(q) ||
+        (e.followup || '').toLowerCase().includes(q) ||
+        (e.notes    || '').toLowerCase().includes(q)
+      );
+      if (trackerHits.length > 0) {
+        panel.style.display = 'block';
+        const trackerHeader = document.createElement('div');
+        trackerHeader.style.cssText = 'font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);padding:8px 14px 4px;border-top:1px solid var(--border);margin-top:4px;';
+        trackerHeader.textContent = 'Contact Log';
+        panel.appendChild(trackerHeader);
+        trackerHits.slice(0, 10).forEach(e => {
+          const row = document.createElement('div');
+          row.className = 'doc-search-result';
+          const label = [e.name, e.entity].filter(Boolean).join(' · ');
+          const snippet = (e.internal || e.takeaway || e.notes || '').slice(0, 80);
+          row.innerHTML = `<span class="doc-search-result-name">${escapeHtml(label || 'Contact entry')}</span>`
+            + (snippet ? `<span class="doc-search-result-loc">${escapeHtml(snippet)}…</span>` : '');
+          row.onclick = () => {
+            panel.innerHTML = ''; panel.style.display = 'none';
+            document.querySelectorAll('.board-section').forEach(s => s.classList.remove('bsearch-hidden'));
+            const trackerSection = document.getElementById('tracker-section');
+            if (trackerSection) {
+              const mainNav = document.getElementById('site-nav');
+              const offset = (mainNav ? mainNav.offsetHeight : 88) + 16;
+              const top = trackerSection.getBoundingClientRect().top + window.pageYOffset - offset;
+              window.scrollTo({ top, behavior: 'smooth' });
+              boardSetActive('tracker-section');
+              const trSearch = document.getElementById('tr-search');
+              if (trSearch) { trSearch.value = val; trackerRender(); }
+            }
+          };
+          panel.appendChild(row);
+        });
+      }
+    }
+
+    // Show "no results" if nothing found anywhere
+    if (panel && panel.children.length === 0) {
+      const allHidden = [...document.querySelectorAll('.board-section')].every(s => s.classList.contains('bsearch-hidden'));
+      if (allHidden) {
+        panel.style.display = 'block';
+        const empty = document.createElement('div');
+        empty.className = 'doc-search-no-results';
+        empty.textContent = 'No results found for "' + val + '"';
+        panel.appendChild(empty);
       }
     }
   }
@@ -5262,6 +5341,12 @@ function trackerFileClear() {
 }
 window.trackerFileClear = trackerFileClear;
 
+function trackerToggleNetworking() {
+  const checked = document.getElementById('tr-file-networking')?.checked;
+  document.getElementById('tr-networking-sub-row').style.display = checked ? 'block' : 'none';
+}
+window.trackerToggleNetworking = trackerToggleNetworking;
+
 function trackerToggleForm() {
   const form = document.getElementById('tracker-form');
   const isOpen = form.style.display !== 'none';
@@ -5303,6 +5388,9 @@ async function trackerAdd() {
     return;
   }
 
+  const fileNetworking  = document.getElementById('tr-file-networking')?.checked;
+  const networkingSub   = document.getElementById('tr-networking-sub')?.value || 'Partner Organizations';
+
   const saveBtn = document.getElementById('tr-save-btn');
   if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = 'Saving…'; }
 
@@ -5327,6 +5415,25 @@ async function trackerAdd() {
       await addDoc(trackerColRef, { ...fields, done: false, createdAt: serverTimestamp(), createdBy: chatUserName });
     }
 
+    // Auto-file to Networking folder if checked
+    if (fileNetworking && !editId) {
+      const docLabel = [entity, name].filter(Boolean).join(' — ');
+      const summary  = [takeaway, followup].filter(Boolean).join(' | ');
+      const netFields = {
+        section:    'board-networking',
+        sub:        networkingSub,
+        categories: [{ section: 'board-networking', sub: networkingSub }],
+        name:       docLabel || 'Contact — ' + date,
+        date,
+        uploadedBy: chatUserName || 'Board Member',
+        notes:      summary,
+        createdAt:  serverTimestamp(),
+        fromTracker: true
+      };
+      if (attachmentURL) { netFields.fileURL = attachmentURL; netFields.fileName = attachmentName; }
+      await addDoc(collection(db, 'board_documents'), netFields);
+    }
+
     ['tr-name','tr-entity','tr-internal','tr-date','tr-takeaway','tr-followup'].forEach(id => {
       const el = document.getElementById(id); if (el) el.value = '';
     });
@@ -5334,6 +5441,8 @@ async function trackerAdd() {
       const el = document.getElementById(id); if (el) el.value = '';
     });
     if (editIdEl) editIdEl.value = '';
+    const fileNetworkingEl = document.getElementById('tr-file-networking');
+    if (fileNetworkingEl) { fileNetworkingEl.checked = false; trackerToggleNetworking(); }
     trackerFileClear();
     document.getElementById('tracker-form').style.display = 'none';
   } catch (err) {
