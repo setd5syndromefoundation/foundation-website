@@ -351,22 +351,55 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
   border-top:1px solid var(--border); background:var(--cream);
 }
 .doc-folder.open > .doc-folder-body { display:block; }
-/* ── Document search results panel ── */
-.doc-search-panel {
-  display:none; position:absolute; top:100%; left:0; right:0; z-index:200;
-  background:var(--white); border:1px solid var(--border); border-radius:10px;
-  box-shadow:var(--shadow-lg); margin-top:4px; overflow:hidden;
+/* ── Document search results panel (hidden — replaced by overlay) ── */
+.doc-search-panel { display:none !important; }
+
+/* ── Search results overlay ── */
+#search-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(26,51,64,0.45); backdrop-filter: blur(2px);
+  align-items: flex-start; justify-content: center;
+  padding-top: 80px;
 }
-.doc-search-result {
-  display:flex; flex-direction:column; gap:2px;
-  padding:10px 16px; cursor:pointer; border-bottom:1px solid var(--border);
-  transition:background 0.1s;
+#search-overlay.open { display: flex; }
+#search-results-box {
+  background: var(--white); border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+  width: 100%; max-width: 640px; max-height: 70vh;
+  overflow-y: auto; margin: 0 20px;
 }
-.doc-search-result:last-child { border-bottom:none; }
-.doc-search-result:hover { background:var(--cream); }
-.doc-search-result-name { font-size:0.88rem; font-weight:600; color:var(--text); }
-.doc-search-result-loc { font-size:0.75rem; color:var(--text-light); }
-.doc-search-no-results { padding:12px 16px; font-size:0.85rem; color:var(--text-light); font-style:italic; }
+#search-results-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; background: var(--white); z-index: 1;
+}
+#search-results-query {
+  font-size: 0.95rem; font-weight: 700; color: var(--text);
+}
+#search-results-query span { color: var(--teal); }
+#search-results-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.1rem; color: var(--text-light); padding: 2px 6px;
+  border-radius: 4px; line-height: 1;
+}
+#search-results-close:hover { background: var(--cream); color: var(--text); }
+#search-results-body { padding: 8px 0 12px; }
+.sr-group-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-light);
+  padding: 10px 20px 4px;
+}
+.sr-group-label:not(:first-child) { border-top: 1px solid var(--border); margin-top: 6px; }
+.sr-item {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 10px 20px; cursor: pointer; transition: background 0.1s;
+}
+.sr-item:hover { background: var(--cream); }
+.sr-item-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.sr-item-loc { font-size: 0.78rem; color: var(--text-light); }
+.sr-empty { padding: 28px 20px; text-align: center; font-size: 0.9rem; color: var(--text-light); }
 
 /* ===== COMMUNICATIONS TAB UI ===== */
 .comm-tabs {
@@ -1353,7 +1386,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
       <button class="board-sidebar-toggle" aria-label="Toggle sidebar">▾</button>
     </div>
     <div class="board-sidebar-search" style="position:relative;">
-      <input type="search" id="board-search-input" placeholder="Search the Board Portal" oninput="boardSearch(this.value)" autocomplete="off" aria-label="Search board portal" />
+      <input type="search" id="board-search-input" placeholder="Search the Board Portal" oninput="boardSearch(this.value)" onkeydown="if(event.key==='Escape')searchOverlayDismiss()" autocomplete="off" aria-label="Search board portal" />
       <button class="board-search-clear" id="board-search-clear" onclick="boardSearchClear()" aria-label="Clear search" type="button">✕</button>
       <div class="doc-search-panel" id="doc-search-panel"></div>
     </div>
@@ -2989,17 +3022,27 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
       section.classList.toggle('bsearch-hidden', !matches);
     });
 
-    // --- Search 2: document names from docEntries (global, set by Firebase module) ---
-    if (panel && typeof docEntries !== 'undefined') {
+    // --- Show results in overlay ---
+    const overlay  = document.getElementById('search-overlay');
+    const body     = document.getElementById('search-results-body');
+    const termEl   = document.getElementById('search-results-term');
+    if (!overlay || !body) return;
+
+    body.innerHTML = '';
+    if (termEl) termEl.textContent = '"' + val + '"';
+
+    let totalHits = 0;
+
+    // Documents
+    if (typeof docEntries !== 'undefined') {
       const hits = docEntries.filter(d => d.name && d.name.toLowerCase().includes(q));
       if (hits.length > 0) {
-        panel.style.display = 'block';
-        const docHeader = document.createElement('div');
-        docHeader.style.cssText = 'font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);padding:8px 14px 4px;';
-        docHeader.textContent = 'Documents';
-        panel.appendChild(docHeader);
-        hits.slice(0, 10).forEach(d => {
-          // Determine location label
+        totalHits += hits.length;
+        const label = document.createElement('div');
+        label.className = 'sr-group-label';
+        label.textContent = 'Documents (' + hits.length + ')';
+        body.appendChild(label);
+        hits.slice(0, 15).forEach(d => {
           let locLabel = '';
           if (d.categories && d.categories.length) {
             locLabel = d.categories.map(c => {
@@ -3011,18 +3054,18 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
             locLabel = secLabel + (d.sub ? ' › ' + d.sub : '');
           }
           const row = document.createElement('div');
-          row.className = 'doc-search-result';
-          row.innerHTML = `<span class="doc-search-result-name">${escapeHtml(d.name)}</span>`
-            + (locLabel ? `<span class="doc-search-result-loc">${locLabel}</span>` : '');
-          row.onclick = () => jumpToDoc(d, row);
-          panel.appendChild(row);
+          row.className = 'sr-item';
+          row.innerHTML = `<span class="sr-item-name">${escapeHtml(d.name)}</span>`
+            + (locLabel ? `<span class="sr-item-loc">📁 ${locLabel}</span>` : '');
+          row.onclick = () => { searchOverlayDismiss(); jumpToDoc(d, null); };
+          body.appendChild(row);
         });
       }
     }
 
-    // --- Search 3: contact/outreach tracker entries ---
-    if (panel && typeof trackerEntries !== 'undefined' && trackerEntries.length) {
-      const trackerHits = trackerEntries.filter(e =>
+    // Contact log
+    if (typeof trackerEntries !== 'undefined' && trackerEntries.length) {
+      const hits = trackerEntries.filter(e =>
         (e.name     || '').toLowerCase().includes(q) ||
         (e.internal || '').toLowerCase().includes(q) ||
         (e.entity   || '').toLowerCase().includes(q) ||
@@ -3030,50 +3073,55 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
         (e.followup || '').toLowerCase().includes(q) ||
         (e.notes    || '').toLowerCase().includes(q)
       );
-      if (trackerHits.length > 0) {
-        panel.style.display = 'block';
-        const trackerHeader = document.createElement('div');
-        trackerHeader.style.cssText = 'font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);padding:8px 14px 4px;border-top:1px solid var(--border);margin-top:4px;';
-        trackerHeader.textContent = 'Contact Log';
-        panel.appendChild(trackerHeader);
-        trackerHits.slice(0, 10).forEach(e => {
+      if (hits.length > 0) {
+        totalHits += hits.length;
+        const label = document.createElement('div');
+        label.className = 'sr-group-label';
+        label.textContent = 'Contact Log (' + hits.length + ')';
+        body.appendChild(label);
+        hits.slice(0, 15).forEach(e => {
           const row = document.createElement('div');
-          row.className = 'doc-search-result';
-          const label = [e.name, e.entity].filter(Boolean).join(' · ');
-          const snippet = (e.internal || e.takeaway || e.notes || '').slice(0, 80);
-          row.innerHTML = `<span class="doc-search-result-name">${escapeHtml(label || 'Contact entry')}</span>`
-            + (snippet ? `<span class="doc-search-result-loc">${escapeHtml(snippet)}…</span>` : '');
+          row.className = 'sr-item';
+          const name = [e.name, e.entity].filter(Boolean).join(' · ');
+          const snippet = (e.internal || e.takeaway || e.notes || '').slice(0, 100);
+          row.innerHTML = `<span class="sr-item-name">${escapeHtml(name || 'Contact entry')}</span>`
+            + (snippet ? `<span class="sr-item-loc">${escapeHtml(snippet)}…</span>` : '');
           row.onclick = () => {
-            panel.innerHTML = ''; panel.style.display = 'none';
+            searchOverlayDismiss();
             document.querySelectorAll('.board-section').forEach(s => s.classList.remove('bsearch-hidden'));
-            const trackerSection = document.getElementById('tracker-section');
-            if (trackerSection) {
-              const mainNav = document.getElementById('site-nav');
-              const offset = (mainNav ? mainNav.offsetHeight : 88) + 16;
-              const top = trackerSection.getBoundingClientRect().top + window.pageYOffset - offset;
-              window.scrollTo({ top, behavior: 'smooth' });
+            const sec = document.getElementById('tracker-section');
+            if (sec) {
+              const offset = (document.getElementById('site-nav')?.offsetHeight || 88) + 16;
+              window.scrollTo({ top: sec.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
               boardSetActive('tracker-section');
               const trSearch = document.getElementById('tr-search');
               if (trSearch) { trSearch.value = val; trackerRender(); }
             }
           };
-          panel.appendChild(row);
+          body.appendChild(row);
         });
       }
     }
 
-    // Show "no results" if nothing found anywhere
-    if (panel && panel.children.length === 0) {
-      const allHidden = [...document.querySelectorAll('.board-section')].every(s => s.classList.contains('bsearch-hidden'));
-      if (allHidden) {
-        panel.style.display = 'block';
-        const empty = document.createElement('div');
-        empty.className = 'doc-search-no-results';
-        empty.textContent = 'No results found for "' + val + '"';
-        panel.appendChild(empty);
-      }
+    if (totalHits === 0) {
+      body.innerHTML = `<div class="sr-empty">No results found for "<strong>${escapeHtml(val)}</strong>"</div>`;
     }
+
+    // Remove section greying — overlay handles the results
+    document.querySelectorAll('.board-section').forEach(s => s.classList.remove('bsearch-hidden'));
+
+    overlay.classList.add('open');
   }
+
+  function searchOverlayClose(e) {
+    if (e.target === document.getElementById('search-overlay')) searchOverlayDismiss();
+  }
+  function searchOverlayDismiss() {
+    const overlay = document.getElementById('search-overlay');
+    if (overlay) overlay.classList.remove('open');
+  }
+  window.searchOverlayClose   = searchOverlayClose;
+  window.searchOverlayDismiss = searchOverlayDismiss;
 
   function jumpToDoc(docObj, row) {
     // Determine section/sub from first category or legacy fields
@@ -6538,5 +6586,16 @@ window.inboxFileItSave = inboxFileItSave;
 #roadmap-modal-body .progress-pct { font-size:0.85rem; font-weight:700; color:#2F5361; }
 #roadmap-modal-body .note { background:#f7f3ee; border-left:3px solid #D8AB67; border-radius:0 8px 8px 0; padding:12px 16px; font-size:0.85rem; color:#4a6b78; margin-top:16px; }
 </style>
+
+<!-- Search overlay -->
+<div id="search-overlay" onclick="searchOverlayClose(event)">
+  <div id="search-results-box">
+    <div id="search-results-header">
+      <div id="search-results-query">Results for <span id="search-results-term"></span></div>
+      <button id="search-results-close" onclick="searchOverlayDismiss()" title="Close">✕</button>
+    </div>
+    <div id="search-results-body"></div>
+  </div>
+</div>
 </body>
 </html>
