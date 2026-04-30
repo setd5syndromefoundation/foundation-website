@@ -3064,14 +3064,18 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     }
 
     // Contact log
-    if (typeof trackerEntries !== 'undefined' && trackerEntries.length) {
-      const hits = trackerEntries.filter(e =>
+    const _trackerEntries = (typeof trackerEntries !== 'undefined' && trackerEntries.length)
+      ? trackerEntries
+      : (window.trackerEntries || []);
+    if (_trackerEntries.length) {
+      const hits = _trackerEntries.filter(e =>
         (e.name     || '').toLowerCase().includes(q) ||
         (e.internal || '').toLowerCase().includes(q) ||
         (e.entity   || '').toLowerCase().includes(q) ||
         (e.takeaway || '').toLowerCase().includes(q) ||
         (e.followup || '').toLowerCase().includes(q) ||
-        (e.notes    || '').toLowerCase().includes(q)
+        (e.notes    || '').toLowerCase().includes(q) ||
+        (e.purpose  || '').toLowerCase().includes(q)
       );
       if (hits.length > 0) {
         totalHits += hits.length;
@@ -5344,11 +5348,13 @@ async function chatSearchMessages(val) {
 
 // ===== OUTREACH LOG (Firestore - shared, real-time) =====
 let trackerEntries = [];
+window.trackerEntries = trackerEntries; // expose to global scope for boardSearch
 
 const trackerColRef = collection(db, 'outreach_log');
 const trackerQ = query(trackerColRef, orderBy('createdAt', 'desc'));
 onSnapshot(trackerQ, snap => {
   trackerEntries = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  window.trackerEntries = trackerEntries; // keep global in sync
   trackerRender();
 }, err => console.error('Outreach log error:', err));
 
