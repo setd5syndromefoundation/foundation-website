@@ -398,6 +398,9 @@ strong { color: var(--text); }
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 1px 6px rgba(0,0,0,0.10);
   transition: transform 0.22s, box-shadow 0.22s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 @media (hover: hover) {
   .hero-card:hover {
@@ -731,6 +734,16 @@ strong { color: var(--text); }
   position: relative;
   overflow: hidden;
 }
+/* Per-page gradient variation — same palette, different angle/midpoint per page */
+#about    .page-banner { background-image: linear-gradient(120deg, var(--teal-dark) 0%, var(--teal) 55%, #3d6b7d 100%); }
+#research .page-banner { background-image: linear-gradient(150deg, #1a3040 0%, var(--teal) 60%, var(--teal-dark) 100%); }
+#donate   .page-banner { background-image: linear-gradient(125deg, var(--teal-dark) 0%, #3a6070 50%, var(--teal) 100%); }
+#who      .page-banner { background-image: linear-gradient(115deg, var(--teal) 0%, var(--teal-dark) 65%, #1a3040 100%); }
+#resources .page-banner { background-image: linear-gradient(145deg, var(--teal-dark) 0%, var(--teal) 70%, #3d6b7d 100%); }
+#community .page-banner { background-image: linear-gradient(130deg, #1a3040 0%, var(--teal) 50%, #3a6b7d 100%); }
+#partners  .page-banner { background-image: linear-gradient(155deg, var(--teal) 0%, var(--teal-dark) 55%, #1a3040 100%); }
+#fundraising .page-banner { background-image: linear-gradient(118deg, var(--teal-dark) 0%, #3d6070 45%, var(--teal) 100%); }
+#volunteer   .page-banner { background-image: linear-gradient(140deg, #1e3a45 0%, var(--teal) 60%, #2d5870 100%); }
 .page-banner .container { position: relative; z-index: 1; width: 100%; }
 .page-banner::before {
   content: '';
@@ -1682,15 +1695,15 @@ body { top: 0 !important; }
           <div class="hero-actions">
             <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Donate Now</a>
             <a href="#" class="btn btn-secondary btn-lg" onclick="showPage('about')">Learn About SETD5 Syndrome</a>
-            <a href="#" class="btn btn-lg" style="background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.50); letter-spacing:0.02em;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.50)'" onclick="scrollToNewsletter(); return false;">Get Updates</a>
+            <a href="#" class="btn btn-lg" style="background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.50); letter-spacing:0.02em;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.50)'" onclick="showPage('community')">Find Community</a>
           </div>
         </div>
-        <div class="hero-card">
+        <a href="#" onclick="showPage('about')" style="text-decoration:none; display:block;" class="hero-card">
           <h2 style="text-align:center;">About the Condition</h2>
           <div class="hero-stat-row">
             <div class="hero-stat">
-              <span class="number">Rare</span>
-              <span class="label">Officially Classified by FDA &amp; EU Standards</span>
+              <span class="number">De Novo</span>
+              <span class="label">Most Cases Arise Spontaneously</span>
             </div>
             <div class="hero-stat">
               <span class="number">1,100+</span>
@@ -1709,7 +1722,7 @@ body { top: 0 !important; }
           </div>
           <hr class="hero-divider">
           <p class="hero-tagline">"Every dollar brings us closer to answers."</p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -1791,6 +1804,34 @@ body { top: 0 !important; }
     </div>
   </section>
 
+  <!-- Photo Gallery: Faces of Our Community -->
+  <section class="section section--cream" style="padding: 56px 0;">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:36px;">
+        <span class="subhead">Our Community</span>
+        <h2>Faces of SETD5 Syndrome</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <!-- PHOTO PLACEHOLDER 1 — replace src with a real family photo -->
+        <div style="border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:var(--teal-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border:2px dashed var(--teal); opacity:0.7;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2F5361" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span style="font-size:0.8rem; color:var(--teal); font-weight:600; text-align:center; padding:0 16px;">Family photo placeholder<br><span style="font-weight:400; font-size:0.75rem;">Replace with real photo</span></span>
+        </div>
+        <!-- PHOTO PLACEHOLDER 2 — replace src with a real family photo -->
+        <div style="border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:var(--teal-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border:2px dashed var(--teal); opacity:0.7;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2F5361" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span style="font-size:0.8rem; color:var(--teal); font-weight:600; text-align:center; padding:0 16px;">Family photo placeholder<br><span style="font-weight:400; font-size:0.75rem;">Replace with real photo</span></span>
+        </div>
+        <!-- PHOTO PLACEHOLDER 3 — replace src with a real family photo -->
+        <div style="border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:var(--teal-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border:2px dashed var(--teal); opacity:0.7;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2F5361" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span style="font-size:0.8rem; color:var(--teal); font-weight:600; text-align:center; padding:0 16px;">Family photo placeholder<br><span style="font-weight:400; font-size:0.75rem;">Replace with real photo</span></span>
+        </div>
+      </div>
+      <p style="text-align:center; font-size:0.82rem; color:var(--text-light); margin-top:20px; margin-bottom:0;">📷 Drop real photos into the folder and tell me the filenames — I'll swap these out in minutes.</p>
+    </div>
+  </section>
+
   <!-- Foundation Stats Bar -->
   <section class="stats-bar">
     <div class="container">
@@ -1815,7 +1856,7 @@ body { top: 0 !important; }
   </section>
 
   <!-- Donate CTA Band -->
-  <section class="cta-band">
+  <section class="cta-band" style="background:var(--coral-light);">
     <div class="container">
       <div style="width:40px; height:3px; background:var(--coral); border-radius:2px; margin:0 auto 28px;"></div>
       <h2 style="color:var(--teal); font-size:2.2rem; line-height:1.15; margin-bottom:16px;">Every Gift Funds a Breakthrough</h2>
