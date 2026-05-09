@@ -1569,11 +1569,60 @@ footer {
   .swm-disclaimer { text-align: left; margin-left: 0; max-width: 100%; }
 }
 
+/* ===== TRANSLATE BAR ===== */
+#translate-bar {
+  background: #1a2e35;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 24px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+}
+#translate-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+#translate-bar-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+/* Suppress Google's injected top banner */
+body > .skiptranslate { display: none !important; }
+body { top: 0 !important; }
+#translate-bar .goog-te-gadget { margin: 0; }
+#translate-bar .goog-te-gadget-simple {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  border-radius: 4px !important;
+  padding: 2px 8px !important;
+  font-size: 0.72rem !important;
+}
+#translate-bar .goog-te-gadget-simple a,
+#translate-bar .goog-te-gadget-simple .goog-te-menu-value span {
+  color: rgba(255,255,255,0.75) !important;
+  font-size: 0.72rem !important;
+}
+#translate-bar .goog-te-gadget-simple .goog-te-menu-value img { display: none; }
+#translate-bar .goog-te-gadget > span { display: none; }
 
 </style>
 </head>
 <body>
 
+
+<!-- ===== TRANSLATE BAR ===== -->
+<div id="translate-bar">
+  <div id="translate-bar-inner">
+    <span id="translate-bar-label">🌐 Translate this page:</span>
+    <div id="google_translate_element"></div>
+  </div>
+</div>
 
 <!-- ===== NAV ===== -->
 <nav id="site-nav">
@@ -3449,7 +3498,6 @@ footer {
         <p style="font-size:0.8rem; color:rgba(255,255,255,0.5); margin:0 0 6px;">501(c)(3) nonprofit &nbsp;·&nbsp; EIN: 41-5356866</p>
         <p style="font-size:0.8rem; margin:0 0 10px;"><a href="mailto:info@setd5syndrome.org" style="color:rgba(255,255,255,0.55);">info@setd5syndrome.org</a></p>
         <a href="#" onclick="showPage('donate')" style="font-size:0.8rem; color:rgba(255,255,255,0.55); text-decoration:underline;">Donate</a>
-        <div id="google_translate_element" style="margin-top:10px;"></div>
       </div>
 
       <!-- Right: subscribe -->
