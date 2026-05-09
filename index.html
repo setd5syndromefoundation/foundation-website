@@ -326,7 +326,7 @@ strong { color: var(--text); }
 .hero {
   background-color: #1e3a45;
   background-image: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 60%, #3d6b7d 100%);
-  padding: 72px 0 112px;
+  padding: 96px 0 120px;
   position: relative;
   overflow: hidden;
 }
@@ -372,7 +372,7 @@ strong { color: var(--text); }
 }
 .hero h1 {
   color: var(--white);
-  font-size: 3.2rem;
+  font-size: 3.6rem;
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.01em;
@@ -388,7 +388,7 @@ strong { color: var(--text); }
   line-height: 1.7;
   margin-bottom: 36px;
 }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 20px; flex-wrap: wrap; }
 .hero-card {
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.20);
@@ -556,9 +556,9 @@ strong { color: var(--text); }
 @media (hover: hover) { .story-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); } }
 .story-card::before {
   content: '\201C';
-  font-size: 5rem;
+  font-size: 6rem;
   color: var(--gold);
-  opacity: 0.3;
+  opacity: 0.45;
   position: absolute;
   top: 16px; left: 24px;
   line-height: 1;
@@ -566,7 +566,7 @@ strong { color: var(--text); }
 }
 .story-card blockquote {
   font-family: 'Source Serif 4', serif;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   color: var(--text);
   line-height: 1.72;
   padding-top: 20px;
@@ -1423,6 +1423,7 @@ footer {
   .container, .container--narrow { padding: 0 16px; }
   #site-nav .container { padding: 0 6px; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .condition-facts-grid { grid-template-columns: 1fr 1fr !important; }
   .symptoms-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .values-grid { grid-template-columns: 1fr; }
@@ -1693,8 +1694,8 @@ body { top: 0 !important; }
           <p class="hero-desc">We are a family-led nonprofit dedicated to advancing research for SETD5 Syndrome, a rare genetic condition, and building a global community of support, hope, and action.</p>
           <div class="hero-actions">
             <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Donate Now</a>
-            <a href="#" class="btn btn-secondary btn-lg" onclick="showPage('about')">Learn About SETD5 Syndrome</a>
-            <a href="#" class="btn btn-lg" style="background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.50); letter-spacing:0.02em;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.50)'" onclick="showPage('community')">Find Community</a>
+            <a href="#" class="btn btn-lg" style="background:rgba(255,255,255,0.12); color:var(--white); border:2px solid rgba(255,255,255,0.55);" onclick="showPage('about')">Learn About SETD5 Syndrome</a>
+            <a href="#" class="btn btn-lg" style="background:transparent; color:rgba(255,255,255,0.80); border:2px solid rgba(255,255,255,0.30); font-size:0.88rem;" onmouseover="this.style.borderColor='rgba(255,255,255,0.60)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.30)'" onclick="showPage('community')">Find Community</a>
           </div>
         </div>
         <a href="#" onclick="showPage('about')" style="text-decoration:none; display:block;" class="hero-card">
@@ -1735,13 +1736,37 @@ body { top: 0 !important; }
         <img src="image.png" alt="Children with SETD5 Syndrome" style="width:100%; border-radius:12px; display:block;">
       </div>
       <!-- Text below -->
-      <div class="what-is-content" style="text-align:left;">
+      <div class="what-is-content" style="text-align:left; max-width:760px;">
         <span class="subhead">What is SETD5 Syndrome?</span>
         <h2>A Rare Genetic Condition with a Growing Community</h2>
         <p>SETD5 Syndrome is caused by changes (variants or deletions) in the <em>SETD5</em> gene. This gene plays a critical role in brain development, and when it doesn't work as expected, it can affect many areas of development. Common features include intellectual disability, autism spectrum disorder, speech and language delays, and behavioral differences such as attention and hyperactivity challenges. SETD5 Syndrome can also lead to a range of physical symptoms, which vary from person to person.</p>
         <p>In most reported cases, the change arises spontaneously (de novo) and there is no prior family history of the condition, though familial cases do occur. When a parent carries the variant, it can be passed to a child. SETD5 Syndrome was first described in 2014, and the global community of diagnosed individuals is still growing as genetic testing becomes more widespread.</p>
-        <p>Every person with SETD5 Syndrome is unique. This is a condition of beautiful complexity, and our mission is to fully understand it and support those living with it.</p>
-        <a href="#" class="btn btn-outline mt-24" onclick="showPage('about')">Learn More About the Condition</a>
+        <p style="background:var(--cream); border-left:3px solid var(--teal); border-radius:0 8px 8px 0; padding:16px 20px; font-style:italic; color:var(--text); margin-top:24px;">Every person with SETD5 Syndrome is unique. This is a condition of beautiful complexity, and our mission is to fully understand it and support those living with it.</p>
+        <a href="#" style="color:var(--teal); font-weight:600; font-size:0.93rem; text-decoration:underline; text-underline-offset:3px;" class="mt-24" onclick="showPage('about')">Learn More About the Condition</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Condition Facts Band -->
+  <section class="section section--teal-light" style="padding:48px 0;">
+    <div class="container">
+      <div class="condition-facts-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+        <div style="background:var(--white); border-radius:10px; padding:24px; text-align:center; box-shadow:var(--shadow-sm);">
+          <div style="font-family:'Source Serif 4',serif; font-size:2rem; font-weight:600; color:var(--teal); line-height:1.1; margin-bottom:8px;">De Novo</div>
+          <div style="font-size:0.72rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.08em; font-weight:600;">Most Cases Arise Spontaneously</div>
+        </div>
+        <div style="background:var(--white); border-radius:10px; padding:24px; text-align:center; box-shadow:var(--shadow-sm);">
+          <div style="font-family:'Source Serif 4',serif; font-size:2rem; font-weight:600; color:var(--teal); line-height:1.1; margin-bottom:8px;">1,100+</div>
+          <div style="font-size:0.72rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.08em; font-weight:600;">Families Worldwide</div>
+        </div>
+        <div style="background:var(--white); border-radius:10px; padding:24px; text-align:center; box-shadow:var(--shadow-sm);">
+          <div style="font-family:'Source Serif 4',serif; font-size:2rem; font-weight:600; color:var(--teal); line-height:1.1; margin-bottom:8px;">2014</div>
+          <div style="font-size:0.72rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.08em; font-weight:600;">Condition First Described</div>
+        </div>
+        <div style="background:var(--white); border-radius:10px; padding:24px; text-align:center; box-shadow:var(--shadow-sm);">
+          <div style="font-family:'Source Serif 4',serif; font-size:2rem; font-weight:600; color:var(--teal); line-height:1.1; margin-bottom:8px;">&lt;75</div>
+          <div style="font-size:0.72rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.08em; font-weight:600;">Studies Published</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1749,23 +1774,26 @@ body { top: 0 !important; }
   <!-- Research Highlights -->
   <section class="section section--cream">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" style="border-top:3px solid var(--gold); padding-top:40px;">
         <span class="subhead">Research Priorities</span>
         <h2>Science That Needs Funding</h2>
         <p>Our role is to support the researchers doing the work — connecting with investigators and raising the funds to make each of these a reality.</p>
       </div>
       <div class="grid-3">
         <div class="research-card">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.68rem; font-weight:700; color:var(--text-light); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:8px; display:block;">Priority 01</span>
           <span class="tag">Natural History</span>
           <h3>Natural History Study</h3>
           <p>Supporting researchers to follow individuals with SETD5 Syndrome over time, tracking development, health outcomes, and quality of life across the lifespan.</p>
         </div>
         <div class="research-card">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.68rem; font-weight:700; color:var(--text-light); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:8px; display:block;">Priority 02</span>
           <span class="tag">Registry</span>
           <h3>Patient &amp; Variant Registry</h3>
           <p>Supporting the development of a global database of everyone diagnosed with SETD5 Syndrome, capturing each person's specific genetic variant and clinical features.</p>
         </div>
         <div class="research-card">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.68rem; font-weight:700; color:var(--text-light); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:8px; display:block;">Priority 03</span>
           <span class="tag">Clinical</span>
           <h3>Clinical Care Guidelines</h3>
           <p>Supporting the convening of physicians and specialists to establish consensus on how individuals with SETD5 Syndrome should be evaluated and cared for across their lifetime.</p>
@@ -1778,7 +1806,7 @@ body { top: 0 !important; }
   </section>
 
   <!-- Family Story -->
-  <section class="section section--white">
+  <section class="section section--cream" style="padding:96px 0;">
     <div class="container--narrow">
       <div class="section-header">
         <span class="subhead">Family Stories</span>
@@ -1798,7 +1826,7 @@ body { top: 0 !important; }
         </div>
       </div>
       <div class="text-center mt-32">
-        <a href="#" class="btn btn-outline" onclick="showPage('who')">Our Full Story</a>
+        <a href="#" style="color:var(--teal); font-weight:600; font-size:0.93rem; text-decoration:underline; text-underline-offset:3px;" onclick="showPage('who')">Our Full Story</a>
       </div>
     </div>
   </section>
@@ -1811,27 +1839,79 @@ body { top: 0 !important; }
         <h2>Faces of SETD5 Syndrome</h2>
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
-        <!-- PHOTO PLACEHOLDER 1 — replace src with a real family photo -->
-        <div style="border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:var(--teal-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border:2px dashed var(--teal); opacity:0.7;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2F5361" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span style="font-size:0.8rem; color:var(--teal); font-weight:600; text-align:center; padding:0 16px;">Family photo placeholder<br><span style="font-weight:400; font-size:0.75rem;">Replace with real photo</span></span>
+        <!-- Branded visual panel 1: community/connection motif -->
+        <div style="aspect-ratio:4/3; background:linear-gradient(135deg, var(--teal-light) 0%, rgba(216,171,103,0.15) 100%); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm);">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="40" r="18" stroke="#2F5361" stroke-width="2" stroke-opacity="0.55"/>
+            <circle cx="52" cy="40" r="18" stroke="#2F5361" stroke-width="2" stroke-opacity="0.55"/>
+            <line x1="28" y1="22" x2="28" y2="58" stroke="#D8AB67" stroke-width="1.5" stroke-opacity="0.6" stroke-dasharray="3 3"/>
+            <line x1="52" y1="22" x2="52" y2="58" stroke="#D8AB67" stroke-width="1.5" stroke-opacity="0.6" stroke-dasharray="3 3"/>
+            <circle cx="40" cy="40" r="3" fill="#2F5361" fill-opacity="0.4"/>
+          </svg>
         </div>
-        <!-- PHOTO PLACEHOLDER 2 — replace src with a real family photo -->
-        <div style="border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:var(--teal-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border:2px dashed var(--teal); opacity:0.7;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2F5361" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span style="font-size:0.8rem; color:var(--teal); font-weight:600; text-align:center; padding:0 16px;">Family photo placeholder<br><span style="font-weight:400; font-size:0.75rem;">Replace with real photo</span></span>
+        <!-- Branded visual panel 2: hexagon science motif -->
+        <div style="aspect-ratio:4/3; background:linear-gradient(135deg, rgba(216,171,103,0.12) 0%, var(--teal-light) 100%); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm);">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- center hex -->
+            <polygon points="40,18 55,27 55,45 40,54 25,45 25,27" stroke="#2F5361" stroke-width="2" stroke-opacity="0.55" fill="none"/>
+            <!-- surrounding dots -->
+            <circle cx="40" cy="10" r="3" fill="#D8AB67" fill-opacity="0.6"/>
+            <circle cx="62" cy="22" r="3" fill="#D8AB67" fill-opacity="0.6"/>
+            <circle cx="62" cy="50" r="3" fill="#D8AB67" fill-opacity="0.6"/>
+            <circle cx="40" cy="62" r="3" fill="#D8AB67" fill-opacity="0.6"/>
+            <circle cx="18" cy="50" r="3" fill="#D8AB67" fill-opacity="0.6"/>
+            <circle cx="18" cy="22" r="3" fill="#D8AB67" fill-opacity="0.6"/>
+            <!-- connectors -->
+            <line x1="40" y1="13" x2="40" y2="18" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.35"/>
+            <line x1="59" y1="23" x2="55" y2="27" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.35"/>
+            <line x1="59" y1="49" x2="55" y2="45" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.35"/>
+            <line x1="40" y1="59" x2="40" y2="54" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.35"/>
+            <line x1="21" y1="49" x2="25" y2="45" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.35"/>
+            <line x1="21" y1="23" x2="25" y2="27" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.35"/>
+          </svg>
         </div>
-        <!-- PHOTO PLACEHOLDER 3 — replace src with a real family photo -->
-        <div style="border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:var(--teal-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border:2px dashed var(--teal); opacity:0.7;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2F5361" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span style="font-size:0.8rem; color:var(--teal); font-weight:600; text-align:center; padding:0 16px;">Family photo placeholder<br><span style="font-weight:400; font-size:0.75rem;">Replace with real photo</span></span>
+        <!-- Branded visual panel 3: branching family tree motif -->
+        <div style="aspect-ratio:4/3; background:linear-gradient(135deg, var(--teal-light) 0%, rgba(201,106,56,0.08) 100%); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm);">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- trunk -->
+            <line x1="40" y1="62" x2="40" y2="38" stroke="#2F5361" stroke-width="2" stroke-opacity="0.55" stroke-linecap="round"/>
+            <!-- first branch level -->
+            <line x1="40" y1="38" x2="22" y2="26" stroke="#2F5361" stroke-width="1.8" stroke-opacity="0.5" stroke-linecap="round"/>
+            <line x1="40" y1="38" x2="58" y2="26" stroke="#2F5361" stroke-width="1.8" stroke-opacity="0.5" stroke-linecap="round"/>
+            <!-- second branch level left -->
+            <line x1="22" y1="26" x2="13" y2="18" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round"/>
+            <line x1="22" y1="26" x2="28" y2="17" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round"/>
+            <!-- second branch level right -->
+            <line x1="58" y1="26" x2="52" y2="17" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round"/>
+            <line x1="58" y1="26" x2="67" y2="18" stroke="#2F5361" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round"/>
+            <!-- leaf nodes -->
+            <circle cx="13" cy="15" r="3.5" fill="#D8AB67" fill-opacity="0.7"/>
+            <circle cx="28" cy="14" r="3.5" fill="#D8AB67" fill-opacity="0.7"/>
+            <circle cx="52" cy="14" r="3.5" fill="#D8AB67" fill-opacity="0.7"/>
+            <circle cx="67" cy="15" r="3.5" fill="#D8AB67" fill-opacity="0.7"/>
+            <!-- root node -->
+            <circle cx="40" cy="65" r="4" fill="#2F5361" fill-opacity="0.35"/>
+          </svg>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Donate CTA Band -->
+  <section class="cta-band" style="background:linear-gradient(135deg, #2F5361 0%, #1e3a45 100%);">
+    <div class="container">
+      <div style="width:40px; height:3px; background:var(--gold); border-radius:2px; margin:0 auto 28px;"></div>
+      <h2 style="color:var(--white); font-size:2.2rem; line-height:1.15; margin-bottom:16px;">Every Gift Funds a Breakthrough</h2>
+      <p style="color:rgba(255,255,255,0.80); font-size:1rem; line-height:1.7; max-width:520px; margin:0 auto 32px;">Research doesn't wait. Neither do our families. A donation today keeps scientists at the bench and gives hope to hundreds of families around the world.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+        <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Make a Donation</a>
+        <a href="#" class="btn btn-secondary btn-lg" onclick="showPage('donate')">Other Ways to Give</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Foundation Stats Bar -->
-  <section class="stats-bar">
+  <section class="stats-bar" style="padding:28px 0;">
     <div class="container">
       <p style="text-align:center; font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; opacity:0.9;">About the Foundation</p>
       <div class="stats-bar-inner">
@@ -1849,19 +1929,6 @@ body { top: 0 !important; }
           <span class="num">100%</span>
           <span class="lbl">Donor-Funded Research</span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Donate CTA Band -->
-  <section class="cta-band" style="background:var(--coral-light);">
-    <div class="container">
-      <div style="width:40px; height:3px; background:var(--coral); border-radius:2px; margin:0 auto 28px;"></div>
-      <h2 style="color:var(--teal); font-size:2.2rem; line-height:1.15; margin-bottom:16px;">Every Gift Funds a Breakthrough</h2>
-      <p style="color:var(--text-mid); font-size:1rem; line-height:1.7; max-width:520px; margin:0 auto 32px;">Research doesn't wait. Neither do our families. A donation today keeps scientists at the bench and gives hope to hundreds of families around the world.</p>
-      <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
-        <a href="#" class="btn btn-primary btn-lg" onclick="showPage('donate')">Make a Donation</a>
-        <a href="#" class="btn btn-outline btn-lg" onclick="showPage('donate')">Other Ways to Give</a>
       </div>
     </div>
   </section>
