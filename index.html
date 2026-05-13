@@ -246,7 +246,8 @@ strong { color: var(--text); }
   white-space: nowrap;
 }
 .nav-links a:hover { color: var(--teal); background: var(--teal-light); }
-.nav-links a.active { color: var(--teal); background: none; }
+.nav-links a.active:not(.nav-donate) { color: var(--teal); background: none; }
+.nav-donate.active { background: var(--coral) !important; color: var(--white) !important; }
 .nav-donate {
   background: var(--coral);
   color: var(--white) !important;
