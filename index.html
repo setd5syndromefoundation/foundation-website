@@ -2188,7 +2188,7 @@ body { top: 0 !important; }
     <div class="container">
       <h2>Newly Diagnosed? You Are Not Alone.</h2>
       <p>We connect families with resources, community, and the latest research. Reach out; we respond to every message.</p>
-      <a href="#" class="btn btn-secondary btn-lg" onclick="showPage('who')">Contact the Foundation</a>
+      <a href="#" class="btn btn-secondary btn-lg" onclick="goToContact()">Contact the Foundation</a>
     </div>
   </section>
 
@@ -2743,7 +2743,7 @@ body { top: 0 !important; }
   </div>
 
   <!-- Contact -->
-  <section class="section section--cream">
+  <section class="section section--cream" id="contact-form-section">
     <div class="container">
       <div class="section-header">
         <span class="subhead">Reach Out</span>
@@ -2841,7 +2841,7 @@ body { top: 0 !important; }
     <div class="container">
       <h2>Not Sure Where to Start?</h2>
       <p>If you are newly diagnosed or feeling overwhelmed, reach out directly. We connect every family with the right resources for their situation.</p>
-      <a href="#" onclick="showPage('who')" class="btn btn-secondary btn-lg" style="margin-top:8px;">Contact the Foundation</a>
+      <a href="#" onclick="goToContact()" class="btn btn-secondary btn-lg" style="margin-top:8px;">Contact the Foundation</a>
     </div>
   </section>
 
@@ -2952,7 +2952,7 @@ body { top: 0 !important; }
     <div class="container">
       <h2>Ready to Connect?</h2>
       <p>Reach out directly and we will help you find what you need. No matter where you are starting from.</p>
-      <a href="#" onclick="showPage('who')" class="btn btn-secondary btn-lg" style="margin-top:8px;">Contact the Foundation</a>
+      <a href="#" onclick="goToContact()" class="btn btn-secondary btn-lg" style="margin-top:8px;">Contact the Foundation</a>
     </div>
   </section>
 
@@ -3561,6 +3561,15 @@ body { top: 0 !important; }
         if (inp) inp.focus();
       }, 600);
     }
+  }
+
+  // Go to contact form on Who We Are page
+  function goToContact() {
+    showPage('who');
+    setTimeout(function() {
+      var el = document.getElementById('contact-form-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   }
 
   // Page routing
