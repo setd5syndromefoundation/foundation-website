@@ -2378,6 +2378,19 @@ body { top: 0 !important; }
     <span class="helix-accent" aria-hidden="true"></span>
   </div>
 
+  <!-- 501c3 Pending Notice -->
+  <section class="section section--white" style="padding-bottom:0;">
+    <div class="container">
+      <div style="background:#fef9ec; border:1.5px solid var(--gold); border-radius:10px; padding:20px 28px; display:flex; gap:18px; align-items:flex-start; max-width:820px; margin:0 auto;">
+        <svg style="flex-shrink:0; margin-top:2px;" width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#D8AB67" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="#D8AB67" stroke-width="2" stroke-linecap="round"/></svg>
+        <div>
+          <strong style="color:var(--text); font-size:0.97rem;">Our 501(c)(3) application is in progress.</strong>
+          <p style="margin:6px 0 0; color:var(--text-mid); font-size:0.9rem; line-height:1.6;">We are not yet accepting donations while we await IRS approval of our tax-exempt status. Sign up below to be notified the moment giving opens — your support will make an immediate difference.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Donate Tiers -->
   <section class="section section--white">
     <div class="container">
@@ -2396,7 +2409,7 @@ body { top: 0 !important; }
             <li>Tax receipt</li>
             <li>Research updates</li>
           </ul>
-          <a href="#" class="btn btn-outline" style="width:100%; display:block;">Give $50</a>
+          <a href="#" class="btn btn-outline" style="width:100%; display:block;" onclick="showPage('newsletter')">Get Notified</a>
         </div>
         <div class="donate-tier">
           <div class="amount"><span>$</span>250</div>
@@ -2407,7 +2420,7 @@ body { top: 0 !important; }
             <li>Donor recognition</li>
             <li>Annual impact report</li>
           </ul>
-          <a href="#" class="btn btn-outline" style="width:100%; display:block;">Give $250</a>
+          <a href="#" class="btn btn-outline" style="width:100%; display:block;" onclick="showPage('newsletter')">Get Notified</a>
         </div>
         <div class="donate-tier featured">
           <div class="tier-badge">Most Impactful</div>
@@ -2419,7 +2432,7 @@ body { top: 0 !important; }
             <li>Named in annual report</li>
             <li>Invitation to annual donor briefing</li>
           </ul>
-          <a href="#" class="btn btn-primary" style="width:100%; display:block;">Give $1,000</a>
+          <a href="#" class="btn btn-primary" style="width:100%; display:block;" onclick="showPage('newsletter')">Get Notified</a>
         </div>
         <div class="donate-tier">
           <div class="amount"><span>$</span>5,000</div>
@@ -2430,12 +2443,12 @@ body { top: 0 !important; }
             <li>Named research opportunity</li>
             <li>Direct researcher connection</li>
           </ul>
-          <a href="#" class="btn btn-outline" style="width:100%; display:block;">Give $5,000</a>
+          <a href="#" class="btn btn-outline" style="width:100%; display:block;" onclick="showPage('newsletter')">Get Notified</a>
         </div>
       </div>
       <div class="text-center">
         <p style="font-size:0.9rem; color:var(--text-light);">Want to give a different amount?</p>
-        <a href="#" class="btn btn-gold mt-8">Give a Custom Amount</a>
+        <a href="#" class="btn btn-gold mt-8" onclick="showPage('newsletter')">Get Notified When Giving Opens</a>
       </div>
     </div>
   </section>
@@ -2449,7 +2462,7 @@ body { top: 0 !important; }
           <h2>Become a Research Champion</h2>
           <p>Monthly donors are the foundation of everything we are building. A consistent, predictable stream of funding will allow us to commit to multi-year research projects — the kind that produce real results.</p>
           <p>Even $20/month adds up to $240 per year, enough to fund a full week of laboratory analysis.</p>
-          <a href="#" class="btn btn-primary mt-16">Start a Monthly Gift</a>
+          <a href="#" class="btn btn-primary mt-16" onclick="showPage('newsletter')">Get Notified When Giving Opens</a>
         </div>
         <div>
           <span class="subhead">Other Ways to Give</span>
@@ -2511,7 +2524,7 @@ body { top: 0 !important; }
 
   <section style="background:var(--white); border-top:1px solid var(--border); padding:40px 0; text-align:center;">
     <div class="container--narrow">
-      <p style="font-size:0.88rem; color:var(--text-mid);">SETD5 Syndrome Foundation is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the extent permitted by law. EIN: 41-5356866</p>
+      <p style="font-size:0.88rem; color:var(--text-mid);">SETD5 Syndrome Foundation is a nonprofit organization with a 501(c)(3) application pending with the IRS. EIN: 41-5356866. Donations will be tax-deductible once our exempt status is confirmed.</p>
     </div>
   </section>
 
