@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Review Checklist | SETD5 Syndrome Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #F7F3EE;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1A3340;
+    padding: 40px 20px;
+  }
+
+  .draft-banner {
+    max-width: 720px;
+    margin: 0 auto 12px;
+    background: #c96a38;
+    color: #ffffff;
+    text-align: center;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #dde8ec;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .header {
+    background: #1e3a45;
+    padding: 32px 44px 28px;
+  }
+
+  .header-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #D8AB67;
+    margin-bottom: 10px;
+  }
+
+  .header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-size: 0.82rem;
+    color: #d5ddde;
+  }
+
+  .body {
+    padding: 36px 44px 48px;
+  }
+
+  .overview {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: #4a6b78;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 2px solid #dde8ec;
+  }
+
+  .section-block {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid #dde8ec;
+  }
+
+  .section-block:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .sub-label {
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #c96a38;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e3a45;
+    margin-bottom: 14px;
+  }
+
+  .sub-section {
+    margin-bottom: 28px;
+  }
+
+  .sub-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .sub-section-label {
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #c96a38;
+    margin-bottom: 10px;
+    margin-top: 24px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: #1A3340;
+    margin-bottom: 10px;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* Checklist */
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .check-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f4f6;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #1A3340;
+  }
+
+  .check-list li:first-child { padding-top: 0; }
+  .check-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .check-list input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    accent-color: #2F5361;
+    cursor: pointer;
+  }
+
+  .check-list .item-note {
+    font-size: 0.8rem;
+    color: #4a6b78;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* Inline member list */
+  .activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .activity-list li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #1A3340;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f4f6;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  .activity-list li:first-child { padding-top: 0; }
+  .activity-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .dot {
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #2F5361;
+    margin-top: 8px;
+  }
+
+  /* Callouts */
+  .callout {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    padding: 14px 18px;
+    background: #EEF4F8;
+    border-left: 4px solid #2F5361;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: #1A3340;
+  }
+
+  .callout strong { color: #2F5361; font-weight: 600; }
+
+  .callout.amber {
+    background: #FBF3DC;
+    border-left-color: #D8AB67;
+  }
+
+  .callout.amber strong { color: #9a7a30; }
+
+  /* Example message */
+  .example-msg {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: #FBF7EE;
+    border-left: 3px solid #D8AB67;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: #4a6b78;
+    font-style: italic;
+  }
+
+  .example-msg .msg-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #9a7a30;
+    margin-bottom: 6px;
+    display: block;
+    font-style: normal;
+  }
+
+  .draft-notice {
+    margin-top: 36px;
+    padding: 13px 16px;
+    background: #FBF7EE;
+    border-left: 3px solid #D8AB67;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.82rem;
+    color: #4a6b78;
+    line-height: 1.6;
+  }
+
+  .draft-notice strong { color: #9a7a30; }
+
+  .footer {
+    background: #F2F2F0;
+    border-top: 1px solid #dde8ec;
+    padding: 13px 44px;
+    font-size: 0.72rem;
+    color: #4a6b78;
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+
+  @media print {
+    body { background: #ffffff; padding: 0; }
+    .draft-banner { border-radius: 0; margin: 0 0 0; }
+    .page { border: none; border-radius: 0; max-width: 100%; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section-block { break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 12px; }
+    .header { padding: 24px 20px; }
+    .body { padding: 24px 20px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="draft-banner">Draft — For Board Review Only — Not for Public Distribution</div>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">SETD5 Syndrome Foundation · Board Document</div>
+    <h1>Website review checklist</h1>
+    <div class="header-sub">Board approval draft &nbsp;·&nbsp; setd5syndrome.org &nbsp;·&nbsp; May 2026</div>
+  </div>
+
+  <div class="body">
+
+    <p class="overview">Complete this checklist before the board meets to discuss and approve the website for full public launch. Each board member should visit <strong>setd5syndrome.org</strong> and review the site before the meeting.</p>
+
+    <!-- SECTION 1 -->
+    <div class="section-block">
+      <div class="sub-label">Section 1</div>
+      <h2>Page-by-page review</h2>
+
+      <ul class="check-list">
+        <li><input type="checkbox"><span><strong>Home</strong> — headline, placeholder quote, and calls to action reviewed for accuracy and tone</span></li>
+        <li><input type="checkbox"><span><strong>About the Foundation</strong> — mission statement, board bios, SAB and MAB sections reviewed</span></li>
+        <li><input type="checkbox"><span><strong>Research</strong> — research priorities and framing of the Foundation's role reviewed</span></li>
+        <li><input type="checkbox"><span><strong>Community</strong> — Connect Directly form, external resources list, and Share Your Story section reviewed</span></li>
+        <li><input type="checkbox"><span><strong>Donate</strong> — 501(c)(3) pending notice, interim support messaging, and notify-me signup reviewed</span></li>
+        <li><input type="checkbox"><span><strong>Contact</strong> — contact form, email address, and response time language reviewed</span></li>
+        <li><input type="checkbox"><span>All inaccurate or incomplete content identified and flagged for correction before launch</span></li>
+        <li><input type="checkbox"><span>All content approved for public distribution</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-block">
+      <div class="sub-label">Section 2</div>
+      <h2>Logo and branding</h2>
+
+      <ul class="check-list">
+        <li><input type="checkbox"><span>Board formally approves the current logo as the Foundation's official logo</span></li>
+        <li><input type="checkbox"><span>Logo displays consistently and correctly across all pages of the site</span></li>
+        <li><input type="checkbox"><span>Decision made on logo usage guidelines (minimum size, approved color versions, prohibited modifications) — or deferred to future meeting</span></li>
+        <li><input type="checkbox"><span>Custodian of master logo files designated</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-block">
+      <div class="sub-label">Section 3</div>
+      <h2>Board of Directors</h2>
+      <p>Each board member should read their bio on the site before the meeting and confirm it is accurate and approved for public display.</p>
+
+      <div class="sub-section">
+        <div class="sub-section-label">Individual bio confirmation</div>
+        <ul class="check-list">
+          <li><input type="checkbox"><span><strong>Kate Carr</strong> — bio reviewed and approved for public display</span></li>
+          <li><input type="checkbox"><span><strong>Laura Biazon</strong> — bio reviewed and approved for public display</span></li>
+          <li><input type="checkbox"><span><strong>Samantha Cotter</strong> — bio reviewed and approved for public display</span></li>
+          <li><input type="checkbox"><span><strong>Amy Kreller-Kochis</strong> — bio reviewed and approved for public display</span></li>
+          <li><input type="checkbox"><span><strong>Jesiree Mendez</strong> — bio reviewed and approved for public display</span></li>
+          <li><input type="checkbox"><span><strong>Taryn Mildenhall</strong> — bio reviewed and approved for public display</span></li>
+        </ul>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-label">Homepage quote</div>
+        <p>The homepage currently features a placeholder quote attributed to "J.T., Parent." This must be replaced with a real quote from a real family, with written consent, before the site is promoted publicly.</p>
+        <ul class="check-list" style="margin-top:10px;">
+          <li><input type="checkbox"><span>Family identified to provide a homepage quote</span></li>
+          <li><input type="checkbox"><span>Written consent obtained from that family</span></li>
+          <li><input type="checkbox"><span>Decision made on whether to include a photo or use initials only</span></li>
+          <li><input type="checkbox"><span>Placeholder quote replaced before public launch</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section-block">
+      <div class="sub-label">Section 4</div>
+      <h2>Scientific Advisory Board</h2>
+      <p>The website includes a SAB section on the About page stating the Foundation is assembling the board and welcoming inquiries from researchers and scientists. No individual members are listed yet.</p>
+
+      <div class="example-msg">
+        <span class="msg-label">Current website copy — SAB section</span>
+        "We are in the process of assembling our Scientific Advisory Board. If you are a researcher or scientist with expertise relevant to SETD5 Syndrome, rare disease genetics, neurodevelopment, or related fields, we would welcome a conversation."
+      </div>
+
+      <ul class="check-list" style="margin-top:16px;">
+        <li><input type="checkbox"><span>Board approves the SAB as a formal body of the Foundation</span></li>
+        <li><input type="checkbox"><span>SAB website copy reviewed and approved</span></li>
+        <li><input type="checkbox"><span>Point of contact for SAB recruitment and relationship management designated</span></li>
+        <li><input type="checkbox"><span>Decision made on SAB inquiry contact method (general contact form or dedicated email)</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section-block">
+      <div class="sub-label">Section 5</div>
+      <h2>Medical Advisory Board</h2>
+      <p>The website includes a MAB section on the About page welcoming interest from physicians, geneticists, neurologists, and other clinicians. No individual members are listed yet.</p>
+
+      <div class="example-msg">
+        <span class="msg-label">Current website copy — MAB section</span>
+        "We are building our Medical Advisory Board and welcome interest from physicians, geneticists, neurologists, and other clinicians who work with families navigating rare neurodevelopmental diagnoses."
+      </div>
+
+      <ul class="check-list" style="margin-top:16px;">
+        <li><input type="checkbox"><span>Board approves the MAB as a formal body of the Foundation</span></li>
+        <li><input type="checkbox"><span>MAB website copy reviewed and approved</span></li>
+        <li><input type="checkbox"><span>Point of contact for MAB recruitment designated</span></li>
+        <li><input type="checkbox"><span>Decision made on whether SAB and MAB will eventually have formal bylaws or terms of service, and if so, who will lead that process</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="section-block">
+      <div class="sub-label">Section 6</div>
+      <h2>Research priorities</h2>
+      <p>The website lists four research priorities. The board should confirm these represent the Foundation's current focus before they are published publicly.</p>
+
+      <ul class="activity-list" style="margin-bottom:16px;">
+        <li><span class="dot"></span><span>Natural History Study</span></li>
+        <li><span class="dot"></span><span>Patient &amp; Variant Registry</span></li>
+        <li><span class="dot"></span><span>Family &amp; Caregiver Quality of Life Study</span></li>
+        <li><span class="dot"></span><span>Clinical Care Guidelines</span></li>
+      </ul>
+
+      <div class="example-msg">
+        <span class="msg-label">Current website copy — Research section</span>
+        "Our role is to support the researchers doing the work — connecting with investigators and raising the funds to make each of these a reality."
+      </div>
+
+      <ul class="check-list" style="margin-top:16px;">
+        <li><input type="checkbox"><span>Board approves the four stated research priorities as the Foundation's current public focus</span></li>
+        <li><input type="checkbox"><span>Natural history study researcher relationship discussed and next steps identified</span></li>
+        <li><input type="checkbox"><span>No additional priorities need to be added at this time</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="section-block">
+      <div class="sub-label">Section 7</div>
+      <h2>Community page</h2>
+      <p>The Community page includes three sections: a direct family connection pathway, curated external resources, and an invitation for families to share their story.</p>
+
+      <ul class="activity-list" style="margin-bottom:16px;">
+        <li><span class="dot"></span><span><strong>Connect Directly</strong> — families can fill out a form to be connected with other SETD5 Syndrome families</span></li>
+        <li><span class="dot"></span><span><strong>Find Your Community</strong> — curated links to external organizations, with a disclaimer that the Foundation does not formally endorse any external organization</span></li>
+        <li><span class="dot"></span><span><strong>Share Your Story</strong> — an invitation for families to contribute their story to the Foundation's work</span></li>
+      </ul>
+
+      <div class="callout"><strong>Disclaimer on the site:</strong> "The resources listed below are provided for informational purposes only. The Foundation does not formally endorse any external organization, website, or community. Families are encouraged to evaluate resources independently."</div>
+
+      <ul class="check-list" style="margin-top:16px;">
+        <li><input type="checkbox"><span>Board approves the Community page and its three sections</span></li>
+        <li><input type="checkbox"><span>External organizations list reviewed and approved (review directly on the site)</span></li>
+        <li><input type="checkbox"><span>Point of contact for Connect Directly form responses and family introductions designated</span></li>
+        <li><input type="checkbox"><span>No external resources need to be added or removed at this time</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 8 -->
+    <div class="section-block">
+      <div class="sub-label">Section 8</div>
+      <h2>Donate page</h2>
+      <p>The donation page currently reflects that the Foundation's 501(c)(3) application is pending with the IRS. The page states clearly that donations are not yet being accepted and that giving will not be tax-deductible until tax-exempt status is confirmed. Visitors can sign up to be notified when giving opens.</p>
+
+      <div class="callout amber"><strong>Current status:</strong> The Foundation is not actively processing donations. The page includes a notify-me email signup and a preview section — "Once Our 501(c)(3) Is Confirmed" — that outlines planned giving options including one-time and recurring donations, employer matching, in-kind support, and planned giving.</div>
+
+      <ul class="check-list" style="margin-top:16px;">
+        <li><input type="checkbox"><span>501(c)(3) pending messaging reviewed and approved for public display</span></li>
+        <li><input type="checkbox"><span>Notify-me email signup confirmed working and responses routed to the right inbox</span></li>
+        <li><input type="checkbox"><span>Decision made on which donation platform to activate once 501(c)(3) is approved (e.g., GiveButter, Zeffy, PayPal Giving Fund)</span></li>
+        <li><input type="checkbox"><span>Decision made on whether to offer any way for supporters to contribute now — or confirmed that the board is comfortable waiting for full 501(c)(3) approval</span></li>
+        <li><input type="checkbox"><span>Plan in place for updating the donate page promptly once 501(c)(3) approval arrives</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 9 -->
+    <div class="section-block">
+      <div class="sub-label">Section 9</div>
+      <h2>Social media</h2>
+      <p>The website currently shows Facebook and Instagram as "Coming Soon." The board should decide on timing and ownership before or at the meeting.</p>
+
+      <ul class="check-list">
+        <li><input type="checkbox"><span>Social media launch timing decided</span></li>
+        <li><input type="checkbox"><span>Responsibility for managing social accounts assigned</span></li>
+        <li><input type="checkbox"><span>Decision made on whether social launch is tied to website launch or handled separately</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 10 -->
+    <div class="section-block">
+      <div class="sub-label">Section 10</div>
+      <h2>Photos and privacy</h2>
+      <p>The website features photos of children and families living with SETD5 Syndrome. The board should confirm consent is in place for current photos and establish a policy for obtaining photos going forward.</p>
+
+      <div class="callout amber"><strong>Why this matters:</strong> Many families in the SETD5 Syndrome community are cautious about public identification of their children due to disability-related stigma, insurance concerns, and personal preference. A clear, opt-in consent process protects families and the Foundation.</div>
+
+      <div class="sub-section">
+        <div class="sub-section-label">Current photos on the site</div>
+        <ul class="check-list">
+          <li><input type="checkbox"><span>All photos currently on the site have explicit written permission for public, indefinite use</span></li>
+          <li><input type="checkbox"><span>All families whose child appears on the site have been informed that their photo is on a publicly accessible website</span></li>
+          <li><input type="checkbox"><span>No photos need to be removed or replaced before launch</span></li>
+        </ul>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-label">Obtaining more photos</div>
+        <ul class="check-list">
+          <li><input type="checkbox"><span>Point of contact for future photo requests designated</span></li>
+          <li><input type="checkbox"><span>Process for requesting photos decided (direct email, website form, or community channels)</span></li>
+          <li><input type="checkbox"><span>Decision made on whether to collect more photos before launch or after</span></li>
+          <li><input type="checkbox"><span>Any pages or sections that feel thin on photos identified and prioritized</span></li>
+        </ul>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-label">Policy decisions</div>
+        <ul class="check-list">
+          <li><input type="checkbox"><span>Board approves creating a formal photo consent form for website, social media, and printed materials use</span></li>
+          <li><input type="checkbox"><span>Decision made on whether families can specify how their photos may be used (e.g., website only, newsletter only, not social media)</span></li>
+          <li><input type="checkbox"><span>Decision made on whether photo consent will be time-limited and require renewal</span></li>
+          <li><input type="checkbox"><span>Process for handling photo removal requests established</span></li>
+          <li><input type="checkbox"><span>Responsibility for tracking photo consent assigned</span></li>
+          <li><input type="checkbox"><span>Privacy policy updated to explicitly address photo consent — or update scheduled before launch</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 11 -->
+    <div class="section-block">
+      <div class="sub-label">Section 11</div>
+      <h2>Contact and email</h2>
+      <p>The contact form sends messages to <strong>info@setd5syndrome.org</strong>. This inbox should be actively monitored once the site is live.</p>
+
+      <ul class="check-list">
+        <li><input type="checkbox"><span>Responsibility for monitoring info@setd5syndrome.org and how often confirmed</span></li>
+        <li><input type="checkbox"><span>Decision made on whether to state a response time on the site (e.g., "we respond within 3 business days")</span></li>
+      </ul>
+    </div>
+
+    <div class="draft-notice">
+      <strong>Working draft.</strong> This document is for internal board use only and is not for public distribution. Content is subject to change based on board discussion and any website updates made before launch.
+    </div>
+
+  </div>
+
+  <div class="footer">SETD5 Syndrome Foundation &nbsp;·&nbsp; Confidential Board Document &nbsp;·&nbsp; May 14, 2026</div>
+
+</div>
+</body>
+</html>
