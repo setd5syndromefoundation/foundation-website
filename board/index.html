@@ -1392,23 +1392,27 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     </div>
     <div class="board-sidebar-links" id="board-sidebar-links">
       <div class="board-nav-group-header">Communications</div>
-      <a id="nav-messenger" href="#board-communications" onclick="boardNavClick(event,'board-communications');commTab('messenger');markSeen('board');" style="display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messenger <span id="badge-messenger" class="chat-unread-badge"></span></a>
-      <a id="nav-directory" href="#board-communications" onclick="boardNavClick(event,'board-communications');commTab('directory')" style="display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 7l10 7 10-7"/></svg> Directory</a>
+      <a id="nav-messenger" href="#board-communications" onclick="boardNavClick(event,'board-communications');commTab('messenger');markSeen('board');" style="display:flex;align-items:center;gap:6px;padding-left:22px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messenger <span id="badge-messenger" class="chat-unread-badge"></span></a>
+      <a id="nav-directory" href="#board-communications" onclick="boardNavClick(event,'board-communications');commTab('directory')" style="display:flex;align-items:center;gap:6px;padding-left:22px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 7l10 7 10-7"/></svg> Directory</a>
       <!-- Website Review nav link hidden — section retired; content migrated to Website topic in Messenger -->
       <!-- <a href="#board-website-review" onclick="boardNavClick(event,'board-website-review');wrMarkSeen()" style="color:var(--coral);font-weight:600;display:inline-flex;align-items:center;gap:6px;">Website Review ★<span id="badge-website-review" style="display:none;background:var(--coral);color:white;font-size:0.62rem;font-weight:700;border-radius:20px;padding:1px 7px;min-width:18px;text-align:center;"></span></a> -->
-      <a href="#tracker-section" onclick="boardNavClick(event,'tracker-section')">Outreach Log</a>
-      <div class="board-nav-group-header">Sections</div>
-      <a href="#board-inbox" onclick="boardNavClick(event,'board-inbox');markSeen('board_inbox');inboxRender();" id="inbox-nav-link" style="display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg> Doc Inbox <span id="inbox-nav-badge" style="display:none;background:var(--coral);color:white;font-size:0.65rem;font-weight:700;padding:1px 7px;border-radius:10px;line-height:1.6;"></span></a>
-      <a href="#board-committees"  onclick="boardNavClick(event,'board-committees')">Committees</a>
-      <a href="#board-finance"     onclick="boardNavClick(event,'board-finance')">Finance</a>
-      <a href="#board-fundraising" onclick="boardNavClick(event,'board-fundraising')">Fundraising</a>
-      <a href="#board-governance"  onclick="boardNavClick(event,'board-governance')">Governance</a>
-      <a href="#board-comms"       onclick="boardNavClick(event,'board-comms')">Marketing</a>
-      <a href="#board-research"    onclick="boardNavClick(event,'board-research')">Research</a>
-      <a href="#board-meetings"    class="bsnav-active" onclick="boardNavClick(event,'board-meetings')">Meetings</a>
-      <a href="#board-networking"  onclick="boardNavClick(event,'board-networking')">Networking</a>
-      <a href="#board-operations"  onclick="boardNavClick(event,'board-operations')">Operations</a>
-      <a href="#volunteer-roster"  onclick="boardNavClick(event,'volunteer-roster')">Volunteers</a>
+      <div class="board-nav-group-header">Governance &amp; Operations</div>
+      <a href="#board-meetings"    onclick="boardNavClick(event,'board-meetings')" style="padding-left:22px;">Meetings</a>
+      <a href="#board-committees"  onclick="boardNavClick(event,'board-committees')" style="padding-left:22px;">Committees</a>
+      <a href="#board-inbox" onclick="boardNavClick(event,'board-inbox');markSeen('board_inbox');inboxRender();" id="inbox-nav-link" style="display:flex;align-items:center;gap:6px;padding-left:22px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg> Doc Inbox <span id="inbox-nav-badge" style="display:none;background:var(--coral);color:white;font-size:0.65rem;font-weight:700;padding:1px 7px;border-radius:10px;line-height:1.6;"></span></a>
+      <a href="#board-governance"  onclick="boardNavClick(event,'board-governance')" style="padding-left:22px;">Governance</a>
+      <a href="#board-operations"  onclick="boardNavClick(event,'board-operations')" style="padding-left:22px;">Operations</a>
+      <div class="board-nav-group-header">Finance</div>
+      <a href="#board-finance"     onclick="boardNavClick(event,'board-finance')" style="padding-left:22px;">Finance</a>
+      <div class="board-nav-group-header">Fundraising</div>
+      <a href="#board-fundraising" onclick="boardNavClick(event,'board-fundraising')" style="padding-left:22px;">Fundraising</a>
+      <div class="board-nav-group-header">Networking &amp; Outreach</div>
+      <a href="#board-networking"  onclick="boardNavClick(event,'board-networking')" style="padding-left:22px;">Networking</a>
+      <a href="#tracker-section"   onclick="boardNavClick(event,'tracker-section')" style="padding-left:22px;">Outreach Log</a>
+      <a href="#volunteer-roster"  onclick="boardNavClick(event,'volunteer-roster')" style="padding-left:22px;">Volunteers</a>
+      <a href="#board-research"    onclick="boardNavClick(event,'board-research')" style="padding-left:22px;">Research</a>
+      <div class="board-nav-group-header">Marketing</div>
+      <a href="#board-comms"       onclick="boardNavClick(event,'board-comms')" style="padding-left:22px;">Marketing</a>
     </div>
   </nav>
   <div class="board-content">
