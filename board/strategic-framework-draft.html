@@ -16,18 +16,24 @@
   }
 
   /* ── Section nav ── */
-  .sec-nav {
+  .sec-nav-wrap {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
     background: #1e3a45;
     border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .sec-nav {
+    width: 100%;
+    max-width: 720px;
     display: flex;
     align-items: center;
     gap: 0;
     overflow-x: auto;
     scrollbar-width: none;
-    padding: 0 20px;
+    padding: 0 4px;
     height: 44px;
   }
   .sec-nav::-webkit-scrollbar { display: none; }
@@ -461,6 +467,7 @@
 </head>
 <body>
 
+<div class="sec-nav-wrap">
 <nav class="sec-nav" id="sec-nav">
   <a href="#sec-purpose">Purpose</a>
   <span class="nav-divider"></span>
@@ -480,6 +487,7 @@
   <span class="nav-divider"></span>
   <a href="#sec-measures">Progress</a>
 </nav>
+</div>
 
 <div class="page">
 
