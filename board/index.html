@@ -5884,7 +5884,17 @@ window.docRefileConfirm = async function(id, e) {
   if (!sel) return;
   const newSub = sel.value;
   try {
-    await updateDoc(doc(db, 'board_documents', id), { sub: newSub });
+    const docRef = doc(db, 'board_documents', id);
+    const snap = await getDoc(docRef);
+    const data = snap.data() || {};
+    const updates = { sub: newSub };
+    // Also update categories array if present, replacing the Secretary Review entry
+    if (Array.isArray(data.categories)) {
+      updates.categories = data.categories.map(c =>
+        c.sub === 'Secretary Review — Pending' ? { ...c, sub: newSub } : c
+      );
+    }
+    await updateDoc(docRef, updates);
     document.querySelectorAll('.doc-refile-panel').forEach(p => p.remove());
   } catch(err) {
     console.error('Refile error:', err);
