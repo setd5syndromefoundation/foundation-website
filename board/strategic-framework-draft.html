@@ -12,7 +12,49 @@
     background: #F7F3EE;
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #1A3340;
-    padding: 40px 20px;
+    padding: 80px 20px 40px;
+  }
+
+  /* ── Section nav ── */
+  .sec-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: #1e3a45;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 20px;
+    height: 44px;
+  }
+  .sec-nav::-webkit-scrollbar { display: none; }
+  .sec-nav a {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 0 13px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .sec-nav a:hover { color: #fff; border-bottom-color: #D8AB67; }
+  .sec-nav a.active { color: #D8AB67; border-bottom-color: #D8AB67; }
+  .sec-nav .nav-divider {
+    flex-shrink: 0;
+    width: 1px;
+    height: 18px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 2px;
   }
 
   .page {
@@ -418,6 +460,27 @@
 </style>
 </head>
 <body>
+
+<nav class="sec-nav" id="sec-nav">
+  <a href="#sec-purpose">Purpose</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-discussion">Discussion</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-community">Community</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-research">Research</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-communication">Communication</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-membership">Membership</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-governance">Governance</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-priorities">Priorities</a>
+  <span class="nav-divider"></span>
+  <a href="#sec-measures">Progress</a>
+</nav>
+
 <div class="page">
 
   <div class="header">
@@ -433,7 +496,7 @@
     </div>
 
     <!-- STRATEGIC PURPOSE -->
-    <div class="north-star">
+    <div class="north-star" id="sec-purpose">
       <div class="sub-label">Strategic purpose</div>
       <h2>Why this Foundation exists</h2>
       <p>The SETD5 Syndrome Foundation exists to support families living with SETD5 Syndrome and to advance research that improves their lives.</p>
@@ -449,7 +512,7 @@
     </div>
 
     <!-- FOR BOARD DISCUSSION -->
-    <div class="section" style="margin-bottom:32px;padding-bottom:32px;border-bottom:2px solid #dde8ec;">
+    <div id="sec-discussion" class="section" style="margin-bottom:32px;padding-bottom:32px;border-bottom:2px solid #dde8ec;">
       <div class="sub-label">For board discussion</div>
       <h2 style="font-family:'Source Serif 4',serif;font-size:1.05rem;font-weight:600;color:#1e3a45;margin-bottom:14px;">What we are considering at this meeting</h2>
       <p style="font-weight:600;font-size:0.9rem;color:#1e3a45;margin-bottom:6px;">For this discussion, we are considering:</p>
@@ -478,7 +541,7 @@
     </div>
 
     <!-- COMMUNITY ARM -->
-    <div class="arm-section">
+    <div class="arm-section" id="sec-community">
       <div class="arm-header">
         <span class="arm-badge community">Community</span>
         <span class="arm-title">Community arm</span>
@@ -552,7 +615,7 @@
     </div>
 
     <!-- RESEARCH ARM -->
-    <div class="arm-section">
+    <div class="arm-section" id="sec-research">
       <div class="arm-header">
         <span class="arm-badge research">Research</span>
         <span class="arm-title">Research arm</span>
@@ -680,7 +743,7 @@
     </div>
 
     <!-- COMMUNICATION ARM -->
-    <div class="arm-section">
+    <div class="arm-section" id="sec-communication">
       <div class="arm-header">
         <span class="arm-badge communication">Communication</span>
         <span class="arm-title">Communication arm</span>
@@ -728,7 +791,7 @@
     </div>
 
     <!-- MEMBERSHIP -->
-    <div class="cross-arm">
+    <div class="cross-arm" id="sec-membership">
       <div class="sub-label">Organizational membership</div>
       <div class="cross-arm-title">Organizations to join</div>
       <p style="font-size:0.9rem;line-height:1.75;color:#4a6b78;margin-bottom:14px;">The Foundation is a global organization serving families worldwide. Membership in the following organizations supports visibility, credibility, and access to resources across all three arms. This list is not exhaustive and will grow as the Foundation develops.</p>
@@ -784,7 +847,7 @@
     </div>
 
     <!-- CROSS-ARM: GOVERNANCE -->
-    <div class="cross-arm">
+    <div class="cross-arm" id="sec-governance">
       <div class="sub-label">Cross-arm</div>
       <div class="cross-arm-title">Governance and decision-making</div>
       <div class="tag-row">
@@ -899,7 +962,7 @@
     </div>
 
     <!-- PRIORITIES -->
-    <div class="cross-arm">
+    <div class="cross-arm" id="sec-priorities">
       <div class="sub-label">First three to six months</div>
       <div class="cross-arm-title">First three to six month priorities</div>
       <p style="font-size:0.9rem;line-height:1.75;color:#1A3340;margin-bottom:14px;">The Foundation does not need to build every program at once. In the first three to six months, the priority should be to establish the structure, language, and processes needed for responsible growth.</p>
@@ -925,7 +988,7 @@
     </div>
 
     <!-- MEASURES -->
-    <div class="cross-arm">
+    <div class="cross-arm" id="sec-measures">
       <div class="sub-label">Progress</div>
       <div class="cross-arm-title">Early measures of progress</div>
       <p style="font-size:0.9rem;line-height:1.75;color:#4a6b78;margin-bottom:16px;">These measures are not intended to be formal performance metrics yet. They are early indicators that the Foundation is building useful systems, serving families, and creating a credible base for future work.</p>
@@ -970,5 +1033,34 @@
   <div class="footer">SETD5 Syndrome Foundation &nbsp;·&nbsp; Confidential Board Document &nbsp;·&nbsp; Last updated May 14, 2026</div>
 
 </div>
+<script>
+  // Offset anchor scrolling for fixed nav
+  document.querySelectorAll('.sec-nav a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (!target) return;
+      const offset = 56;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // Highlight active section
+  const sections = ['sec-purpose','sec-discussion','sec-community','sec-research','sec-communication','sec-membership','sec-governance','sec-priorities','sec-measures'];
+  function updateActive() {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (el.getBoundingClientRect().top <= 70) current = id;
+    });
+    document.querySelectorAll('.sec-nav a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+</script>
 </body>
 </html>
