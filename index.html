@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://setd5syndrome.org/social-preview.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,10 +67,14 @@ body {
 
 /* ===== TYPOGRAPHY ===== */
 h1, h2, h3, h4 {
-  font-family: 'Source Serif 4', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
   color: var(--teal);
   line-height: 1.2;
+  font-variant-numeric: lining-nums;
+}
+.cormorant, [style*="Cormorant Garamond"] {
+  font-variant-numeric: lining-nums;
 }
 h3, h4 { line-height: 1.35; }
 h2 { margin-bottom: 20px; }
@@ -213,7 +217,7 @@ strong { color: var(--text); }
 }
 .nav-logo-text { line-height: 1.15; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; margin-left: -8px; }
 .nav-logo-text .name {
-  font-family: 'Source Serif 4', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
   font-size: 1.85rem;
   color: var(--teal);
@@ -431,7 +435,7 @@ strong { color: var(--text); }
 }
 .hero-divider { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 20px 0; }
 .hero-tagline {
-  font-family: 'Source Serif 4', serif;
+  font-family: 'Cormorant Garamond', serif;
   color: rgba(255,255,255,0.80);
   font-size: 0.92rem;
   text-align: center;
@@ -469,7 +473,7 @@ strong { color: var(--text); }
   min-width: 160px;
 }
 .stat-item .num {
-  font-family: 'Source Serif 4', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 2.2rem;
   font-weight: 600;
   color: var(--gold);
@@ -562,10 +566,10 @@ strong { color: var(--text); }
   position: absolute;
   top: 16px; left: 24px;
   line-height: 1;
-  font-family: 'Source Serif 4', serif;
+  font-family: 'Cormorant Garamond', serif;
 }
 .story-card blockquote {
-  font-family: 'Source Serif 4', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 1.15rem;
   color: var(--text);
   line-height: 1.72;
@@ -1117,7 +1121,7 @@ strong { color: var(--text); }
 }
 .bio-modal-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .bio-modal-initials { font-size: 1.4rem; font-weight: 600; color: var(--teal); }
-.bio-modal-name { font-family: 'Source Serif 4', serif; font-size: 1.4rem; font-weight: 600; color: var(--teal); text-align: center; margin-bottom: 4px; }
+.bio-modal-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--teal); text-align: center; margin-bottom: 4px; }
 .bio-modal-role { font-size: 0.78rem; color: var(--coral); font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; text-align: center; margin-bottom: 24px; }
 .bio-modal-text p { font-size: 0.96rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1em; }
 .bio-modal-text p:last-child { margin-bottom: 0; }
