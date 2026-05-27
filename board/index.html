@@ -5868,33 +5868,57 @@ document.addEventListener('DOMContentLoaded', packetDocInitHidden);
 window.docShowRefile = function(id, btn, e) {
   e.preventDefault(); e.stopPropagation();
   document.querySelectorAll('.doc-refile-panel').forEach(p => p.remove());
-  const destSubs = (DOC_SECTIONS['board-governance']?.subs || []).filter(s => s !== 'Secretary Review — Pending');
+
+  // Build section options (all sections)
+  const secOptions = Object.entries(DOC_SECTIONS)
+    .map(([secId, info]) => `<option value="${secId}">${info.label}</option>`)
+    .join('');
+
+  // Build initial sub options for the first section
+  const firstSecId = Object.keys(DOC_SECTIONS)[0];
+  const firstSubs = DOC_SECTIONS[firstSecId]?.subs || [];
+  const subOptions = firstSubs.map(s => `<option value="${s}">${s}</option>`).join('');
+
   const panel = document.createElement('div');
   panel.className = 'doc-refile-panel';
   panel.innerHTML = `
     <span style="color:var(--text-light);font-weight:600;">File to:</span>
-    <select id="refile-dest-${id}">
-      ${destSubs.map(s => `<option value="${s}">${s}</option>`).join('')}
+    <select id="refile-sec-${id}" onchange="docRefileUpdateSubs('${id}')">
+      ${secOptions}
+    </select>
+    <select id="refile-sub-${id}">
+      ${subOptions}
     </select>
     <button class="doc-refile-confirm" onclick="docRefileConfirm('${id}',event)">File</button>
     <button class="doc-refile-cancel" onclick="this.closest('.doc-refile-panel').remove()">Cancel</button>`;
   btn.closest('.doc-item').insertAdjacentElement('afterend', panel);
 };
 
+window.docRefileUpdateSubs = function(id) {
+  const secSel = document.getElementById(`refile-sec-${id}`);
+  const subSel = document.getElementById(`refile-sub-${id}`);
+  if (!secSel || !subSel) return;
+  const subs = DOC_SECTIONS[secSel.value]?.subs || [];
+  subSel.innerHTML = subs.map(s => `<option value="${s}">${s}</option>`).join('');
+};
+window.docRefileUpdateSubs = window.docRefileUpdateSubs;
+
 window.docRefileConfirm = async function(id, e) {
   e.preventDefault(); e.stopPropagation();
-  const sel = document.getElementById(`refile-dest-${id}`);
-  if (!sel) return;
-  const newSub = sel.value;
+  const secSel = document.getElementById(`refile-sec-${id}`);
+  const subSel = document.getElementById(`refile-sub-${id}`);
+  if (!secSel || !subSel) return;
+  const newSection = secSel.value;
+  const newSub = subSel.value;
   try {
     const docRef = doc(db, 'board_documents', id);
     const snap = await getDoc(docRef);
     const data = snap.data() || {};
-    const updates = { sub: newSub };
-    // Also update categories array if present, replacing the Secretary Review entry
+    // Update both section and sub; replace the Secretary Review entry in categories too
+    const updates = { section: newSection, sub: newSub };
     if (Array.isArray(data.categories)) {
       updates.categories = data.categories.map(c =>
-        c.sub === 'Secretary Review — Pending' ? { ...c, sub: newSub } : c
+        c.sub === 'Secretary Review — Pending' ? { ...c, section: newSection, sub: newSub } : c
       );
     }
     await updateDoc(docRef, updates);
