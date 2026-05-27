@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board Meeting Minutes Instructions — May 27, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal:       #2F5361;
+      --teal-dark:  #1e3a45;
+      --teal-light: #dde8ec;
+      --teal-pale:  #eef4f6;
+      --gold:       #D8AB67;
+      --gold-light: #fdf6ec;
+      --bg:         #F7F3EE;
+      --white:      #ffffff;
+      --text:       #1A3340;
+      --text-mid:   #4a6b78;
+      --text-light: #7a9bab;
+      --border:     #dde8ec;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      background: var(--teal-dark);
+      color: white;
+      padding: 12px 24px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--teal);
+      color: white;
+      padding: 44px 40px 36px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+    .hero-meta span {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta span::before {
+      content: '';
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── Phase header ── */
+    .phase {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 36px 0 20px;
+    }
+    .phase-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .phase h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--teal-dark);
+    }
+
+    /* ── Step ── */
+    .step {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 12px;
+    }
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--teal-pale);
+      color: var(--teal);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .step-body {
+      padding-left: 40px;
+    }
+    .step-body p {
+      color: var(--text-mid);
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+    }
+    .step-body ul {
+      list-style: none;
+      padding: 0;
+    }
+    .step-body ul li {
+      padding: 3px 0 3px 18px;
+      position: relative;
+      color: var(--text-mid);
+      font-size: 0.88rem;
+    }
+    .step-body ul li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+    .step-body ul li strong {
+      color: var(--text);
+    }
+
+    /* ── URL chip ── */
+    .url-chip {
+      display: inline-block;
+      background: var(--teal-pale);
+      border: 1px solid var(--teal-light);
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--teal);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-decoration: none;
+      margin: 6px 0 4px;
+      word-break: break-all;
+    }
+
+    /* ── Pre-fill table ── */
+    .prefill-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 4px;
+      font-size: 0.84rem;
+    }
+    .prefill-table tr:not(:last-child) td {
+      border-bottom: 1px solid var(--border);
+    }
+    .prefill-table td {
+      padding: 7px 10px;
+      vertical-align: top;
+    }
+    .prefill-table td:first-child {
+      width: 38%;
+      font-weight: 600;
+      color: var(--teal);
+      background: var(--teal-pale);
+      border-radius: 0;
+      white-space: nowrap;
+    }
+    .prefill-table td:last-child {
+      color: var(--text);
+    }
+    .note {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* ── Discussion section divider ── */
+    .section-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 20px 0 10px;
+    }
+
+    /* ── Discussion item ── */
+    .disc-item {
+      background: var(--teal-pale);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+    }
+    .disc-item-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--teal-dark);
+      margin-bottom: 4px;
+    }
+    .disc-item ul {
+      list-style: none;
+      padding: 0;
+    }
+    .disc-item ul li {
+      padding: 2px 0 2px 16px;
+      position: relative;
+      color: var(--text-mid);
+      font-size: 0.84rem;
+    }
+    .disc-item ul li::before {
+      content: '·';
+      position: absolute;
+      left: 3px;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    /* ── Tips box ── */
+    .tips {
+      background: var(--gold-light);
+      border: 1px solid rgba(216,171,103,0.3);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 22px;
+      margin-top: 28px;
+    }
+    .tips-title {
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .tips ul {
+      list-style: none;
+      padding: 0;
+    }
+    .tips ul li {
+      padding: 4px 0 4px 20px;
+      position: relative;
+      color: var(--text-mid);
+      font-size: 0.87rem;
+    }
+    .tips ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 32px 24px 28px; }
+      .hero h1 { font-size: 1.6rem; }
+      .prefill-table td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">SETD5 Syndrome Foundation &nbsp;·&nbsp; For Recording Secretary Use</div>
+
+<div class="hero">
+  <div class="hero-label">Board Meeting Minutes</div>
+  <h1>Step-by-Step Instructions<br>for the Recording Secretary</h1>
+  <div class="hero-meta">
+    <span>Tuesday, May 27, 2026</span>
+    <span>5:30 PM Pacific</span>
+    <span>Zoom</span>
+    <span>Samantha Cotter</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ── BEFORE THE MEETING ── -->
+  <div class="phase">
+    <div class="phase-icon">1</div>
+    <h2>Before the Meeting</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Open the minutes form</div>
+    </div>
+    <div class="step-body">
+      <p>Log in to the board portal and go to <strong>Board Meeting Materials → Meeting Minutes</strong> — there is a button there that links directly to the form. Or go directly to:</p>
+      <a class="url-chip" href="https://setd5syndrome.org/board/meeting-minutes.html" target="_blank">
+        setd5syndrome.org/board/meeting-minutes.html
+      </a>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Pre-fill the Meeting Details section</div>
+    </div>
+    <div class="step-body">
+      <p>Fill in the top section with the following before the meeting starts:</p>
+      <table class="prefill-table">
+        <tr><td>Date</td><td>May 27, 2026</td></tr>
+        <tr><td>Meeting Type</td><td>Regular Board Meeting</td></tr>
+        <tr><td>Called to Order</td><td>5:30 PM — select Pacific (PT) from the timezone dropdown</td></tr>
+        <tr><td>Location / Platform</td><td>Zoom</td></tr>
+        <tr><td>Presiding Officer</td><td>Kate Carr</td></tr>
+        <tr><td>Recording Secretary</td><td>Samantha Cotter</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── DURING THE MEETING ── -->
+  <div class="phase">
+    <div class="phase-icon">2</div>
+    <h2>During the Meeting</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Attendance</div>
+    </div>
+    <div class="step-body">
+      <ul>
+        <li>Click each board member's name to mark them <strong>Present</strong> or <strong>Absent</strong></li>
+        <li>The form tracks the quorum count automatically</li>
+        <li>Add any guests or observers in the Guests / Observers field</li>
+        <li>Under "Quorum established?" select <strong>Yes</strong> if 4 or more members are present</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Approval of Agenda</div>
+    </div>
+    <div class="step-body">
+      <p>Kate will ask for a motion to approve the agenda. Record:</p>
+      <ul>
+        <li>Who makes the motion</li>
+        <li>Who seconds it</li>
+        <li>The result — select <strong>"Approved unanimously"</strong> if no objections</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Approval of Prior Minutes</div>
+    </div>
+    <div class="step-body">
+      <p>The board will vote to approve the minutes from the April 29, 2026 inaugural meeting.</p>
+      <ul>
+        <li><strong>Prior Meeting Date:</strong> April 29, 2026</li>
+        <li>Record who moves to approve and who seconds</li>
+        <li>Record the result — likely "Approved unanimously"</li>
+        <li>If anyone notes a correction, write it in the Notes or Corrections field</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Old Business</div>
+    </div>
+    <div class="step-body">
+      <ul>
+        <li>There is no old business for this meeting — leave this section blank</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">New Business — Discussion Items</div>
+    </div>
+    <div class="step-body">
+      <p>Click <strong>"+ Add item"</strong> for each of the three discussion items below. For all three, select <strong>"No vote taken — discussion only"</strong> as the result and leave Motion, Seconded, and Vote fields blank.</p>
+
+      <div class="section-label">Three items to record</div>
+
+      <div class="disc-item">
+        <div class="disc-item-title">Item 1 — Website Review</div>
+        <ul>
+          <li>Item name: Website review and discussion</li>
+          <li>Write a brief summary of the key points raised</li>
+        </ul>
+      </div>
+
+      <div class="disc-item">
+        <div class="disc-item-title">Item 2 — Strategic Framework Draft</div>
+        <ul>
+          <li>Item name: Strategic framework draft review and discussion</li>
+          <li>Write a brief summary of the key points raised</li>
+        </ul>
+      </div>
+
+      <div class="disc-item">
+        <div class="disc-item-title">Item 3 — Spain Association Meeting</div>
+        <ul>
+          <li>Item name: Scheduling a meeting with the Spain association</li>
+          <li>Write a brief summary of what was discussed</li>
+          <li>If a date or action is agreed to, note it here and add it to Action Items</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div class="step-title">Action Items</div>
+    </div>
+    <div class="step-body">
+      <p>Capture any follow-up tasks assigned during the meeting. For each one:</p>
+      <ul>
+        <li>Describe the action clearly</li>
+        <li>Record who is responsible</li>
+        <li>Record the due date if one was given</li>
+      </ul>
+      <p class="note">Click "+ Add action item" to add more rows.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div class="step-title">Adjournment</div>
+    </div>
+    <div class="step-body">
+      <p>Kate will call for a motion to adjourn. Record:</p>
+      <ul>
+        <li>Who moves to adjourn and who seconds</li>
+        <li>What time the meeting ended</li>
+        <li>The next meeting date and time if one was set</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">8</div>
+      <div class="step-title">Secretary Certification</div>
+    </div>
+    <div class="step-body">
+      <ul>
+        <li>Type your full name in the <strong>"Secretary Signature"</strong> field at the bottom</li>
+        <li>Enter today's date as the Date of Certification</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── AFTER THE MEETING ── -->
+  <div class="phase">
+    <div class="phase-icon">3</div>
+    <h2>After the Meeting</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Export the minutes</div>
+    </div>
+    <div class="step-body">
+      <ul>
+        <li>Scroll to the bottom of the form and click <strong>"Print / Export"</strong></li>
+        <li>When the print dialog opens, change the destination to <strong>"Save as PDF"</strong></li>
+        <li>Save the file as: <strong>Meeting Minutes 5.27.2026.pdf</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Upload to the board portal</div>
+    </div>
+    <div class="step-body">
+      <ul>
+        <li>Log in to the board portal at <strong>setd5syndrome.org/board/</strong></li>
+        <li>Go to <strong>Board Meeting Materials → Meeting Minutes</strong></li>
+        <li>Upload the PDF you just saved</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Distribute to the board</div>
+    </div>
+    <div class="step-body">
+      <ul>
+        <li>Distribute the PDF to all board members — aim to have them out within a few days of the meeting while it's still fresh</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── TIPS ── -->
+  <div class="tips">
+    <div class="tips-title">Tips</div>
+    <ul>
+      <li>Minutes record what was decided and what actions were assigned — not a word-for-word transcript of the conversation.</li>
+      <li>For discussion items with no vote, a 2–3 sentence summary of the main points is enough.</li>
+      <li>If you miss something during the meeting, flag it to Kate right after and fill it in while it's fresh.</li>
+      <li>It's okay to write shorthand during the meeting and clean it up afterward.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    SETD5 Syndrome Foundation &nbsp;·&nbsp; Board Meeting May 27, 2026 &nbsp;·&nbsp; For Recording Secretary Use
+  </div>
+
+</div>
+</body>
+</html>
