@@ -310,15 +310,6 @@
 
 <main class="page-main">
 
-  <!-- Inaugural meeting banner -->
-  <div id="inaugural-banner" style="background:#1e3a45;border-radius:10px;padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-    <div>
-      <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#D8AB67;margin-bottom:3px;">April 29, 2026 · Inaugural Board Meeting</div>
-      <div style="font-size:0.82rem;color:rgba(255,255,255,0.7);">Pre-fill this form with the agenda items for the first meeting.</div>
-    </div>
-    <button class="btn btn-gold" onclick="loadInauguralTemplate()" style="white-space:nowrap;flex-shrink:0;">Load Inaugural Meeting Template</button>
-  </div>
-
   <div class="action-bar">
     <div class="action-bar-title">Board Meeting Minutes</div>
     <div class="action-bar-btns">
@@ -1329,15 +1320,10 @@ document.getElementById('mtg-type').addEventListener('change', function() {
 });
 
 // ── Seed form rows — runs after all functions are defined ────────────────────
-if (!editDocId) {
-  loadInauguralTemplate();   // hides inapplicable sections + pre-fills New Business
-  addActionItem();           // seed one action item row
-} else {
-  addReport();
-  addOldBiz();
-  addNewBiz();
-  addActionItem();
-}
+addReport();
+addOldBiz();
+addNewBiz();
+addActionItem();
 
 </script>
 </body>
