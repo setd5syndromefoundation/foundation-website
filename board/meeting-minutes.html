@@ -452,13 +452,6 @@
     </div>
   </div>
 
-  <!-- OFFICER & COMMITTEE REPORTS -->
-  <div class="card" id="card-officer-reports">
-    <div class="card-title">Officer &amp; Committee Reports</div>
-    <div id="reports-list"></div>
-    <button class="rep-add" onclick="addReport()">+ Add report</button>
-  </div>
-
   <!-- OLD BUSINESS -->
   <div class="card" id="card-old-business">
     <div class="card-title">Old Business</div>
@@ -633,29 +626,6 @@ function removeBtn(div) {
   return btn;
 }
 
-window.addReport = function() {
-  const list = document.getElementById('reports-list');
-  const div  = document.createElement('div');
-  div.className = 'rep-item';
-  div.innerHTML = `
-    <div class="field-row">
-      <div><label>Presenter / Committee</label>
-           <input type="text" placeholder="e.g., Treasurer, Research Committee"></div>
-      <div><label>Topic</label>
-           <input type="text" placeholder="Brief topic title"></div>
-    </div>
-    <div class="field-full">
-      <label>Summary</label>
-      <textarea placeholder="Key points from the report..."></textarea>
-    </div>
-    <div class="field-full">
-      <label>Discussion / Follow-up</label>
-      <textarea placeholder="Any discussion, votes, or follow-up items..."></textarea>
-    </div>`;
-  div.appendChild(removeBtn(div));
-  list.appendChild(div);
-};
-
 window.addOldBiz = function() {
   const list = document.getElementById('old-biz-list');
   const div  = document.createElement('div');
@@ -811,12 +781,6 @@ function collectFormData() {
     if (name) attendance[name] = el.classList.contains('present');
   });
 
-  const reports = [];
-  document.querySelectorAll('#reports-list .rep-item').forEach(el => {
-    const inputs = el.querySelectorAll('input, textarea');
-    reports.push([...inputs].map(i => i.value));
-  });
-
   const oldBiz = [];
   document.querySelectorAll('#old-biz-list .rep-item').forEach(el => {
     const inputs = el.querySelectorAll('input, textarea');
@@ -849,7 +813,7 @@ function collectFormData() {
     priorSecond:  gv('prior-second'),
     priorResult:  document.getElementById('prior-result').value,
     priorNotes:   gv('prior-notes'),
-    reports, oldBiz, newBiz, actions,
+    oldBiz, newBiz, actions,
     nextDate:     gv('next-date'),
     nextTime:     gv('next-time'),
     nextLocation: gv('next-location'),
@@ -893,7 +857,6 @@ function restoreFormData(d) {
     });
   };
 
-  fillRepeatable('reports-list', addReport, d.reports);
   fillRepeatable('old-biz-list', addOldBiz, d.oldBiz);
   fillRepeatable('new-biz-list', addNewBiz, d.newBiz);
 
@@ -1107,11 +1070,6 @@ function buildMinutesHTML() {
   const present = BOARD_MEMBERS.filter(n => attendState[n] === 'present');
   const absent  = BOARD_MEMBERS.filter(n => attendState[n] === 'absent');
 
-  const reports = [...document.querySelectorAll('#reports-list .rep-item')].map(el => {
-    const txt = el.querySelectorAll('input[type=text], textarea');
-    return { presenter: txt[0]?.value, topic: txt[1]?.value, summary: txt[2]?.value, discussion: txt[3]?.value };
-  }).filter(r => r.presenter || r.summary);
-
   const oldBiz = [...document.querySelectorAll('#old-biz-list .rep-item')].map(el => {
     const txt = el.querySelectorAll('input[type=text], textarea');
     return { item: txt[0]?.value, notes: txt[1]?.value };
@@ -1195,14 +1153,6 @@ ${guests ? `<p><strong>Guests / Observers:</strong> ${esc(guests)}</p>` : ''}
   <strong>Result:</strong> ${esc(priorRes) || '—'}
 </p>
 ${priorNote ? `<p style="margin-top:6pt;">${nl2br(priorNote)}</p>` : ''}
-
-<h2>Officer &amp; Committee Reports</h2>
-${reports.length ? reports.map(r => `
-<div class="section-block">
-  <div class="block-label">${esc(r.presenter || '')}${r.topic ? ` — ${esc(r.topic)}` : ''}</div>
-  ${r.summary    ? `<div class="block-body">${nl2br(r.summary)}</div>` : ''}
-  ${r.discussion ? `<div style="margin-top:8pt;"><strong style="font-size:8.5pt;text-transform:uppercase;letter-spacing:0.04em;color:#6b7280;">Discussion / Follow-up</strong><div class="block-body">${nl2br(r.discussion)}</div></div>` : ''}
-</div>`).join('') : '<p><em style="color:#999">None</em></p>'}
 
 <h2>Old Business</h2>
 ${oldBiz.length ? oldBiz.map(b => `
@@ -1314,13 +1264,11 @@ document.getElementById('mtg-tz').addEventListener('change', updateTzDisplay);
 // ── Meeting type toggle: show/hide sections when type is changed ─────────────
 document.getElementById('mtg-type').addEventListener('change', function() {
   const isInaugural = this.value === 'Inaugural Board Meeting';
-  document.getElementById('card-prior-minutes').style.display   = isInaugural ? 'none' : '';
-  document.getElementById('card-officer-reports').style.display = isInaugural ? 'none' : '';
-  document.getElementById('card-old-business').style.display    = isInaugural ? 'none' : '';
+  document.getElementById('card-prior-minutes').style.display = isInaugural ? 'none' : '';
+  document.getElementById('card-old-business').style.display  = isInaugural ? 'none' : '';
 });
 
 // ── Seed form rows — runs after all functions are defined ────────────────────
-addReport();
 addOldBiz();
 addNewBiz();
 addActionItem();
