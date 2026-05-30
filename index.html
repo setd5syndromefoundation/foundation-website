@@ -3143,19 +3143,20 @@ body { top: 0 !important; }
 
           <div id="newsletter-page-form" style="display:flex; flex-direction:column; gap:14px;">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-              <input type="text" placeholder="First Name" style="padding:12px 16px; border:1.5px solid rgba(47,83,97,0.25); border-radius:8px; font-size:0.95rem; font-family:inherit; background:white; color:var(--text-dark); outline:none;">
-              <input type="text" placeholder="Last Name" style="padding:12px 16px; border:1.5px solid rgba(47,83,97,0.25); border-radius:8px; font-size:0.95rem; font-family:inherit; background:white; color:var(--text-dark); outline:none;">
+              <input type="text" id="newsletter-page-firstname" placeholder="First Name" style="padding:12px 16px; border:1.5px solid rgba(47,83,97,0.25); border-radius:8px; font-size:0.95rem; font-family:inherit; background:white; color:var(--text-dark); outline:none;">
+              <input type="text" id="newsletter-page-lastname" placeholder="Last Name" style="padding:12px 16px; border:1.5px solid rgba(47,83,97,0.25); border-radius:8px; font-size:0.95rem; font-family:inherit; background:white; color:var(--text-dark); outline:none;">
             </div>
             <input type="email" id="newsletter-page-email" placeholder="Email Address" style="padding:12px 16px; border:1.5px solid rgba(47,83,97,0.25); border-radius:8px; font-size:0.95rem; font-family:inherit; background:white; color:var(--text-dark); outline:none;">
-            <select style="padding:12px 16px; border:1.5px solid rgba(47,83,97,0.25); border-radius:8px; font-size:0.95rem; font-family:inherit; background:white; color:var(--text-mid); outline:none;">
+            <select id="newsletter-page-role" style="padding:12px 16px; border:1.5px solid rgba(47,83,97,0.25); border-radius:8px; font-size:0.95rem; font-family:inherit; background:white; color:var(--text-mid); outline:none;">
               <option value="" disabled selected>I am a... (optional)</option>
-              <option>Parent / Caregiver</option>
+              <option>Family Member / Caregiver</option>
               <option>Individual with SETD5 Syndrome</option>
-              <option>Clinician or Researcher</option>
+              <option>Clinician / Medical Professional</option>
+              <option>Researcher / Scientist</option>
               <option>Supporter / Donor</option>
               <option>Other</option>
             </select>
-            <button type="button" onclick="subscribeEmail('newsletter-page-email','newsletter-page-form','newsletter-page-success')" class="btn btn-primary" style="width:100%; padding:14px; font-size:1rem;">Subscribe to the Newsletter</button>
+            <button type="button" onclick="subscribeEmailFull()" class="btn btn-primary" style="width:100%; padding:14px; font-size:1rem;">Subscribe to the Newsletter</button>
           </div>
           <div class="newsletter-success" id="newsletter-page-success">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="white" fill-opacity="0.25"/><path d="M6 10l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -3371,11 +3372,12 @@ body { top: 0 !important; }
     var success = document.getElementById(successId);
     if (form) form.style.display = 'none';
     if (success) success.style.display = 'flex';
-    // Submit to Formspree then redirect
-    fetch('https://formspree.io/f/meeddnaw', {
+    // Submit to JotForm then redirect
+    var jotData = new FormData();
+    jotData.append('q3_email', email);
+    fetch('https://submit.jotform.com/submit/261491516889067/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ email: email })
+      body: jotData
     }).then(function() {
       window.location.href = 'https://setd5syndrome.org/newsletter-thank-you.html';
     });
@@ -3399,6 +3401,33 @@ body { top: 0 !important; }
       body: JSON.stringify(data)
     }).then(function() {
       window.location.href = 'https://setd5syndrome.org/contact-thank-you.html';
+    });
+  }
+
+  function subscribeEmailFull() {
+    var email = document.getElementById('newsletter-page-email').value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('newsletter-page-email').style.borderColor = 'var(--coral)';
+      setTimeout(function() { document.getElementById('newsletter-page-email').style.borderColor = ''; }, 2000);
+      return;
+    }
+    var firstName = document.getElementById('newsletter-page-firstname').value.trim();
+    var lastName = document.getElementById('newsletter-page-lastname').value.trim();
+    var role = document.getElementById('newsletter-page-role').value;
+    var jotData = new FormData();
+    jotData.append('q1_firstName', firstName);
+    jotData.append('q2_lastName', lastName);
+    jotData.append('q3_email', email);
+    jotData.append('q4_iAm', role);
+    var form = document.getElementById('newsletter-page-form');
+    var success = document.getElementById('newsletter-page-success');
+    if (form) form.style.display = 'none';
+    if (success) success.style.display = 'flex';
+    fetch('https://submit.jotform.com/submit/261491516889067/', {
+      method: 'POST',
+      body: jotData
+    }).then(function() {
+      window.location.href = 'https://setd5syndrome.org/newsletter-thank-you.html';
     });
   }
 
