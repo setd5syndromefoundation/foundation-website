@@ -2569,8 +2569,7 @@ body { top: 0 !important; }
         <p>Families, researchers, donors, press. We respond to every message.</p>
       </div>
       <div style="max-width:600px; margin:0 auto;">
-        <form class="contact-form" action="https://formspree.io/f/mqenopvy" method="POST">
-          <input type="hidden" name="_next" value="https://setd5syndrome.org/contact-thank-you.html">
+        <form class="contact-form" id="contact-form">
           <input type="text" name="name" placeholder="Your Name">
           <input type="email" name="email" placeholder="Your Email">
           <select name="category">
@@ -2584,7 +2583,7 @@ body { top: 0 !important; }
             <option value="other">Other</option>
           </select>
           <textarea name="message" placeholder="Tell us how we can help..."></textarea>
-          <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+          <button type="button" class="btn btn-primary" style="width:100%;" onclick="submitContactForm()">Send Message</button>
         </form>
         <div style="margin-top:24px; text-align:center;">
           <p style="font-size:0.8rem; color:var(--text-light); margin-bottom:12px; text-transform:uppercase; letter-spacing:.08em; font-weight:600;">Follow Us</p>
@@ -3379,6 +3378,27 @@ body { top: 0 !important; }
       body: JSON.stringify({ email: email })
     }).then(function() {
       window.location.href = 'https://setd5syndrome.org/newsletter-thank-you.html';
+    });
+  }
+
+  function submitContactForm() {
+    var form = document.getElementById('contact-form');
+    var name = form.querySelector('[name="name"]').value.trim();
+    var email = form.querySelector('[name="email"]').value.trim();
+    var message = form.querySelector('[name="message"]').value.trim();
+    if (!name || !email || !message) return;
+    var data = {
+      name: name,
+      email: email,
+      category: form.querySelector('[name="category"]').value,
+      message: message
+    };
+    fetch('https://formspree.io/f/mqenopvy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function() {
+      window.location.href = 'https://setd5syndrome.org/contact-thank-you.html';
     });
   }
 
