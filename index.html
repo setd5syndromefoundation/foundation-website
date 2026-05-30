@@ -3389,16 +3389,14 @@ body { top: 0 !important; }
     var email = form.querySelector('[name="email"]').value.trim();
     var message = form.querySelector('[name="message"]').value.trim();
     if (!name || !email || !message) return;
-    var data = {
-      name: name,
-      email: email,
-      category: form.querySelector('[name="category"]').value,
-      message: message
-    };
-    fetch('https://formspree.io/f/mqenopvy', {
+    var jotData = new FormData();
+    jotData.append('q2_fullName', name);
+    jotData.append('q3_emailAddress', email);
+    jotData.append('q4_whatIs', form.querySelector('[name="category"]').value);
+    jotData.append('q5_message', message);
+    fetch('https://submit.jotform.com/submit/261491156349058/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
+      body: jotData
     }).then(function() {
       window.location.href = 'https://setd5syndrome.org/contact-thank-you.html';
     });
