@@ -2563,7 +2563,10 @@ body { top: 0 !important; }
       </div>
       <div style="max-width:600px; margin:0 auto;">
         <form class="contact-form" id="contact-form">
-          <input type="text" name="name" placeholder="Your Name">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <input type="text" name="firstname" placeholder="First Name">
+            <input type="text" name="lastname" placeholder="Last Name">
+          </div>
           <input type="email" name="email" placeholder="Your Email">
           <select name="category">
             <option value="" disabled selected>What is this about?</option>
@@ -2613,7 +2616,10 @@ body { top: 0 !important; }
       </div>
       <div style="max-width:600px; margin:0 auto;">
         <form class="contact-form" id="contact-form-2">
-          <input type="text" name="name" placeholder="Your Name">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <input type="text" name="firstname" placeholder="First Name">
+            <input type="text" name="lastname" placeholder="Last Name">
+          </div>
           <input type="email" name="email" placeholder="Your Email">
           <select name="category">
             <option value="" disabled selected>What is this about?</option>
@@ -3432,12 +3438,14 @@ body { top: 0 !important; }
 
   function submitContactForm() {
     var form = document.getElementById('contact-form');
-    var name = form.querySelector('[name="name"]').value.trim();
+    var firstname = form.querySelector('[name="firstname"]').value.trim();
+    var lastname = form.querySelector('[name="lastname"]').value.trim();
     var email = form.querySelector('[name="email"]').value.trim();
     var message = form.querySelector('[name="message"]').value.trim();
-    if (!name || !email || !message) return;
+    if (!firstname || !email || !message) return;
     var jotData = new FormData();
-    jotData.append('q2_fullName', name);
+    jotData.append('q2_fullname0[first]', firstname);
+    jotData.append('q2_fullname0[last]', lastname);
     jotData.append('q3_emailAddress', email);
     jotData.append('q4_whatIs', form.querySelector('[name="category"]').value);
     jotData.append('q5_message', message);
@@ -3478,12 +3486,14 @@ body { top: 0 !important; }
 
   function submitContactForm2() {
     var form = document.getElementById('contact-form-2');
-    var name = form.querySelector('[name="name"]').value.trim();
+    var firstname = form.querySelector('[name="firstname"]').value.trim();
+    var lastname = form.querySelector('[name="lastname"]').value.trim();
     var email = form.querySelector('[name="email"]').value.trim();
     var message = form.querySelector('[name="message"]').value.trim();
-    if (!name || !email || !message) return;
+    if (!firstname || !email || !message) return;
     var jotData = new FormData();
-    jotData.append('q2_fullName', name);
+    jotData.append('q2_fullname0[first]', firstname);
+    jotData.append('q2_fullname0[last]', lastname);
     jotData.append('q3_emailAddress', email);
     jotData.append('q4_whatIs', form.querySelector('[name="category"]').value);
     jotData.append('q5_message', message);
