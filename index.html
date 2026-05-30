@@ -3372,11 +3372,13 @@ body { top: 0 !important; }
     var success = document.getElementById(successId);
     if (form) form.style.display = 'none';
     if (success) success.style.display = 'flex';
-    // Submit to Formspree
+    // Submit to Formspree then redirect
     fetch('https://formspree.io/f/meeddnaw', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ email: email })
+    }).then(function() {
+      window.location.href = 'https://setd5syndrome.org/newsletter-thank-you.html';
     });
   }
 
