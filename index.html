@@ -3371,9 +3371,12 @@ body { top: 0 !important; }
     var success = document.getElementById(successId);
     if (form) form.style.display = 'none';
     if (success) success.style.display = 'flex';
-    // TODO: Replace with your email service endpoint (Mailchimp, ConvertKit, etc.)
-    // Example: fetch('/subscribe', { method:'POST', body: JSON.stringify({email}) })
-    console.log('Subscribe:', email);
+    // Submit to Formspree
+    fetch('https://formspree.io/f/meeddnaw', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email: email })
+    });
   }
 
   function scrollToNewsletter() {
