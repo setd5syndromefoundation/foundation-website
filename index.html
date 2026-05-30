@@ -3374,7 +3374,7 @@ body { top: 0 !important; }
     if (success) success.style.display = 'flex';
     // Submit to JotForm then redirect
     var jotData = new FormData();
-    jotData.append('q3_email', email);
+    jotData.append('q4_email2', email);
     fetch('https://submit.jotform.com/submit/261491516889067/', {
       method: 'POST',
       body: jotData
@@ -3413,10 +3413,10 @@ body { top: 0 !important; }
     var lastName = document.getElementById('newsletter-page-lastname').value.trim();
     var role = document.getElementById('newsletter-page-role').value;
     var jotData = new FormData();
-    jotData.append('q1_firstName', firstName);
-    jotData.append('q2_lastName', lastName);
-    jotData.append('q3_email', email);
-    jotData.append('q4_iAm', role);
+    jotData.append('q2_textbox0', firstName);
+    jotData.append('q3_textbox1', lastName);
+    jotData.append('q4_email2', email);
+    jotData.append('q5_dropdown3', role);
     var form = document.getElementById('newsletter-page-form');
     var success = document.getElementById('newsletter-page-success');
     if (form) form.style.display = 'none';
