@@ -3473,15 +3473,10 @@ body { top: 0 !important; }
     jotData.append('q3_textbox1', lastName);
     jotData.append('q4_email2', email);
     jotData.append('q5_dropdown3', role);
-    var form = document.getElementById('newsletter-page-form');
-    var success = document.getElementById('newsletter-page-success');
-    if (form) form.style.display = 'none';
-    if (success) success.style.display = 'flex';
+    window.location.href = 'https://setd5syndrome.org/newsletter-thank-you.html';
     fetch('https://submit.jotform.com/submit/261491516889067/', {
       method: 'POST',
       body: jotData
-    }).then(function() {
-      window.location.href = 'https://setd5syndrome.org/newsletter-thank-you.html';
     });
   }
 
