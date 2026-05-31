@@ -1946,6 +1946,15 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
             </div>
           </div>
         </div>
+        <!-- Tentative -->
+        <div class="tracker-grid full" style="margin-bottom:8px;">
+          <div class="tracker-field">
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="tr-tentative" style="width:15px;height:15px;accent-color:var(--coral);cursor:pointer;">
+              <span><strong>Tentative</strong> — I plan to contact this person but haven't yet. Mark so others don't duplicate the effort.</span>
+            </label>
+          </div>
+        </div>
         <!-- File to Networking -->
         <div class="tracker-grid full" style="margin-bottom:8px;">
           <div class="tracker-field">
@@ -5473,6 +5482,7 @@ async function trackerAdd() {
     return;
   }
 
+  const tentative       = document.getElementById('tr-tentative')?.checked || false;
   const fileNetworking  = document.getElementById('tr-file-networking')?.checked;
   const networkingSub   = document.getElementById('tr-networking-sub')?.value || 'Partner Organizations';
 
@@ -5491,7 +5501,7 @@ async function trackerAdd() {
       attachmentName = file.name;
     }
 
-    const fields = { name, entity, internal, date, category, how, purpose, relstatus, takeaway, followup };
+    const fields = { name, entity, internal, date, category, how, purpose, relstatus, takeaway, followup, tentative };
     if (attachmentName) { fields.attachmentName = attachmentName; fields.attachmentURL = attachmentURL; }
 
     if (editId) {
@@ -5555,6 +5565,7 @@ function trackerEditEntry(id) {
   document.getElementById('tr-relstatus').value = e.relstatus|| '';
   document.getElementById('tr-takeaway').value  = e.takeaway || '';
   document.getElementById('tr-followup').value  = e.followup || '';
+  document.getElementById('tr-tentative').checked = !!e.tentative;
   if (e.attachmentName) {
     document.getElementById('tr-attachment-zone').style.display = 'none';
     document.getElementById('tr-attachment-chosen').style.display = 'flex';
@@ -5576,6 +5587,15 @@ async function trackerToggleDone(id) {
   } catch (err) { console.error('Toggle done error:', err); }
 }
 window.trackerToggleDone = trackerToggleDone;
+
+async function trackerToggleTentative(id) {
+  const entry = trackerEntries.find(t => t.id === id);
+  if (!entry) return;
+  try {
+    await updateDoc(doc(db, 'outreach_log', id), { tentative: !entry.tentative });
+  } catch (err) { console.error('Toggle tentative error:', err); }
+}
+window.trackerToggleTentative = trackerToggleTentative;
 
 // trackerDelete removed — contact log entries are permanent records
 
@@ -5643,10 +5663,15 @@ function trackerRender() {
     // In grouped view, hide the category badge since it's on the group header
     const showCatBadge = !!catF;
 
-    return `<div class="tracker-entry ${e.done ? 'done' : ''}">
+    const tentativeBadge = e.tentative
+      ? `<span style="font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:#fff4ee;color:var(--coral);border:1px solid #f0c4a8;padding:2px 8px;border-radius:20px;flex-shrink:0;">Tentative</span>`
+      : '';
+
+    return `<div class="tracker-entry ${e.done ? 'done' : ''}${e.tentative ? ' tentative' : ''}">
       <div class="tracker-entry-main">
         <div class="tracker-entry-top">
           <span class="tracker-entity">${safeEntity}${safeName ? '<span class="tracker-contact-name"> · ' + safeName + '</span>' : ''}${safeInternal ? '<span class="tracker-internal-name"> via ' + safeInternal + '</span>' : ''}</span>
+          ${tentativeBadge}
           ${showCatBadge ? `<span class="tracker-badge badge-${e.category}">${catLabel}</span>` : ''}
           <span class="tracker-date">${dateStr}</span>
         </div>
@@ -5657,6 +5682,9 @@ function trackerRender() {
       </div>
       <div class="tracker-entry-controls">
         ${(!e.createdBy || e.createdBy === chatUserName) ? `<button class="btn-icon" title="Edit entry" onclick="trackerEditEntry('${e.id}')" style="color:var(--teal);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5a1.415 1.415 0 012 2L5 13 2 14l1-3 8.5-8.5z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>` : ''}
+        <button class="btn-icon ${e.tentative ? 'active' : ''}" title="${e.tentative ? 'Remove tentative' : 'Mark as tentative'}" onclick="trackerToggleTentative('${e.id}')" style="color:${e.tentative ? 'var(--coral)' : 'var(--text-light)'};">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/><path d="M8 5v3.5l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
         <button class="btn-icon done-btn ${e.done ? 'active' : ''}" title="${e.done ? 'Mark follow-up open' : 'Mark follow-up complete'}" onclick="trackerToggleDone('${e.id}')">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 9l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
