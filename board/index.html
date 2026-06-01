@@ -1392,7 +1392,9 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     </div>
     <div class="board-sidebar-links" id="board-sidebar-links">
       <div class="board-nav-group-header">Communications</div>
+      <!-- Messenger nav hidden — section temporarily disabled. To restore, uncomment this and the board-communications section.
       <a id="nav-messenger" href="#board-communications" onclick="boardNavClick(event,'board-communications');commTab('messenger');markSeen('board');" style="display:flex;align-items:center;gap:6px;padding-left:22px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messenger <span id="badge-messenger" class="chat-unread-badge"></span></a>
+      -->
       <a id="nav-directory" href="#board-communications" onclick="boardNavClick(event,'board-communications');commTab('directory')" style="display:flex;align-items:center;gap:6px;padding-left:22px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 7l10 7 10-7"/></svg> Directory</a>
       <!-- Website Review nav link hidden — section retired; content migrated to Website topic in Messenger -->
       <!-- <a href="#board-website-review" onclick="boardNavClick(event,'board-website-review');wrMarkSeen()" style="color:var(--coral);font-weight:600;display:inline-flex;align-items:center;gap:6px;">Website Review ★<span id="badge-website-review" style="display:none;background:var(--coral);color:white;font-size:0.62rem;font-weight:700;border-radius:20px;padding:1px 7px;min-width:18px;text-align:center;"></span></a> -->
@@ -1421,7 +1423,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
 
   <!-- Member Directory -->
 
-  <!-- Board Messaging -->
+<!-- BOARD MESSAGING SECTION — commented out. To restore, remove this comment block wrapper.
   <section class="section section--white board-section" id="board-communications" style="padding-top:48px;">
     <div class="container">
       <div class="section-header" style="margin-bottom:24px;">
@@ -2029,6 +2031,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.75); padding: 6
     </div>
   </div>
 </section>
+-->
 
 
 <!-- Finance -->

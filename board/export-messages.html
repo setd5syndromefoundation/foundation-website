@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Board Messages Archive — SETD5 Syndrome Foundation</title>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getFirestore, collection, query, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey:            "AIzaSyD5imh_WikBHbTufh0os2a7nxgqEDFKmb4",
+    authDomain:        "setd5-syndrome-foundation.firebaseapp.com",
+    projectId:         "setd5-syndrome-foundation",
+    storageBucket:     "setd5-syndrome-foundation.firebasestorage.app",
+    messagingSenderId: "1041702466779",
+    appId:             "1:1041702466779:web:22d00333b4fd011e11c8fe"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  async function exportMessages() {
+    const statusEl = document.getElementById('status');
+    const outputEl = document.getElementById('output');
+    statusEl.textContent = 'Loading messages from Firestore...';
+
+    try {
+      const q = query(collection(db, 'board_messages'), orderBy('ts', 'asc'));
+      const snap = await getDocs(q);
+
+      if (snap.empty) {
+        statusEl.textContent = 'No messages found.';
+        return;
+      }
+
+      const messages = [];
+      snap.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+
+      statusEl.textContent = `Found ${messages.length} messages. Rendering archive...`;
+
+      // Group by channel/tag
+      const channels = {};
+      messages.forEach(m => {
+        const ch = (m.tags && m.tags[0]) || m.tag || m.channel || 'general';
+        if (!channels[ch]) channels[ch] = [];
+        channels[ch].push(m);
+      });
+
+      let html = '';
+      const channelOrder = ['announcements','admin','fundraising','general','outreach','research','website','site-updates','meetings'];
+      const allChannels = [...new Set([...channelOrder, ...Object.keys(channels)])].filter(c => channels[c]);
+
+      allChannels.forEach(ch => {
+        const msgs = channels[ch];
+        if (!msgs || !msgs.length) return;
+        html += `<div class="channel-section">
+          <h2 class="channel-header"># ${ch}</h2>`;
+        msgs.forEach(m => {
+          const date = m.ts?.toDate ? m.ts.toDate() : (m.ts ? new Date(m.ts.seconds * 1000) : new Date());
+          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+          const sender = m.author || m.sender || m.user || m.from || 'Unknown';
+          const body = (m.text || m.body || m.message || '').replace(/\n/g, '<br>');
+          html += `<div class="message">
+            <div class="message-meta"><span class="sender">${sender}</span><span class="date">${dateStr} at ${timeStr}</span></div>
+            <div class="message-body">${body}</div>
+          </div>`;
+        });
+        html += `</div>`;
+      });
+
+      outputEl.innerHTML = html;
+      statusEl.innerHTML = `✅ ${messages.length} messages exported across ${allChannels.length} channels. <button onclick="window.print()">Print / Save as PDF</button>`;
+
+    } catch (err) {
+      statusEl.textContent = 'Error: ' + err.message;
+      console.error(err);
+    }
+  }
+
+  window.addEventListener('load', exportMessages);
+</script>
+<style>
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 40px 24px; color: #1e3a45; background: #f7f3ee; }
+  h1 { font-size: 1.4rem; color: #1e3a45; margin-bottom: 8px; }
+  .subtitle { font-size: 0.85rem; color: #7a9bab; margin-bottom: 32px; }
+  #status { background: #eef3f5; border-left: 4px solid #2F5361; padding: 12px 16px; border-radius: 4px; font-size: 0.9rem; margin-bottom: 32px; }
+  #status button { margin-left: 16px; background: #2F5361; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+  .channel-section { margin-bottom: 48px; }
+  .channel-header { font-size: 1rem; font-weight: 700; color: #2F5361; border-bottom: 2px solid #dde8ec; padding-bottom: 8px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .message { padding: 12px 0; border-bottom: 1px solid #e8f0f3; }
+  .message-meta { display: flex; gap: 12px; align-items: baseline; margin-bottom: 4px; }
+  .sender { font-weight: 700; font-size: 0.88rem; color: #1e3a45; }
+  .date { font-size: 0.78rem; color: #7a9bab; }
+  .message-body { font-size: 0.9rem; color: #4a6878; line-height: 1.65; }
+  @media print {
+    body { background: white; padding: 20px; }
+    #status button { display: none; }
+  }
+</style>
+</head>
+<body>
+  <h1>Board Messages Archive</h1>
+  <p class="subtitle">SETD5 Syndrome Foundation · Exported from board portal · All channels</p>
+  <div id="status">Connecting to database...</div>
+  <div id="output"></div>
+</body>
+</html>
