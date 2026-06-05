@@ -1663,7 +1663,13 @@ body { top: 0 !important; }
           </ul>
         </li>
         <li><a href="#" onclick="showPage('community')" data-page="community">Community</a></li>
-        <li><a href="#" onclick="showPage('research')" data-page="research">Research</a></li>
+        <li class="nav-item-dropdown" id="dropdown-research">
+          <button class="nav-dropdown-trigger nav-caret-btn" onclick="toggleDropdown(event,'dropdown-research')">Research <span class="nav-caret">▾</span></button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="#" onclick="showPage('research')" data-page="research">Research Priorities</a></li>
+            <li><a href="#" onclick="showPage('clinical-studies')" data-page="clinical-studies">Clinical Studies</a></li>
+          </ul>
+        </li>
         <li><a href="#" onclick="showPage('resources')" data-page="resources">Resources</a></li>
         <li class="nav-item-dropdown" id="dropdown-involve">
           <button class="nav-dropdown-trigger nav-caret-btn" onclick="toggleDropdown(event,'dropdown-involve')">Get Involved <span class="nav-caret">▾</span></button>
