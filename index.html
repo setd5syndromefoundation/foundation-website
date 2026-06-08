@@ -1636,8 +1636,13 @@ body { top: 0 !important; }
 <!-- ===== TRANSLATE BAR ===== -->
 <div id="translate-bar">
   <div id="translate-bar-inner">
-    <span id="translate-bar-label">🌐 Translate this page:</span>
-    <div id="google_translate_element"></div>
+    <span id="translate-bar-label">Translate this page:</span>
+    <a href="https://translate.google.com/translate?sl=auto&tl=es&u=https://setd5syndrome.org" target="_blank" rel="noopener" id="translate-link" onclick="this.href='https://translate.google.com/translate?sl=auto&tl=es&u='+encodeURIComponent(window.location.href);" style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;color:rgba(255,255,255,0.75);text-decoration:none;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:4px;padding:3px 10px;">
+      <img src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_18dp.png" width="12" height="12" alt="Google" style="border-radius:2px;flex-shrink:0;">
+      Open in Google Translate
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+    <span style="font-size:0.65rem;color:rgba(255,255,255,0.3);font-style:italic;">Opens in a new tab</span>
   </div>
 </div>
 
@@ -3905,14 +3910,6 @@ jesiree: {
 
 
 <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-      autoDisplay: false
-    }, 'google_translate_element');
-  }
 </script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
