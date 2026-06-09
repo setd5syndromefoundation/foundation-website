@@ -23,8 +23,7 @@ SETD5 Foundation/
 ├── robots.txt                    ← allows search engines and Facebook scraper
 ├── social-preview.jpg            ← Open Graph image for link previews
 ├── images/                       ← board member photos
-├── deploy.command                ← double-click to push from Mac (optional)
-└── CLAUDE.md                     ← session memory for AI assistant
+└── deploy.command                ← double-click to push from Mac (optional)
 ```
 
 > **Note:** The board portal (`board/`) has been retired. All board documents were transferred to Google Drive before removal.
