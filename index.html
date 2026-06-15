@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://setd5syndrome.org/">
 <meta property="og:site_name" content="SETD5 Syndrome Foundation">
-<meta property="og:title" content="SETD5 Syndrome Foundation">
+<meta property="og:title" content="SETD5 Syndromeh Foundation">
 <meta property="og:description" content="A family-led nonprofit dedicated to supporting research for SETD5 Syndrome, a rare genetic condition, and building a global community of support, hope, and action.">
 <meta property="og:image" content="https://setd5syndrome.org/social-preview.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -2166,7 +2166,7 @@ body { top: 0 !important; }
           </div>
           <div class="project-card-body">
             <h3>Natural History Study</h3>
-            <p>Supporting researchers to follow individuals with SETD5 Syndrome over time, tracking development, health outcomes, and quality of life across the lifespan. This is the foundation all future research depends on.</p>          <p>We encourage all of our existing and new families to join <a href="https://www.simonssearchlight.org/why-join-simons-searchlight/" target="_blank" rel="noopener">Simons Searchlight</a> to help with this goal.</p>
+            <p>Supporting researchers to follow individuals with SETD5 Syndrome over time, tracking development, health outcomes, and quality of life across the lifespan. This is the foundation all future research depends on.</p>          <p>We encourage all of our existing and new families to join <a href="https://www.simonssearchlight.org/why-join-simons-searchlight/" target="_blank" rel="noopener">Simons Searchlight</a> to help with this goal.</p>          <p>We encourage all of our existing and new families to join <a href="https://www.simonssearchlight.org/why-join-simons-searchlight/" target="_blank" rel="noopener">Simons Searchlight</a> to help with this goal.</p>          <p>We encourage all of our existing and new families to join <a href="https://www.simonssearchlight.org/why-join-simons-searchlight/" target="_blank" rel="noopener">Simons Searchlight</a> to help with this goal.</p>
           </div>
         </div>
         <div class="project-card">
@@ -3651,4 +3651,275 @@ jesiree: {
       <div class="bio-modal-photo-wrap">${photoHtml}</div>
       <div class="bio-modal-name">${d.name}</div>
       <div class="bio-modal-role">${d.role}</div>
-      <div class="
+      <div class="bio-modal-text"><p>${d.bio.replace(/\n\n/g, '</p><p>')}</p></div>
+    `;
+    document.getElementById('bio-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBio() {
+    document.getElementById('bio-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBio(); });
+
+  // Toggle dropdown open/closed (caret button only)
+  function toggleDropdown(e, dropdownId) {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = document.getElementById(dropdownId);
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.nav-item-dropdown').forEach(d => d.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-item-dropdown')) {
+      document.querySelectorAll('.nav-item-dropdown').forEach(d => d.classList.remove('open'));
+    }
+  });
+
+  // FAQ accordion
+  function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const toggle = el.querySelector('.faq-toggle');
+    const isOpen = answer.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-toggle').forEach(t => t.classList.remove('open'));
+    // Open clicked (if it was closed)
+    if (!isOpen) {
+      answer.classList.add('open');
+      toggle.classList.add('open');
+    }
+  }
+
+  // Prevent default on all internal # links
+  document.querySelectorAll('a[href="#"]').forEach(a => {
+    a.addEventListener('click', e => e.preventDefault());
+  });
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function() {
+  const spcData = [
+    { label: 'Learning & Cognition',         pct: 100, color: '#1a2744' },
+    { label: 'Speech & Language',            pct: 90,  color: '#2a7a6a' },
+    { label: 'Facial Structure & Head',      pct: 85,  color: '#2a627a' },
+    { label: 'Behavior & Emotional Reg.',    pct: 75,  color: '#c9893a' },
+    { label: 'Neurological & Motor',         pct: 65,  color: '#4e7c5f' },
+    { label: 'Eyes & Vision',               pct: 55,  color: '#6b4f7a' },
+    { label: 'Feeding & Growth',             pct: 45,  color: '#4a6080' },
+    { label: 'Mouth, Teeth & Hands',         pct: 25,  color: '#5a7245' },
+    { label: 'Musculoskeletal',              pct: 20,  color: '#7a4a2a' },
+    { label: 'Hearing Impairment',           pct: 18,  color: '#a04a5e' },
+    { label: 'Congenital Heart Defects',     pct: 15,  color: '#b05a30' },
+    { label: 'Cryptorchidism / Hypospadias', pct: 10,  color: '#8a6a3a' },
+    { label: 'Inguinal Hernia',              pct: 8,   color: '#6a4a6a' },
+    { label: 'Fragile Bones',               pct: 5,   color: '#4a7a7a' },
+  ];
+
+  function spcSetHover(i) {
+    document.getElementById('spcCenterNum').textContent = '~' + spcData[i].pct + '%';
+    document.getElementById('spcCenterLabel').querySelector('.spc-center-text').textContent = spcData[i].label;
+    window.spcChart.data.datasets[0].backgroundColor = spcData.map((dd, ii) => ii === i ? dd.color : dd.color + '38');
+    window.spcChart.update('none');
+    const strip = document.getElementById('spcHoverStrip');
+    strip.innerHTML = '<span class="spc-hover-strip-name" style="color:' + spcData[i].color + '">' + spcData[i].label + '</span>'
+      + '<span class="spc-hover-strip-pct">~' + spcData[i].pct + '% of reported cases</span>';
+  }
+
+  function spcClearHover() {
+    document.getElementById('spcCenterNum').textContent = String(spcData.length);
+    document.getElementById('spcCenterLabel').querySelector('.spc-center-text').textContent = 'Categories';
+    window.spcChart.data.datasets[0].backgroundColor = spcData.map(dd => dd.color);
+    window.spcChart.update('none');
+    document.getElementById('spcHoverStrip').innerHTML = '<span class="spc-hover-strip-default">Hover over a slice or category to see details</span>';
+  }
+
+  function initSpcChart() {
+    const legend = document.getElementById('spcLegend');
+    const canvas = document.getElementById('symptomPieChart');
+    if (!legend || !canvas || canvas.dataset.initialized) return;
+    canvas.dataset.initialized = 'true';
+
+    spcData.forEach((d, i) => {
+      const item = document.createElement('div');
+      item.className = 'spc-legend-item';
+      item.innerHTML = '<div class="spc-legend-dot" style="background:' + d.color + '"></div>'
+        + '<span class="spc-legend-label">' + d.label + '</span>'
+        + '<span class="spc-legend-pct">~' + d.pct + '%</span>';
+      item.addEventListener('mouseenter', () => spcSetHover(i));
+      item.addEventListener('mouseleave', spcClearHover);
+      legend.appendChild(item);
+    });
+
+    window.spcChart = new Chart(canvas.getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: spcData.map(d => d.label),
+        datasets: [{
+          data: spcData.map(d => d.pct),
+          backgroundColor: spcData.map(d => d.color),
+          borderColor: '#F7F3EE',
+          borderWidth: 3,
+          hoverOffset: 8,
+        }]
+      },
+      options: {
+        cutout: '62%',
+        responsive: false,
+        animation: { animateRotate: true, duration: 800 },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false },
+        },
+        onHover: (event, elements) => {
+          if (elements.length) {
+            spcSetHover(elements[0].index);
+          } else {
+            spcClearHover();
+          }
+        }
+      }
+    });
+  }
+
+  // Init on load and whenever the about page is shown
+  document.addEventListener('DOMContentLoaded', initSpcChart);
+  const _origShowPage = window.showPage;
+  window.showPage = function(page) {
+    _origShowPage && _origShowPage(page);
+    if (page === 'about') initSpcChart();
+  };
+})();
+</script>
+
+<!-- D3.js World Map -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+(function() {
+  // Countries with documented SETD5 Syndrome cases (ISO numeric codes)
+  // Verified against published research papers 2014–2025
+  const activeCodes = new Set([
+    840, // United States — Brain Gene Registry; Powis et al. 2018; multiple cohorts
+    826, // United Kingdom — Grozeva et al. 2014 (landmark paper); DDD Study
+    276, // Germany — Kuechler et al. 2015 (3p25.3 critical region)
+    250, // France — De Falco et al. 2024 (Paris); Mattioli et al. 2016 (Strasbourg)
+    380, // Italy — De Falco et al. 2024 (Rome, Naples, Genoa, Messina); Kuechler 2015 (Padova, Bologna)
+    724, // Spain — Parenti et al. 2017 (Zaragoza, Barakaldo/Bizkaia)
+    528, // Netherlands — Kuechler et al. 2015 (Erasmus MC, Rotterdam)
+     36, // Australia — Hunter Genetics NSW, Adelaide, Westmead
+    392, // Japan — Yagasaki et al. 2017 (ptosis/3p25 deletion)
+    156, // China — Fan et al. 2025 (Beijing); Fang 2019 (Tianjin); Pan 2020 (Guangzhou)
+     76, // Brazil — Stur et al. 2017 (mild ID); Pires et al. 2020 (Sao Paulo)
+    616, // Poland — Grozeva et al. 2016 (Warsaw)
+    364, // Iran — Kuechler et al. 2015 (Kariminejad-Najmabadi center, Tehran)
+    356, // India — de novo variants study 2023 (Kasturba Medical College, Manipal)
+  ]);
+
+  const countryInfo = {
+    840: 'United States',  826: 'United Kingdom',  276: 'Germany',
+    250: 'France',         380: 'Italy',            724: 'Spain',
+    528: 'Netherlands',     36: 'Australia',         392: 'Japan',
+    156: 'China',           76: 'Brazil',            616: 'Poland',
+    364: 'Iran',           356: 'India',
+  };
+
+  let swmInitialized = false;
+
+  function initSwmMap() {
+    const svgEl = document.getElementById('swm-world-map');
+    if (!svgEl || swmInitialized) return;
+    // Fixed viewBox — no need to query offsetWidth, works when hidden
+    swmInitialized = true;
+
+    const width = 960, height = 500;
+    const svg = d3.select('#swm-world-map');
+    const container = document.getElementById('swm-tooltip').parentElement;
+    const tooltip = document.getElementById('swm-tooltip');
+
+    const projection = d3.geoNaturalEarth1()
+      .scale(153)
+      .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath().projection(projection);
+
+    // Ocean
+    svg.insert('path', ':first-child')
+      .datum({ type: 'Sphere' })
+      .attr('d', path)
+      .attr('fill', '#ddeef7');
+
+    // Graticule
+    svg.append('path')
+      .datum(d3.geoGraticule()())
+      .attr('d', path)
+      .attr('fill', 'none')
+      .attr('stroke', '#ddd8cf')
+      .attr('stroke-width', 0.3);
+
+    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(world) {
+      const countries = topojson.feature(world, world.objects.countries);
+
+      // Country fills
+      svg.selectAll('.swm-country')
+        .data(countries.features)
+        .enter().append('path')
+        .attr('class', function(d) {
+          return activeCodes.has(+d.id)
+            ? 'swm-country swm-country-active'
+            : 'swm-country swm-country-default';
+        })
+        .attr('d', path)
+        .on('mousemove', function(event, d) {
+          var id = +d.id;
+          if (!activeCodes.has(id)) return;
+          var name = countryInfo[id] || 'Country';
+          var rect = container.getBoundingClientRect();
+          var pos = d3.pointer(event, container);
+          tooltip.style.opacity = '1';
+          tooltip.style.left = Math.min(pos[0] + 12, rect.width - 215) + 'px';
+          tooltip.style.top = (pos[1] - 10) + 'px';
+          tooltip.innerHTML = '<strong>' + name + '</strong>';
+        })
+        .on('mouseleave', function() {
+          tooltip.style.opacity = '0';
+        });
+
+      // Country borders (clean mesh layer)
+      svg.append('path')
+        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+        .attr('fill', 'none')
+        .attr('stroke', '#e8e2d9')
+        .attr('stroke-width', 0.5)
+        .attr('d', path);
+
+    }).catch(function() {
+      document.querySelector('.swm-map-container').innerHTML =
+        '<p style="text-align:center;padding:3rem;color:#6b6b6b;">Map could not be loaded. Please check your connection.</p>';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(initSwmMap, 100);
+  });
+
+  var _prevShowPage = window.showPage;
+  window.showPage = function(page) {
+    _prevShowPage && _prevShowPage(page);
+    if (page === 'about') setTimeout(initSwmMap, 50);
+  };
+})();
+</script>
+
+
+<script type="text/javascript">
+</script>
+</body>
+</html>
