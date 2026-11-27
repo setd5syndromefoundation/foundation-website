@@ -1370,6 +1370,11 @@ footer {
 .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin: 0; }
 .footer-bottom a { color: rgba(255,255,255,0.45); font-size: 0.72rem; }
 .footer-bottom a:hover { color: var(--gold); }
+/* Phones: stack the footer into one column so it never runs wider than the screen */
+@media (max-width: 640px) {
+  .footer-main { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .footer-quicklinks { gap: 32px !important; flex-wrap: wrap; }
+}
 .footer-logo-text .name { color: var(--white); font-weight: 600; font-size: 1rem; }
 .footer-logo-text .tagline { color: var(--gold); font-size: 0.75rem; letter-spacing: 0.08em; }
 
@@ -3437,7 +3442,7 @@ body { top: 0 !important; }
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="container">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; padding:20px 0 32px;">
+    <div class="footer-main" style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; padding:20px 0 32px;">
 
       <!-- Left: brand info -->
       <div>
@@ -3456,7 +3461,7 @@ body { top: 0 !important; }
       </div>
 
       <!-- Right: quick links -->
-      <div style="display:flex; gap:48px;">
+      <div class="footer-quicklinks" style="display:flex; gap:48px;">
         <div>
           <p style="font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:12px;">Learn</p>
           <div style="display:flex; flex-direction:column; gap:8px;">
